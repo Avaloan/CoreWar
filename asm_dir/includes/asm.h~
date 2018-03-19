@@ -6,11 +6,18 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/03/13 04:01:56 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/03/16 05:27:34 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
 # define ASM_H
+
+# include "../libft/libft.h"
+
+# define MEM_SIZE (4 * 1024)
+# define PROG_NAME_LENGTH (128)
+# define COMMENT_LENGTH (2048)
+# define CHAMP_MAX_SIZE (MEM_SIZE / 6)
 
 #endif
