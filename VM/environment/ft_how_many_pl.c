@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_create_arena.c                                  :+:      :+:    :+:   */
+/*   ft_how_many_pl.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/14 02:07:51 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/19 03:43:14 by gquerre          ###   ########.fr       */
+/*   Created: 2018/03/19 04:31:29 by gquerre           #+#    #+#             */
+/*   Updated: 2018/03/19 05:36:03 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include ".h"
 
-int	ft_create_arena(t_env *e)
+int	ft_how_many_pl(int *argc, char **argv)
 {
-	if (!(e->arena = (ft_memalloc(sizeof(unsigned char) * (MEM_SIZE)))))
-		return (0);
-	if (!(e->players = (ft_memalloc(sizeof(int **) * e->nb_of_pl))))
-		return (0);
-	if (!(e->pc_list = ft_memalloc(sizeof(t_process *))))
-		return (0);
+	int	i;
+
+	i = 0;
+	while (i < argc)
+		if (argv[i][0] != '\0' && argv[i][0] != '-')
+			e->nb_of_pl++;
+	if (e->nb_of_pl > MAX_PLAYERS)
+		return (-1);
 	return (1);
 }

@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_create_arena.c                                  :+:      :+:    :+:   */
+/*   ft_add_pc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/14 02:07:51 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/19 03:43:14 by gquerre          ###   ########.fr       */
+/*   Created: 2018/03/19 05:48:31 by gquerre           #+#    #+#             */
+/*   Updated: 2018/03/19 06:00:24 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include ".h"
 
-int	ft_create_arena(t_env *e)
+int	ft_add_pc(t_env *e, t_process *father)
 {
-	if (!(e->arena = (ft_memalloc(sizeof(unsigned char) * (MEM_SIZE)))))
+	t_process	*tmp;
+	t_process	*tmp2;
+	int			k;
+
+	k = 0;
+	tmp2 = NULL;
+	if (!(tmp = ft_memalloc(sizeof(t_process*))))
 		return (0);
-	if (!(e->players = (ft_memalloc(sizeof(int **) * e->nb_of_pl))))
-		return (0);
-	if (!(e->pc_list = ft_memalloc(sizeof(t_process *))))
-		return (0);
+	tmp->pc = father->pc;
+	tmp->waiting = father->waiting;
+	tmp->live_during_periode = father->live_during_periode;
+	tmp->carry = father->carry;
+	while (k < 16)
+	{
+		tmp->reg[k] = father->reg[k];
+		k++;
+	}
+	tmp2 = father->next;
+	tmp->next = tmp2;
+	father->next = tmp;
 	return (1);
 }

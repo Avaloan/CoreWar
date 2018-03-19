@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 01:43:22 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/14 06:13:24 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/19 05:42:37 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,56 +23,69 @@
 ** ENVIRONMENT
 */
 
-#define	MAX_PLAYERS		4
-#define CYCLE_TO_DIE	1536
-#define CYCLE_DELTA
-#define NBR_LIVE
-#define MAX_CHECKS
+#define	MAX_PLAYERS				4
+#define CYCLE_TO_DIE			1536
+#define CYCLE_DELTA				
+#define NBR_LIVE				
+#define MAX_CHECKS				
 
-#define T_REG			1
-#define T_DIR			2
-#define T_IND			3
-#d efine T_LAB			8
+#define T_REG					1
+#define T_DIR					2
+#define T_IND					3
+#define T_LAB					8
 
-#define	NAME_LENGTH		128
-#define COMMENT_LENGTH	2048
-#define COREWAR			0xea83f3
-
-typedef struct			s_env
-{
-	int					nb_of_pl;
-	int					nb_of_check;
-	int					cycle;
-	char				carry;
-	void				*(op_code)(s_env *, int, int, int);
-	t_process			*pc_list; 
-	void				*arena;
-}						t_env
+#define	NAME_LENGTH				128
+#define COMMENT_LENGTH			2048
+#define COREWAR					0xea83f3
 
 /*
 ** PLAYERS
 */
+#define NUM_PLAYER				1
+#define ID						2
+#define	LIVES_PERIODE			3
+#define	TOTAL_LIVES				4
+#define	LAST_LIVE				5
 
-typedef struct			s_player
+/*
+**	CHAMPIONS
+*/
+
+typedef struct					s_champ
 {
-	int					num_player;
-	int					lives_during_periode;
-	int					lives_total;
-	int					
-}						t_player;
+	char						*champ;
+	typedef struct s_champ		next;
+}								t_champ;
 
 /*
 ** PROCESS
 */
-
-typedef struct			s_process
+typedef struct					s_process
 {
-	int					pc;
-	int					reg[16];
-	int					waiting;
-	int					live_during_periode;
-	
-}						t_process
+	int							pc;
+	int							reg[16];
+	int							waiting;
+	int							live_during_periode;
+	typedef struct s_process	next;
+	int							carry;
+}								t_process
+
+/*
+** ENVIRONMENT
+*/
+typedef struct					s_env
+{
+	int							nb_of_pl;
+	int							nb_of_check;
+	int							cycle;
+	char						carry;
+	void						*(op_code)(s_env *, int, int, int);
+	t_process					*pc_list; 
+	void						*arena;
+	int							**players;
+	t_champ						*champions;
+
+}								t_env
 
 #define CYCLE_TO_DIE
 #define
