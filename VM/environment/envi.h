@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 01:43:22 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/19 05:42:37 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/20 05:02:31 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,26 @@ typedef struct					s_process
 	int							live_during_periode;
 	typedef struct s_process	next;
 	int							carry;
-}								t_process
+}								t_process;
 
+/*
+** PLAYERS
+*/
+
+typedef struct					s_player
+{
+	int							num_player;
+	int							id;
+	int							lives_periode;
+	int							total_lives;
+	int							last_live;
+	char						*name;
+	char						*comment;
+}								t_player;
 /*
 ** ENVIRONMENT
 */
+
 typedef struct					s_env
 {
 	int							nb_of_pl;
@@ -82,10 +97,10 @@ typedef struct					s_env
 	void						*(op_code)(s_env *, int, int, int);
 	t_process					*pc_list; 
 	void						*arena;
-	int							**players;
+	t_players					*players;
 	t_champ						*champions;
 
-}								t_env
+}								t_env;
 
 #define CYCLE_TO_DIE
 #define
