@@ -67,7 +67,7 @@ int fonction_check_coding_byte(t_env *e, t_params &p, t_args_value args[3], int 
 	else
 		return (1)
 	if (tmp = ((p->coding_byte >> 6) & (e->op_tab[opcode].arg_type[p->i]))
-	{
+	{// care avec le ind
 		p->coding_byte <<= 2;
 		p->i++;
 		if (fonction_check_coding_byte(e, p, args, opcode) == 1)
