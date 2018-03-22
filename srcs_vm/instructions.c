@@ -6,13 +6,16 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/03/14 05:40:59 by snedir           ###   ########.fr       */
+/*   Updated: 2018/03/19 05:55:00 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/corewar.h"
 
-void	live(t_env *e, int direct, int not_used, int not_used2)
+}
+
+
+void	get_coding_byte(t_env *e, t_process *process, int nb_arguments)
 {
 }
 

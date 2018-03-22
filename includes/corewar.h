@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 04:36:59 by snedir            #+#    #+#             */
-/*   Updated: 2018/03/14 05:56:56 by snedir           ###   ########.fr       */
+/*   Updated: 2018/03/19 00:58:45 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct				s_process
 	char					alive;
 	int						countdown;
 	char					carry;
-	s_process				*next;
 }							t_process;
 
 typedef struct				s_op
@@ -41,5 +40,4 @@ typedef struct				s_env
 	t_process				*pc_list;
 	void					*arena;
 }							t_env;
-
 #endif
