@@ -6,25 +6,25 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 01:34:47 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/22 05:36:53 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/23 06:06:37 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../.h"
 
-int	ft_free_process(t_env *e, int flag)
+void	ft_free_process(t_env *e)
 {
-	if (flag == 1)
-	{
+	t_process	tmp;
 
-	}
-	else
+	tmp = e->pc_list;
+	if (e->pc_list->next)
 	{
-
+		e->pc_list = e->pc_list->next;
+		free(tmp);
 	}
 }
 
-int	ft_maj(t_env *e, int i)
+int		ft_maj(t_env *e, int i)
 {
 	if (i == 1)
 	{
@@ -37,13 +37,13 @@ int	ft_maj(t_env *e, int i)
 	e->cycles_periode = 0;
 	return (1);
 }
-int	ft_up_periode(t_env *e)
+int		ft_up_periode(t_env *e)
 {
 	t_process	*tmp;
 	t_process	*tmp_2;
 
 	while (e->pc_List && e->pc_list->lives_during_periode == 0)
-		ft_free_process(e, NULL, 1);//free le process et "e->pc_list = e->pc_list->next avant
+		ft_free_process(e);
 	tmp = e->pc_list;
 	while (tmp->next)
 	{
@@ -51,7 +51,7 @@ int	ft_up_periode(t_env *e)
 		if (tmp_2 && tmp_2->lives_during_periode == 0)
 		{
 			tmp->next = tmp_2->next;
-			ft_free_process(e, tmp_2, 2);//free le process
+			free(tmp2);
 		}
 		tmp->lives_during_periode = 0;
 		tmp = tmp->next;

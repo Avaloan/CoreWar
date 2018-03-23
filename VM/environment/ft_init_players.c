@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:04:40 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/22 00:42:50 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/23 03:37:41 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ int	ft_save_name(t_env *e, int i, int fd)
 
 int	ft_save_comment(t_env *e, int i, int fd, int pos)
 {
+	int		start;
 	int		end;
 	int		next_one;
 
+	start = 0;
 	end = 0;
 	next_one = 0;
 	if ((end = lseek(fd, 4, SEEK_HOLE) == -1))
@@ -70,8 +72,12 @@ int	ft_put_champ_in_arena(t_env *e, int i, int fd, int pos)
 	if (!(buff = ft_memalloc(sizeof(char) * (end - start))))
 		return (0);
 	read(fd, buff, end - start);
-	if (!(ft_strcpy(e->&arena[place_in_arena], buff))
-			return (0);
+	if (!(ft_strcpy(e->&arena[place_in_arena], buff)))
+	{
+		ft_strdel(buff);
+		return (0);
+	}
+	ft_strdel(buff);
 	return (1);
 }
 

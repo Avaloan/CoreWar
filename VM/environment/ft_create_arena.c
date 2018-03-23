@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 02:07:51 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/20 05:50:11 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/23 05:37:46 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,10 @@ int	ft_create_arena(t_env *e)
 		return (0);
 	if (!(e->pc_list = ft_memalloc(sizeof(t_process *))))
 		return (0);
+	e->cycles_to_die = CYCLE_TO_DIE;
+	e->cycles = 0;
+	e->cycles_periodes = 0;
+	e->checks_done = 0;
+	e->lives_periode = 0;
 	return (1);
 }

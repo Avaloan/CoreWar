@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 01:43:22 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/22 05:39:16 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/23 03:01:57 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 typedef struct					s_process
 {
 	int							pc;
-	int							reg[16];
+	int							reg[REG_NUMBER];
 	int							waiting;
 	int							lives_during_periode;
 	typedef struct s_process	next;

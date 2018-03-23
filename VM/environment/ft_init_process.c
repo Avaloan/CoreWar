@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:02:45 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/22 05:39:55 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/23 05:40:02 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ void	ft_save_first(t_env *e, t_process *first)
 	first->live_during_periode = 0;
 	first->carry = 0;
 	first->to_exec = 0;
-	while (++k < 16)
+	while (++k < REG_NUMBER)
 		first->reg[k] = 0;
 	first->next = NULL;
 }
+
 int		ft_init_process(t_env *e)
 {
 	t_process	*tmp;
@@ -47,9 +48,10 @@ int		ft_init_process(t_env *e)
 		tmp->next->live_during_periode = 0;
 		tmp->next->carry = 0;
 		tmp->next->to_exec = 0;
-		while (++k < 16)
+		while (++k < REG_NUMBER)
 			tmp->next->reg[k] = 0;
 		tmp->next->next = NULL;
 		tmp = tmp->next;
 	}
+	return (1);
 }
