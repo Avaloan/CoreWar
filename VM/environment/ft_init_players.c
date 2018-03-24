@@ -6,11 +6,11 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:04:40 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/23 03:37:41 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/24 05:55:47 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include ".h"
+#include "../includes/corewar_vm.h"
 
 int	ft_save_name(t_env *e, int i, int fd)
 {

@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envi.h                                             :+:      :+:    :+:   */
+/*   corewar_vm.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/14 01:43:22 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/23 03:01:57 by gquerre          ###   ########.fr       */
+/*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
+/*   Updated: 2018/03/24 05:54:07 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 /*
 **
@@ -93,3 +92,12 @@ typedef struct					s_env
 **	FONCTIONS
 */
 
+int								ft_create_arena(t_env *e);
+int								ft_how_many_pl(t_env *e, int *argc, char **argv);
+int								ft_init_player(t_env *e, char *argv);
+int								ft_init_process(t_env *e);
+int								ft_error(t_env *e);
+int								ft_finish(t_env *e);
+int								ft_game_runner(t_env *e);
+int								ft_play_turn(t_env *e);
+int								ft_add_pc(t_env *e, t_process *father, int i);//Operations pour fork

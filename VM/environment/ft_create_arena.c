@@ -6,11 +6,11 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 02:07:51 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/23 05:37:46 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/24 05:54:50 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include ".h"
+#include "../includes/corewar_vm.h"
 
 int	ft_create_arena(t_env *e)
 {

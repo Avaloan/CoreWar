@@ -6,11 +6,11 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 04:42:08 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/23 05:40:50 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/24 05:56:30 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../.h"
+#include "../includes/corewar_vm.h"
 
 int	ft_load_waiting(t_emv *e, t_process *proc)
 {

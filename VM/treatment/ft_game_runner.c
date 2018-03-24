@@ -6,11 +6,11 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 01:34:47 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/23 06:06:37 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/24 05:56:23 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../.h"
+#include "../includes/corewar_vm.h"
 
 void	ft_free_process(t_env *e)
 {
