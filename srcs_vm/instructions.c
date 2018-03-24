@@ -68,6 +68,8 @@ void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcod
 	if (arg_type == 1)
 	{
 		args[num_param].reg = fonction_lecture_arg_check_error(e, 4, pc);
+		if (args[num_param].reg <= 0 || args[num_param].reg > REG_NUMBER)
+			return (ERROR)//faire avancer le pc de 1
 		args[num_param].type = 'r';
 	}
 	if (arg_type == 4)
