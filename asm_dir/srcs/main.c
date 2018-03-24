@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:02:28 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/03/19 05:53:29 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/03/24 04:16:28 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,33 +39,66 @@ t_op    g_op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-int	check_s_ponkt(char *str)
+int	check_s_ponkt(char *str, t_env *e)
 {
-	while(*(str++))
+	int	i;
+	int j;
+	int	k;
+
+	i = 0;
+	k = 0;
+	while (str[i++])
 		;
-	if (*(str - 2) == 's' && *(str - 3) == '.')
-		return (1);
-	printf("%c\n", *(str - 2));
-	return (0);
+	j = i;
+	if (str[i - 3] == '/' || str[i - 2] != 's' || str[i - 3] != '.')
+		return (0);
+	while (str[i] != '/')
+		i--;
+	if(!(e->name_file = (char *)ft_memalloc(sizeof(char) * (j - i + 1))))
+		ft_perror("malloc() failed.\n");
+	while (++i < j + 1)
+	{
+		if (i < j - 2)
+			e->name_file[k] = str[i];
+		else if (i == j - 2)
+			e->name_file[k] = 'c';
+		else if (i == j - 1)
+			e->name_file[k] = 'o';
+		else if (i == j)
+			e->name_file[k] = 'r';
+		k++;
+	}
+	e->name_file[k] = '\0';
+	printf("%s\n",e->name_file);
+	return (1);
 }
 
 int	main(int ac, char **av)
 {
-	int	fd;
-	int	off_set = 0;
-	char	*stock;
+	int		fd;
+	t_env	*e;
 
-	if (ac != 2 || !check_s_ponkt(av[1]))
+	if (!(e = (t_env *)ft_memalloc(sizeof(t_env))))
+		ft_perror("malloc() failed.\n");
+	if (ac != 2 || !check_s_ponkt(av[1], e))
 		ft_perror("Mets un joueur ouech.\n");
 	if (!(fd = open(av[1], O_RDONLY)))
 		ft_perror("Open() failed.\n");
-	off_set = lseek(fd, 0, SEEK_END);
-	if (off_set > CHAMP_MAX_SIZE)
+	e->off_set = lseek(fd, 0, SEEK_END);
+	if (e->off_set > CHAMP_MAX_SIZE)
 		ft_perror("Champ too fat, go on a diet.\n");
-	stock = (char *)ft_memalloc(sizeof(char) * off_set);
+	if(!(e->stock = (char *)ft_memalloc(sizeof(char) * e->off_set)))
+		ft_perror("malloc() failed.\n");
 	lseek(fd, 0, SEEK_SET);
-	read(fd, stock, off_set);
-	printf("Player :\n%s\n", stock);
-	printf("Test = %s\n", g_op_tab[1].name);
+	read(fd, e->stock, e->off_set);
+	close(fd);
+	fd = open(e->name_file, O_CREAT | O_WRONLY, 0777);
 	return (0);
 }
+
+/*
+
+retour du lseek ???
+
+
+*/

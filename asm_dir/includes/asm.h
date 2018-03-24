@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/03/19 05:53:13 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/03/24 03:07:13 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define LABEL_CHAR			':'
 # define DIRECT_CHAR		'%'
 # define SEPARATOR_CHAR		','
-# define LABEL_CHARS			"abcdefghijklmnopqrstuvwxyz_0123456789"
+# define LABEL_CHARS		"abcdefghijklmnopqrstuvwxyz_0123456789"
 # define NAME_CMD_STRING	".name"
 # define COMMENT_CMD_STRING	".comment"
 # define REG_NUMBER			16
@@ -45,5 +45,12 @@ typedef struct	s_op
 	int			octal;
 	int			dir_size;
 }				t_op;
+
+typedef struct	s_env
+{
+	char		*name_file;
+	char		*stock;
+	int			off_set;
+}				t_env;
 
 #endif
