@@ -99,8 +99,7 @@ int fonction_check_coding_byte(t_env *e, t_params *p, t_args_value args[3], int 
 	tmp = (p->coding_byte >> 6);
 	if (tmp == 3)
 		tmp = 4;
-	tmp = tmp & (e->op_tab[opcode].args_type[p->i])
-	if (tmp > 0)
+	if ((tmp = tmp & e->op_tab[opcode].args_type[p->i]) > 0)
 	{
 		p->coding_byte <<= 2;
 		p->i++;
@@ -123,8 +122,11 @@ void fonction_lancement_op(t_env *e, t_process *process)
 	opcode = e->arena[process->pc];
 	params.nb_params_max = e->op_tab[opcode].nb_params;
 	params.i = 0;
-	params.coding_byte = e->arena[process->pc + 1];
-	if (fonction_check_coding_byte(e, &params, args, opcode, process) == BAD_CODING_BYTE)
-		return ; //faire avancer le pc de 1
+	if (octet de codage necessaire)
+	{
+		params.coding_byte = e->arena[process->pc + 1];
+		if (fonction_check_coding_byte(e, &params, args, opcode, process) == BAD_CODING_BYTE)
+			return ; //faire avancer le pc de 1
+	}
 	e->op_tab[opcode].op(e, process, args);
 }
