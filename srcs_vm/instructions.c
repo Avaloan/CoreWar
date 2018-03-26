@@ -6,24 +6,28 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/03/23 05:57:19 by snedir           ###   ########.fr       */
+/*   Updated: 2018/03/27 00:53:22 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/corewar.h"
+#include <math.h>
+#include <stdlib.h>
 
 void dec_to_bin(int dec, unsigned char *bin_num, int index)
 {
-    int i = index;
-    while (dec > 0)
-    }
-        bin_num[i] = dec % 2;
-        dec /= 2;
-        i++;
-    }
+	int i;
+
+	i = index;
+	while (dec > 0)
+	{
+		bin_num[i] = dec % 2;
+		dec /= 2;
+		i++;
+	}
 }
 
-int bin_to_dec(int size, char *number)
+int bin_to_dec(int size, unsigned char *number)
 {
 	int result;
 	int i;
@@ -32,15 +36,17 @@ int bin_to_dec(int size, char *number)
 	result = 0;
 	while (number[i])
 	{
-		if (*number == 1)
-			result += pow(2, size * (7 - i);
+		if (*number == '1')
+			result += pow(2, size * (7 - i));
 		i++;
 	}
 	return (result);
 }
+
 /*
-**	Bcp de valeurs en dur faire attention
-*/
+ **	Bcp de valeurs en dur faire attention
+ */
+
 int	fonction_lecture_arg_check_error(t_env *e, int arg_size, t_process *pc)
 {
 	int i;
@@ -49,28 +55,30 @@ int	fonction_lecture_arg_check_error(t_env *e, int arg_size, t_process *pc)
 
 	i = 0;
 	stock = 0;
-	tab = ft_memalloc(sizeof(unsigned char) * arg_size * 8)
+	tab = ft_memalloc(sizeof(unsigned char) * arg_size * 8);
 	while (i < arg_size)
 	{
 		stock = e->arena[pc->pc + i];
-		dec_to_bin(stock, tab, i*8)
+		dec_to_bin(stock, tab, i*8);
 		i++;
 	}
-	stock = bin_to_dec(arg_size, tab)
+	stock = bin_to_dec(arg_size, tab);
 	free(tab);
 	return (stock);
 }
+
 /*
-**	Bcp de valeurs en dur faire attention
-*/
+ **	Bcp de valeurs en dur faire attention
+ */
+
 void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcode, t_process *pc, t_env *e) //pendant le check_coding byte
 {
 	if (arg_type == 1)
 	{
 		args[num_param].reg = fonction_lecture_arg_check_error(e, 4, pc);
 		if (args[num_param].reg <= 0 || args[num_param].reg > REG_NUMBER)
-			return (ERROR)//faire avancer le pc de 1
-		args[num_param].type = 'r';
+			return ;//faire avancer le pc de 1
+				args[num_param].type = 'r';
 	}
 	if (arg_type == 4)
 	{
@@ -82,7 +90,7 @@ void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcod
 		if (dir_size == 4)
 			args[num_param].dir = fonction_lecture_arg_check_error(e, 4, pc);
 		else
-			args[num_param].dir = fonction_lecture_arg_check_error(e, 2, pc);			
+			args[num_param].dir = fonction_lecture_arg_check_error(e, 2, pc);
 		args[num_param].type = 'd';
 	}
 }
@@ -103,10 +111,10 @@ int fonction_check_coding_byte(t_env *e, t_params *p, t_args_value args[3], int 
 	{
 		p->coding_byte <<= 2;
 		p->i++;
-		if (fonction_check_coding_byte(e, p, args, opcode) == 1)
+		if (fonction_check_coding_byte(e, p, args, opcode, pc) == 1)
 		{
 			p->total_size += (int)e->op_tab[opcode].args_type[p->i - 1];
-			get_args_value(args, tmp, p->i, opcode, pc);
+			get_args_value(args, tmp, p->i, opcode, pc, e);
 			return (1);
 		}
 	}
