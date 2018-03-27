@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:20:17 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/24 03:57:28 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/27 06:12:43 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ int	main(int *argc, char **argv)
 		return (ft_error(2));
 	while (++i < argc)
 	{
+		if (e->option > 0)
+			if (ft_apply_option(e, argv[i], i) == 0)
+				return (ft_error(33));
 		if (argv[i][0] == '-')
-			if (ft_options(e, argv[i] == 0))
+			if (ft_options(e, argv[i]) == 0)
 				return (ft_error(3));
 		else if (ft_init_player(e, argv[i]) == 0)
 			return (ft_error(4));

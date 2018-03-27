@@ -6,7 +6,7 @@
 #    By: gquerre <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/24 05:47:01 by gquerre           #+#    #+#              #
-#    Updated: 2018/03/24 06:00:16 by gquerre          ###   ########.fr        #
+#    Updated: 2018/03/27 05:52:17 by gquerre          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC =	./environment/ft_Create_arena.c\
 		./environment/ft_init_process.c\
 		./treatment/ft_game_runner.c\
 		./treatment/ft_play_turn.c\
-		./treatment/ft_add_process.ct
+		./treatment/ft_add_process.c\
+		./ft_options.c
 
 FLAG =	-Wextra - Wall -Werror -03
 

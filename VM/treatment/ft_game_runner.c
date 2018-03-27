@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 01:34:47 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/24 05:56:23 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/27 06:43:13 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ int		ft_up_periode(t_env *e)
 
 int	ft_game_runner(t_env *e)
 {
+	if (e->visu == 1)
+		if (ft_start_the_game_visu(e) == 0)
+			return (0);
 	while (e->pc_List)
 	{
 		while (e->pc_list && e->cycles < e->cycles_to_die)
