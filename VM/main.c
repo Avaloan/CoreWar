@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:20:17 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/29 05:39:11 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/29 07:27:41 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	main(int argc, char **argv)
 {
+//	int	u;
+//	int	v;
 	int		i;
 	t_env	*e;
 
@@ -45,15 +47,23 @@ int	main(int argc, char **argv)
 			return (ft_error(e, 4));
 		}
 		printf("7\n");
-			printf("name = %s\n", e->players[0].name);
 	}
-			printf("name = %s\n", e->players[0].name);
 	printf("8\n");
 	if (ft_init_process(e) == 0)
 		return (ft_error(e, 5));
-	printf("name = %s\n", e->players[0].name);
 	printf("9\n");
-	printf("name = %s\n", e->players[0].name);
+/*	u = 0;
+	while (u < 64)
+	{
+		v = 0;
+		while (v < 64)
+		{
+			printf(" ");
+			printf("%.2x", e->arena[u * 64 + v]);
+			v++;
+		}
+		u++;
+	}*/
 	if (ft_game_runner(e) == 0)
 		return (ft_error(e, 6));
 	printf("10\n");

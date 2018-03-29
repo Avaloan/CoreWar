@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:02:45 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/29 05:43:13 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/29 06:07:09 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_save_first(t_env *e, t_process *first)
 
 	k = 0;
 	first->pc = 0;
-	printf("NAME == %s\n", e->players[0].name);
 	first->reg[k] = e->players[0].id;
 	first->waiting = 0;
 	first->lives_during_periode = 0;
@@ -27,7 +26,6 @@ void	ft_save_first(t_env *e, t_process *first)
 	while (++k < REG_NUMBER)
 		first->reg[k] = 0;
 	first->next = NULL;
-	printf("NAME == %s\n", e->players[0].name);
 }
 
 int		ft_init_process(t_env *e)

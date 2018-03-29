@@ -6,7 +6,7 @@
 #    By: gquerre <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/24 05:47:01 by gquerre           #+#    #+#              #
-#    Updated: 2018/03/28 06:17:06 by gquerre          ###   ########.fr        #
+#    Updated: 2018/03/29 06:11:57 by gquerre          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ V_SRC =	./visual/ft_end_visu.c\
 		./visual/ft_init_visual.c\
 		./visual/ft_maj_visu.c
 
-FLAG =	-Wextra -Wall -Werror -O3 -lncurses
+FLAG =	-g -Wextra -Wall -Werror -O3 -lncurses
 
 SUPP =	./includes/corewar_vm.h ./SRC/libft/libft.a
 

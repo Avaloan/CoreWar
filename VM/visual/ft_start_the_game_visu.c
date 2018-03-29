@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 06:16:10 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/29 04:56:30 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/29 07:31:15 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int	ft_start_the_game_visu(t_env *e)
 		return (0);
 	wrefresh(e->vi->arena);
 	wrefresh(e->vi->info);
-//	getch();
+	getch();
 	return (1);
 }

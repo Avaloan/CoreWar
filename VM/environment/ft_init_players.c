@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:04:40 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/29 05:32:00 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/29 07:24:57 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,40 +43,39 @@ off_t	ft_save_name(t_env *e, int i, int fd)
 		return (0);
 	if (read(fd, e->players[i].name, NAME_SIZE) == -1)
 		return (0);
-	printf("i = %i\n", i);
-	printf("name = %s\n", e->players[i].name);
 	return (140);
 }
 
 off_t	ft_save_comment(t_env *e, int i, int fd, off_t pos)
 {
+	//off_t	size;
 	if (lseek(fd, pos, SEEK_SET) == -1)
 		return (0);
+//	size = prendre_la_taille_indiquee_juste_avant_comment : calcul sur bits;
 	if (!(e->players[i].comment = ft_memalloc(sizeof(char) * (COMMENT_SIZE))))
 		return (0);
 	if (read(fd, e->players[i].comment, COMMENT_SIZE) == -1)
 		return (0);
-	return (2196);
+	return (2192);
 }
 
 off_t	ft_put_champ_in_arena(t_env *e, int i, int fd, off_t pos)
 {
-	off_t		end;
-	int			place_in_arena;
-	char		*buff;
+	off_t			end;
+	int				place_in_arena;
+	unsigned char	*buff;
 
 	place_in_arena = (MEM_SIZE * i / e->nb_of_pl);
 	end = 0;
 	buff = NULL;
-	if ((end = lseek(fd, 0, SEEK_END)) == -1)
-		return (0);
 	if (lseek(fd, pos, SEEK_SET) == -1)
 		return (0);
-	if (!(buff = ft_memalloc(sizeof(char) * (end - pos))))
+	if (!(buff = ft_memalloc(sizeof(char) * (49))))
 		return (0);
-	if (read(fd, buff, end - pos) == -1)
+	if (read(fd, buff, 49) == -1)
 		return (0);
-	if (ft_strcpy((char *)&e->arena[place_in_arena], buff) == NULL)
+
+	if (ft_strcpy_until_unsigned(&e->arena[place_in_arena], buff, 49) == NULL)
 	{
 		ft_strdel(&buff);
 		return (0);

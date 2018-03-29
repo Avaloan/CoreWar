@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 19:35:19 by gquerre           #+#    #+#             */
-/*   Updated: 2017/12/13 04:25:56 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/29 07:21:10 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 # include <stdlib.h>
 # include "./files.h/get_next_line.h"
 
+unsigned char		*ft_strcpy_until_unsigned(unsigned char *dst, unsigned char *str, size_t i);
 char				*ft_strcpy_unt_char(char *src, char c);
+unsigned char		*ft_strcpy_unsigned(unsigned char *dst, unsigned char *src);
 int					ft_strcmp_until(char *s1, char *s2, int lim);
 void				ft_clean(char *str);
 char				*ft_insert(char *str, int i, char *addon);

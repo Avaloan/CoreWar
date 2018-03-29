@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 03:57:39 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/29 05:31:12 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/29 06:54:53 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	ft_fresh(t_env *e)
 	int			i;
 
 	i = 0;
+	tmp = NULL;
 	if (e->pc_list)
 	{
+		tmp = e->pc_list;
 		while (tmp->next)
 		{
 			tmp = e->pc_list;
@@ -49,15 +51,16 @@ int		ft_claim_winner(t_env *e)
 	{
 		if (e->players[i].last_live >= e->winner_value)
 		{
-			printf("i = %i\n", i);
-			printf("str = %s\n", e->players[i].name);
 			e->winner_value = e->players[i].last_live;
 			if ((e->winner_name = ft_strdup(e->players[i].name)) == 0)
 				return (0);
 		}	
 		i++;
 	}
-	printf("The Winner is \"%s\"\n", e->winner_name);
+	ft_putstr("The Winner is");
+	ft_putchar('"');
+	ft_putstr(e->winner_name);
+	ft_putchar('"');
 	return (1);
 }
 

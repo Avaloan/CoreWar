@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_maj_visu.c                                      :+:      :+:    :+:   */
+/*   ft_strcpy_unsigned.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/28 02:19:28 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/29 07:37:45 by gquerre          ###   ########.fr       */
+/*   Created: 2018/03/29 06:59:55 by gquerre           #+#    #+#             */
+/*   Updated: 2018/03/29 07:00:18 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/corewar_vm.h"
+#include "libft.h"
 
-int	ft_maj_visu(t_env *e)
+unsigned char	*ft_strcpy_unsigned(unsigned char *dst, unsigned char *src)
 {
-	if (ft_fill_arena(e) == 0 || ft_fill_info(e) == 0)
-		return (0);
-	wrefresh(e->vi->arena);
-	wrefresh(e->vi->info);
-	return (1);
+	int i;
+
+	i = 0;
+	if (!dst || !src)
+		return (NULL);
+	while (src[i] != '\0')
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }
