@@ -6,85 +6,89 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:04:40 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/24 05:55:47 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/29 05:32:00 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
 
-int	ft_save_name(t_env *e, int i, int fd)
+void	ft_fill_magic(unsigned char *magic_nb)
 {
-	int		start;
-	int		end;
-	int		next_one;
-
-	start = 0;
-	end = 0;
-	next_one = 0;
-	if ((end = lseek(fd, 4, SEEK_HOLE) == -1))
-		return (0);
-	if ((start = lseek(fd, 5, SEEK_SET) == -1))
-		return (0);
-	if (!(e->player[i]->name = ft_memalloc(sizeof(char) * (end - start))))
-		return (0);
-	read(fd, e->player[i]->name, end - start);
-	if ((next_one = lseek(fd, 4, SEEK_DATA) == -1))
-		return (0);
-	return (next_one);
+	magic_nb[0] = 0;
+	magic_nb[1] = 234;
+	magic_nb[2] = 131;
+	magic_nb[3] = 243;
 }
 
-int	ft_save_comment(t_env *e, int i, int fd, int pos)
+off_t	ft_save_name(t_env *e, int i, int fd)
 {
-	int		start;
-	int		end;
-	int		next_one;
+	unsigned char	magic_nb[4];
+	unsigned char	*buff;
+	int				k;
 
-	start = 0;
-	end = 0;
-	next_one = 0;
-	if ((end = lseek(fd, 4, SEEK_HOLE) == -1))
+	ft_fill_magic(magic_nb);
+	k = -1;
+	if (!(buff = ft_memalloc(sizeof(char) * 4)))
 		return (0);
-	if ((start = lseek(fd, pos, SEEK_SET) == -1))
+	if ((read(fd, buff, 4)) == -1)
 		return (0);
-	if (!(e->player[i]->comment = ft_memalloc(sizeof(char) * (end - start))))
+	while (++k < 4)
+		if (buff[k] != magic_nb[k])
+		{
+			free(buff);
+			return (0);
+		}
+	free(buff);
+	if (!(e->players[i].name = ft_memalloc(sizeof(char) * (NAME_SIZE))))
 		return (0);
-	read(fd, e->player[i]->comment, end - start);
-	if ((next_one = lseek(fd, 4, SEEK_DATA) == -1))
+	if (read(fd, e->players[i].name, NAME_SIZE) == -1)
 		return (0);
-	return (next_one);
+	printf("i = %i\n", i);
+	printf("name = %s\n", e->players[i].name);
+	return (140);
 }
 
-int	ft_put_champ_in_arena(t_env *e, int i, int fd, int pos)
+off_t	ft_save_comment(t_env *e, int i, int fd, off_t pos)
 {
-	int		start;
-	int		end;
-	int		place_in_arena;
-	char	*buff;
+	if (lseek(fd, pos, SEEK_SET) == -1)
+		return (0);
+	if (!(e->players[i].comment = ft_memalloc(sizeof(char) * (COMMENT_SIZE))))
+		return (0);
+	if (read(fd, e->players[i].comment, COMMENT_SIZE) == -1)
+		return (0);
+	return (2196);
+}
+
+off_t	ft_put_champ_in_arena(t_env *e, int i, int fd, off_t pos)
+{
+	off_t		end;
+	int			place_in_arena;
+	char		*buff;
 
 	place_in_arena = (MEM_SIZE * i / e->nb_of_pl);
-	start = 0;
 	end = 0;
 	buff = NULL;
-	if ((end = lseek(fd, 0, SEEK_END) == -1))
+	if ((end = lseek(fd, 0, SEEK_END)) == -1)
 		return (0);
-	if ((start = lseek(fd, pos, SEEK_SET) == -1))
+	if (lseek(fd, pos, SEEK_SET) == -1)
 		return (0);
-	if (!(buff = ft_memalloc(sizeof(char) * (end - start))))
+	if (!(buff = ft_memalloc(sizeof(char) * (end - pos))))
 		return (0);
-	read(fd, buff, end - start);
-	if (!(ft_strcpy(e->&arena[place_in_arena], buff)))
+	if (read(fd, buff, end - pos) == -1)
+		return (0);
+	if (ft_strcpy((char *)&e->arena[place_in_arena], buff) == NULL)
 	{
-		ft_strdel(buff);
+		ft_strdel(&buff);
 		return (0);
 	}
-	ft_strdel(buff);
+	ft_strdel(&buff);
 	return (1);
 }
 
 int	ft_import_champ(t_env *e, int i, char *argv)
 {
-	int		fd;
-	int		pos;
+	int			fd;
+	off_t		pos;
 
 	fd = 0;
 	pos = 0;
@@ -96,6 +100,7 @@ int	ft_import_champ(t_env *e, int i, char *argv)
 		return (0);
 	if (!(ft_put_champ_in_arena(e, i, fd, pos)))
 		return (0);
+	close(fd);
 	return (1); 
 }
 
@@ -103,11 +108,11 @@ int	ft_init_player(t_env *e, char *argv)
 {
 	static int	i = 0;
 
-	e->player[i]->num_player = i;
-	e->player[i]->id = MAX_INT - e->player[i]->num_player;
-	e->player[i]->lives_periode = 0;
-	e->player[i]->total_lives = 0;
-	e->player[i]->last_live = 0;
+	e->players[i].num_player = i + 1;
+	e->players[i].id = INT_MAX - e->players[i].num_player;
+	e->players[i].lives_periode = 0;
+	e->players[i].total_lives = 0;
+	e->players[i].last_live = 0;
 	if (!(ft_import_champ(e, i, argv)))
 		return (0);
 	i++;

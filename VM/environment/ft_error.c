@@ -6,14 +6,16 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 05:46:54 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/24 05:55:18 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/28 05:08:09 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
 
-int	ft_error(int i);
+int	ft_error(t_env *e, int i)
 {
+	if (e->visu == 1)
+		ft_end_visu(e);
 	if (i == 1)
 		printf("Error.\nMalloc of environment\n");
 	else if (i == 2)
