@@ -6,13 +6,15 @@
 #    By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/07 22:22:27 by fdidelot          #+#    #+#              #
-#    Updated: 2018/03/14 04:04:21 by fdidelot         ###   ########.fr        #
+#    Updated: 2018/03/29 01:29:18 by fdidelot         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = 		asm
 
 SRCS = 		main.c \
+			name_and_comment.c \
+			tools.c \
 
 OBJS = 		$(SRCS:.c=.o)
 
