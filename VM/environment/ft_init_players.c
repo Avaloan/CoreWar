@@ -6,19 +6,11 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:04:40 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/29 07:24:57 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/31 08:35:14 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
-
-void	ft_fill_magic(unsigned char *magic_nb)
-{
-	magic_nb[0] = 0;
-	magic_nb[1] = 234;
-	magic_nb[2] = 131;
-	magic_nb[3] = 243;
-}
 
 off_t	ft_save_name(t_env *e, int i, int fd)
 {
@@ -26,7 +18,10 @@ off_t	ft_save_name(t_env *e, int i, int fd)
 	unsigned char	*buff;
 	int				k;
 
-	ft_fill_magic(magic_nb);
+	magic_nb[0] = 0;
+	magic_nb[1] = 234;
+	magic_nb[2] = 131;
+	magic_nb[3] = 243;
 	k = -1;
 	if (!(buff = ft_memalloc(sizeof(char) * 4)))
 		return (0);
@@ -43,15 +38,21 @@ off_t	ft_save_name(t_env *e, int i, int fd)
 		return (0);
 	if (read(fd, e->players[i].name, NAME_SIZE) == -1)
 		return (0);
-	return (140);
+	return (136);
 }
 
 off_t	ft_save_comment(t_env *e, int i, int fd, off_t pos)
 {
-	//off_t	size;
-	if (lseek(fd, pos, SEEK_SET) == -1)
+	char	tmp[5];
+
+	tmp[4] = '\0';
+	if ((lseek(fd, pos, SEEK_SET) == -1))
 		return (0);
-//	size = prendre_la_taille_indiquee_juste_avant_comment : calcul sur bits;
+	if (read(fd, tmp, 4) == -1)
+		return (0);
+	if ((tmp[0] != 0) || (tmp[1] != 0) ||
+				(e->players[i].size = tmp[2] * 256 + tmp[3]) > CHAMP_MAX_SIZE)
+		return (0);
 	if (!(e->players[i].comment = ft_memalloc(sizeof(char) * (COMMENT_SIZE))))
 		return (0);
 	if (read(fd, e->players[i].comment, COMMENT_SIZE) == -1)
@@ -70,21 +71,21 @@ off_t	ft_put_champ_in_arena(t_env *e, int i, int fd, off_t pos)
 	buff = NULL;
 	if (lseek(fd, pos, SEEK_SET) == -1)
 		return (0);
-	if (!(buff = ft_memalloc(sizeof(char) * (49))))
+	if (!(buff = ft_memalloc(sizeof(char) * (e->players[i].size))))
 		return (0);
-	if (read(fd, buff, 49) == -1)
+	if (read(fd, buff, e->players[i].size) == -1)
 		return (0);
-
-	if (ft_strcpy_until_unsigned(&e->arena[place_in_arena], buff, 49) == NULL)
+	if (ft_strcpy_until_unsigned(&e->arena[place_in_arena],
+				buff, e->players[i].size) == NULL)
 	{
-		ft_strdel(&buff);
+		free(buff);
 		return (0);
 	}
-	ft_strdel(&buff);
+	free(buff);
 	return (1);
 }
 
-int	ft_import_champ(t_env *e, int i, char *argv)
+int		ft_import_champ(t_env *e, int i, char *argv)
 {
 	int			fd;
 	off_t		pos;
@@ -100,18 +101,25 @@ int	ft_import_champ(t_env *e, int i, char *argv)
 	if (!(ft_put_champ_in_arena(e, i, fd, pos)))
 		return (0);
 	close(fd);
-	return (1); 
+	return (1);
 }
 
-int	ft_init_player(t_env *e, char *argv)
+int		ft_init_player(t_env *e, char *argv)
 {
 	static int	i = 0;
 
-	e->players[i].num_player = i + 1;
-	e->players[i].id = INT_MAX - e->players[i].num_player;
+	if (e->forced_nb_for_pl)
+	{
+		e->players[i].num_player = e->forced_nb_for_pl;
+		e->forced_nb_for_pl = 0;
+	}
+	else
+		e->players[i].num_player = i + 1;
+	e->players[i].id = UINT_MAX - e->players[i].num_player + 1;
 	e->players[i].lives_periode = 0;
 	e->players[i].total_lives = 0;
 	e->players[i].last_live = 0;
+	e->players[i].size = 0;
 	if (!(ft_import_champ(e, i, argv)))
 		return (0);
 	i++;

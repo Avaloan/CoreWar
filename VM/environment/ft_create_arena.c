@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 02:07:51 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/29 06:02:45 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/31 05:19:36 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ int	ft_create_arena(t_env *e)
 	e->option = 0;
 	e->winner_value = 0;
 	e->winner_name = NULL;
+	e->forced_nb_for_pl = 0;
+	e->dump_on = -1;
 	return (1);
 }

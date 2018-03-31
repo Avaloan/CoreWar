@@ -6,45 +6,41 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/29 03:59:16 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/31 09:24:24 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ncurses.h>
-#include <curses.h>
-#include <term.h>
-#include <limits.h>
-#include <math.h>
-#include "../SRC/libft/SRC/libft.h"
+#ifndef COREWAR_VM_H
+# define COREWAR_VM_H
+# include <ncurses.h>
+# include <curses.h>
+# include <term.h>
+# include <limits.h>
+# include <math.h>
+# include "../SRC/libft/SRC/libft.h"
 
-/*
-**
-*/
-
-#define COMMENT_SIZE	2048
-#define NAME_SIZE		128
-#define	MEM_SIZE		(4 * 1024)
-#define IDX_MOD			(MEM_SIZE / 8)
-#define REG_NUMBER		16
+# define COMMENT_SIZE			2048
+# define NAME_SIZE				128
+# define MEM_SIZE				(4 * 1024)
+# define IDX_MOD				(MEM_SIZE / 8)
+# define REG_NUMBER				16
+# define CHAMP_MAX_SIZE			(MEM_SIZE / 8)
 
 /*
 ** ENVIRONMENT
 */
-
-#define	MAX_PLAYERS				4
-#define CYCLE_TO_DIE			1536
-#define CYCLE_DELTA				50
-#define NBR_LIVE				21
-#define MAX_CHECKS				10
-
-#define T_REG					1
-#define T_DIR					2
-#define T_IND					3
-#define T_LAB					8
-
-#define	NAME_LENGTH				128
-#define COMMENT_LENGTH			2048
-#define MAGIC_NB				0xea83f3
+# define MAX_PLAYERS			4
+# define CYCLE_TO_DIE			1536
+# define CYCLE_DELTA			50
+# define NBR_LIVE				21
+# define MAX_CHECKS				10
+# define T_REG					1
+# define T_DIR					2
+# define T_IND					3
+# define T_LAB					8
+# define NAME_LENGTH			128
+# define COMMENT_LENGTH			2048
+# define MAGIC_NB				0xea83f3
 
 /*
 ** PROCESS
@@ -83,12 +79,13 @@ typedef struct					s_visu
 typedef struct					s_player
 {
 	int							num_player;
-	int							id;
+	unsigned int				id;
 	int							lives_periode;
 	int							total_lives;
 	int							last_live;
 	char						*name;
 	char						*comment;
+	int							size;
 }								t_player;
 
 /*
@@ -100,9 +97,8 @@ typedef struct					s_env
 	int							nb_of_pl;
 	int							visu;
 	t_visu						*vi;
-	int							nb_of_check;
 //	void						*(op_code)(s_env *, int, int, int);
-	t_process					*pc_list; 
+	t_process					*pc_list;
 	unsigned char				*arena;
 	t_player					*players;
 	int							cycles_to_die;
@@ -113,6 +109,8 @@ typedef struct					s_env
 	char						*winner_name;
 	int							winner_value;
 	int							option;
+	int							dump_on;
+	unsigned int				forced_nb_for_pl;
 }								t_env;
 
 /*
@@ -128,9 +126,10 @@ int								ft_finish(t_env *e);
 int								ft_game_runner(t_env *e);
 int								ft_play_turn(t_env *e);
 int								ft_options(t_env *e, char *argv);
-int								ft_apply_option(t_env *e, char *argv,int i);
-int								ft_add_pc(t_env *e, t_process *father, int i);//Operations pour fork
-/*	
+int								ft_apply_option(t_env *e, char *argv, int i);
+int								ft_dump(t_env *e);
+int								ft_add_pc(t_env *e, t_process *father, int i);
+/*
 **	VISUAL_FUNCTIONS
 */
 void							ft_end_visu(t_env *e);
@@ -139,3 +138,5 @@ int								ft_fill_info(t_env *e);
 int								ft_visual(t_env *e);
 int								ft_start_the_game_visu(t_env *e);
 int								ft_maj_visu(t_env *e);
+
+#endif

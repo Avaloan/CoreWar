@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:02:45 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/29 06:07:09 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/31 08:31:46 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		ft_init_process(t_env *e)
 			tmp->next->reg[k] = 0;
 		tmp->next->next = NULL;
 		tmp = tmp->next;
+		i++;
 	}
 	return (1);
 }

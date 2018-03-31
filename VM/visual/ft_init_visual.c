@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 00:18:51 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/29 04:52:33 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/31 07:16:41 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,14 @@ int		ft_visual(t_env *e)
 	ft_init_visual(e);
 	e->vi->root = sqrt(MEM_SIZE);
 	test = MEM_SIZE % e->vi->root;
-	printf("test = %i && e->vi->root = %i", test, e->vi->root);
 	if (test != 0 || e->vi->root < (e->nb_of_pl * 10))
 		return (0);
 	e->visu = 1;
 	e->vi->border = 3;
 	e->vi->mx = (3 * e->vi->root) + e->vi->border;
-	e->vi->my = (e->vi->root) + 1;
+	e->vi->my = (e->vi->root) + 2;
 	initscr();
 	e->vi->arena = newwin(e->vi->my, e->vi->mx, 0, 0);
-	e->vi->info = newwin(e->vi->my, e->vi->mx + 80, 0, e->vi->mx + 2);
+	e->vi->info = newwin(e->vi->my, 40, 0, e->vi->mx + 2);
 	return (1);
 }

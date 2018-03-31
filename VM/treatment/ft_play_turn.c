@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 04:42:08 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/28 06:03:27 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/31 08:38:13 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	ft_load_waiting(t_env *e, t_process *proc)
 {
 	if (e->arena[proc->pc] == 9 && proc->carry == 0)
 		proc->pc++;
-	else if (e->arena[proc->pc] < 18 && e->arena[proc->pc] > 0)// Verifie si la case est un OP code valable et si on doit chercher un temps d attente
+	else if (e->arena[proc->pc] < 18 && e->arena[proc->pc] > 0)
+		// Verifie si la case est un OP code valable et si on doit chercher un temps d attente
 	{
 		proc->to_exec = 1;
 	//	proc->waiting = g_op_tab[e->arena[proc->pc]].nb_cycles;//Vrai ligne => integrer g_op_tab pour fonctionner

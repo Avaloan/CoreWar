@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 03:57:39 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/29 06:54:53 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/03/31 08:31:19 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_fresh(t_env *e)
 	t_process	*tmp;
 	int			i;
 
-	i = 0;
+	i = -1;
 	tmp = NULL;
 	if (e->pc_list)
 	{
@@ -31,11 +31,10 @@ void	ft_fresh(t_env *e)
 		free(e->pc_list);
 	}
 	free(e->arena);
-	while (i < e->nb_of_pl)
+	while (++i < e->nb_of_pl)
 	{
 		free(e->players[i].name);
 		free(e->players[i].comment);
-		i++;
 	}
 	free(e->players);
 	free(e->winner_name);
@@ -54,7 +53,7 @@ int		ft_claim_winner(t_env *e)
 			e->winner_value = e->players[i].last_live;
 			if ((e->winner_name = ft_strdup(e->players[i].name)) == 0)
 				return (0);
-		}	
+		}
 		i++;
 	}
 	ft_putstr("The Winner is");
