@@ -106,10 +106,11 @@ unsigned int bin_to_dec(int size, unsigned char *number, unsigned int array_size
 }
 
 /*
- **	Bcp de valeurs en dur faire attention
+ **	fonction lecture bidule doit etre lancée pour
+ ** les indirects aussi faire les modifs
  */
 
-int	fonction_lecture_arg_check_error(t_env *e, int arg_size, t_process *process, t_params *p)
+int	fonction_lecture_arg_check_error(t_env *e, int arg_size, t_process *process, t_params *p, int add)
 {
 	int i;
 	int iter;
@@ -124,7 +125,7 @@ int	fonction_lecture_arg_check_error(t_env *e, int arg_size, t_process *process,
 	//printf("pc : %d | e->arena[process->pc] : %d | i : %d\n", process->pc, e->arena[process->pc], i);
 	while (i < arg_size + 1)
 	{
-		stock = e->arena[process->pc + iter + p->total_size];
+		stock = e->arena[process->pc + iter + p->total_size + add];
 	//	printf("stock : %d\n", stock);
 		dec_to_bin(stock, tab, i * 8, arg_size * 8);
 		i++;
@@ -145,17 +146,17 @@ void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcod
 {
 	if (arg_type == 1)
 	{
-		args[num_param].reg = fonction_lecture_arg_check_error(e, 4, pc, p);
+		args[num_param].reg = fonction_lecture_arg_check_error(e, 1, pc, p, 0);
 		//printf("reg : %d\n", args[num_param].reg);
 		if (args[num_param].reg <= 0 || args[num_param].reg > REG_NUMBER)
 			printf("		REG_NUMBER INVALID\n");//faire avancer le pc de 1
 				args[num_param].type = 'r';
-		p->total_size += 4;
+		p->total_size += 1;
 		//printf("p->total_size : %d\n", p->total_size);
 	}
 	if (arg_type == 4)
 	{
-		args[num_param].ind = fonction_lecture_arg_check_error(e, 2, pc, p);
+		args[num_param].ind = fonction_lecture_arg_check_error(e, 2, pc, p, 0);
 		//printf("ind : %d\n", args[num_param].ind);
 		args[num_param].type = 'i';
 		p->total_size += 2;
@@ -165,19 +166,19 @@ void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcod
 		//printf("DIR SIZE %d\n", g_op_tab[opcode].dir_size);
 		if (g_op_tab[opcode].dir_size == 0)
 		{
-			args[num_param].dir = fonction_lecture_arg_check_error(e, 4, pc, p);
+			args[num_param].dir = fonction_lecture_arg_check_error(e, 4, pc, p, 0);
 		//printf("dir : %d\n", args[num_param].dir);
 			p->total_size += 4;
 		}
 		else
-			args[num_param].dir = fonction_lecture_arg_check_error(e, 2, pc, p);
+			args[num_param].dir = fonction_lecture_arg_check_error(e, 2, pc, p, 0);
 		//printf("dir : %d\n", args[num_param].dir);
 		args[num_param].type = 'd';
 		p->total_size += 2;
 	}
 }
 
-int fonction_check_coding_byte(t_env *e, t_params *p, t_args_value args[3], int opcode, t_process *pc)
+	int	fonction_check_coding_byte(t_env *e, t_params *p, t_args_value args[3], int opcode, t_process *pc)
 {
 	int tmp;
 
@@ -203,7 +204,7 @@ int fonction_check_coding_byte(t_env *e, t_params *p, t_args_value args[3], int 
 	return (BAD_CODING_BYTE);
 }
 
-void fonction_lancement_op(t_env *e, t_process *process)
+void	fonction_lancement_op(t_env *e, t_process *process)
 {
 	unsigned char opcode;
 	t_params params;
@@ -222,5 +223,6 @@ void fonction_lancement_op(t_env *e, t_process *process)
 		if (fonction_check_coding_byte(e, &params, args, opcode, process) == BAD_CODING_BYTE)
 			return ; //faire avancer le pc de 1
 	}
+	process->pc += params.total_size;
 	//e->op_tab[opcode].op(e, process, args);
 }

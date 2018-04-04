@@ -26,16 +26,16 @@ typedef struct				s_params
 
 typedef struct				s_args_value
 {
-	int						reg;
+	unsigned char			reg;
 	int						dir;
-	int						ind;
+	short					ind;
 	char					type;
 }							t_args_value;
 
 typedef struct				s_process
 {
 	unsigned int			pc;
-	int						reg[REG_NUMBER];
+	unsigned int			reg[REG_NUMBER];
 	char					alive;
 	int						countdown;
 	char					carry;
