@@ -84,7 +84,25 @@ void dec_to_bin(int dec, unsigned char *bin_num, int index, int size)
 				printf("fff\n");
 				i++;
 			}
+		
 		}*/
+	}
+}
+
+void	write_nb_bytes(t_env *e, int input, int arg_size)
+{
+	int i = 0;
+	int tmp = 0;
+
+	/*if (arg_size == 1) ?
+		e->arena[pc->pos] = (unsigned char)input;
+		return;*/
+	while (input && i < arg_size)
+	{
+		tmp = input >> 8 * arg_size - 1;
+		e->arena[pc->pos] = tmp;
+		input <<= 8 * arg_size - 1;
+		i++;
 	}
 }
 
@@ -110,7 +128,7 @@ unsigned int bin_to_dec(int size, unsigned char *number, unsigned int array_size
  ** les indirects aussi faire les modifs
  */
 
-int	fonction_lecture_arg_check_error(t_env *e, int arg_size, t_process *process, t_params *p, int add)
+int	read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 {
 	int i;
 	int iter;
@@ -125,7 +143,7 @@ int	fonction_lecture_arg_check_error(t_env *e, int arg_size, t_process *process,
 	//printf("pc : %d | e->arena[process->pc] : %d | i : %d\n", process->pc, e->arena[process->pc], i);
 	while (i < arg_size + 1)
 	{
-		stock = e->arena[process->pc + iter + p->total_size + add];
+		stock = e->arena[process->pc + iter + offset];
 	//	printf("stock : %d\n", stock);
 		dec_to_bin(stock, tab, i * 8, arg_size * 8);
 		i++;
@@ -146,7 +164,7 @@ void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcod
 {
 	if (arg_type == 1)
 	{
-		args[num_param].reg = fonction_lecture_arg_check_error(e, 1, pc, p, 0);
+		args[num_param].reg = read_nb_bytes(e, 1, pc, p->total_size);
 		//printf("reg : %d\n", args[num_param].reg);
 		if (args[num_param].reg <= 0 || args[num_param].reg > REG_NUMBER)
 			printf("		REG_NUMBER INVALID\n");//faire avancer le pc de 1
@@ -156,7 +174,7 @@ void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcod
 	}
 	if (arg_type == 4)
 	{
-		args[num_param].ind = fonction_lecture_arg_check_error(e, 2, pc, p, 0);
+		args[num_param].ind = read_nb_bytes(e, 2, pc, p->total_size);
 		//printf("ind : %d\n", args[num_param].ind);
 		args[num_param].type = 'i';
 		p->total_size += 2;
@@ -166,12 +184,12 @@ void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcod
 		//printf("DIR SIZE %d\n", g_op_tab[opcode].dir_size);
 		if (g_op_tab[opcode].dir_size == 0)
 		{
-			args[num_param].dir = fonction_lecture_arg_check_error(e, 4, pc, p, 0);
+			args[num_param].dir = read_nb_bytes(e, 4, pc, p->total_size);
 		//printf("dir : %d\n", args[num_param].dir);
 			p->total_size += 4;
 		}
 		else
-			args[num_param].dir = fonction_lecture_arg_check_error(e, 2, pc, p, 0);
+			args[num_param].dir = read_nb_bytes(e, 2, pc, p->total_size);
 		//printf("dir : %d\n", args[num_param].dir);
 		args[num_param].type = 'd';
 		p->total_size += 2;

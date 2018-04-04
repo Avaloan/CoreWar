@@ -18,9 +18,9 @@ void	ld(t_env *e, t_process *process, t_args_value args[3])
 {
 	unsigned int	parameter;
 
-	if (args[0].type = 'i')
-		parameter = args[0].ind;
+	if (args[0].type = 'd')
+		parameter = args[0].dir;
 	else
-		parameter = read_nb_bytes(e, 2, process, args[0].dir);
+		parameter = read_nb_bytes(e, 2, process, args[0].ind % IDX_MOD);
 	process->reg[args[1].reg] = parameter;
 }

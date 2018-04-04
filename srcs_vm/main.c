@@ -1,6 +1,24 @@
 #include <stdio.h>
 #include "../includes/corewar.h"
 
+
+void	write_nb_bytes(t_env *e, int input, int arg_size)
+{
+	int i = 0;
+	int tmp = 0;
+
+	/*if (arg_size == 1) ?
+		e->arena[pc->pos] = (unsigned char)input;
+		return;*/
+	while (input && i < arg_size)
+	{
+		tmp = input >> 8 * arg_size - 1;
+		e->arena[pc->pos] = tmp;
+		input <<= 8 * arg_size - 1;
+		i++;
+	}
+}
+
 int main()
 {
 	t_env *e;
@@ -23,5 +41,5 @@ int main()
 	e->arena[12] = 0;
 	e->arena[13] = 16;
 	int i = 0;
-	fonction_lancement_op(e, e->pc_list);
+	//fonction_lancement_op(e, e->pc_list);
 }
