@@ -89,10 +89,10 @@ void dec_to_bin(int dec, unsigned char *bin_num, int index, int size)
 	}
 }
 
-void	write_nb_bytes(t_env *e, int input, int arg_size)
+void	write_4_bytes(t_env *e, unsigned int input, int arg_size)
 {
-	int i = 0;
-	int tmp = 0;
+	unsigned int i = 0;
+	unsigned int tmp = 0;
 
 	/*if (arg_size == 1) ?
 		e->arena[pc->pos] = (unsigned char)input;
@@ -101,8 +101,25 @@ void	write_nb_bytes(t_env *e, int input, int arg_size)
 	{
 		tmp = input >> 8 * arg_size - 1;
 		e->arena[pc->pos] = tmp;
-		input <<= 8 * arg_size - 1;
 		i++;
+		input = input << 8;
+	}
+}
+
+void	write_2_bytes(t_env *e, unsigned short input, int arg_size)
+{
+	unsigned int i = 0;
+	unsigned short tmp = 0;
+
+	/*if (arg_size == 1) ?
+		e->arena[pc->pos] = (unsigned char)input;
+		return;*/
+	while (input && i < arg_size)
+	{
+		tmp = input >> 8 * arg_size - 1;
+		e->arena[pc->pos] = tmp;
+		i++;
+		input = input << 8;
 	}
 }
 
