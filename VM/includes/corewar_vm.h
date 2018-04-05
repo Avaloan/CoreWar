@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/31 09:24:24 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/05 06:26:57 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 /*
 ** ENVIRONMENT
 */
+
+# define BAD_CODING_BYTE		666
 # define MAX_PLAYERS			4
 # define CYCLE_TO_DIE			1536
 # define CYCLE_DELTA			50
@@ -38,9 +40,12 @@
 # define T_DIR					2
 # define T_IND					3
 # define T_LAB					8
+# define MAX_ARG_TYPE			3
 # define NAME_LENGTH			128
 # define COMMENT_LENGTH			2048
 # define MAGIC_NB				0xea83f3
+
+typedef	char	t_arg_type;
 
 /*
 ** PROCESS
@@ -56,6 +61,27 @@ typedef struct					s_process
 	int							carry;
 	int							to_exec;
 }								t_process;
+
+/*
+** OPS
+*/
+
+
+typedef struct					s_params
+{
+	int							nb_params_max;
+	int							i;
+	unsigned char				coding_byte;
+	int							total_size;
+}								t_params;
+
+typedef struct					s_args_value
+{
+	unsigned char				reg;
+	int							dir;
+	short						ind;
+	char						type;
+}								t_args_value;
 
 /*
 ** VISU
@@ -97,7 +123,6 @@ typedef struct					s_env
 	int							nb_of_pl;
 	int							visu;
 	t_visu						*vi;
-//	void						*(op_code)(s_env *, int, int, int);
 	t_process					*pc_list;
 	unsigned char				*arena;
 	t_player					*players;
@@ -112,6 +137,19 @@ typedef struct					s_env
 	int							dump_on;
 	unsigned int				forced_nb_for_pl;
 }								t_env;
+
+typedef struct					s_op_info
+{
+	void						(*op)(t_env *, t_process *, t_args_value args[3]);
+	char						*name;
+	int							nb_param;
+	t_arg_type					arg_type[MAX_ARG_TYPE];
+	int							opcode;
+	int							nb_cycle;
+	char						*comment;
+	int							octal;
+	int							dir_size;
+}								t_op_info;
 
 /*
 **	FUNCTIONS
@@ -129,9 +167,39 @@ int								ft_options(t_env *e, char *argv);
 int								ft_apply_option(t_env *e, char *argv, int i);
 int								ft_dump(t_env *e);
 int								ft_add_pc(t_env *e, t_process *father, int i);
+int								read_nb_bytes(t_env *, int, t_process *, int);
+void							write_2_bytes(t_env *, unsigned short, int, t_process *);
+void							write_4_bytes(t_env *, unsigned int, int, t_process *);
+void							fonction_lancement_op(t_env *, t_process *);
+int								ft_operations(t_env *e, t_process *);
+
+
+/*
+** OP PROTOTYPES
+*/
+
+
+void							live(t_env *, t_process *, t_args_value args[3]);
+void							ld(t_env *, t_process *, t_args_value args[3]);
+void							st(t_env *, t_process *, t_args_value args[3]);
+void							add(t_env *, t_process *, t_args_value args[3]);
+void							sub(t_env *, t_process *, t_args_value args[3]);
+void							_and(t_env *, t_process *, t_args_value args[3]);
+void							_or(t_env *, t_process *, t_args_value args[3]);
+void							_xor(t_env *, t_process *, t_args_value args[3]);
+void							zjmp(t_env *, t_process *, t_args_value args[3]);
+void							ldi(t_env *, t_process *, t_args_value args[3]);
+void							sti(t_env *, t_process *, t_args_value args[3]);
+void							_fork(t_env *, t_process *, t_args_value args[3]);
+void							lld(t_env *, t_process *, t_args_value args[3]);
+void							lldi(t_env *, t_process *, t_args_value args[3]);
+void							lfork(t_env *, t_process *, t_args_value args[3]);
+void							aff(t_env *, t_process *, t_args_value args[3]);
+
 /*
 **	VISUAL_FUNCTIONS
 */
+
 void							ft_end_visu(t_env *e);
 int								ft_fill_arena(t_env *e);
 int								ft_fill_info(t_env *e);
