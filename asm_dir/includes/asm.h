@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/03/24 03:07:13 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/05 02:30:28 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 typedef	char	t_arg_type;
 
-typedef struct	s_op
+typedef struct	s_op_info
 {
 	char		*name;
 	int			nb_param;
@@ -44,13 +44,5 @@ typedef struct	s_op
 	char		*comment;
 	int			octal;
 	int			dir_size;
-}				t_op;
-
-typedef struct	s_env
-{
-	char		*name_file;
-	char		*stock;
-	int			off_set;
-}				t_env;
-
+}				t_op_info;
 #endif

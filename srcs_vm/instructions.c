@@ -6,13 +6,14 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/03/28 04:12:20 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/05 04:06:34 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 #include <math.h>
 #include <stdlib.h>
+#include "../asm_dir/includes/asm.h"
 
 t_op_info	 g_op_tab[17] =
 {
@@ -48,19 +49,19 @@ void dec_to_bin(int dec, unsigned char *bin_num, int index, int size)
 
 	i = index - 1;// - 500;
 	limit = 8;
-	printf("index		: %d\n", i);
+	//printf("index		: %d\n", i);
 	if (dec == 0)
 	{
 		while (--limit >= 0)
 		{
-//			printf("i %d\n", i);
+			//printf("i %d\n", i);
 			bin_num[i] = '0';
 			i--;
 		}
 	}
 	while (dec > 0 && i >= 0)
 	{
-//		printf("dec = %d, i = %d\n", dec, i);
+		//printf("dec = %d, i = %d\n", dec, i);
 		if (dec % 2 == 0)
 			bin_num[i] = '0';
 		else
@@ -89,35 +90,29 @@ void dec_to_bin(int dec, unsigned char *bin_num, int index, int size)
 	}
 }
 
-void	write_4_bytes(t_env *e, unsigned int input, int arg_size)
+void	write_4_bytes(t_env *e, unsigned int input, int arg_size, t_process *pc)
 {
 	unsigned int i = 0;
 	unsigned int tmp = 0;
 
-	/*if (arg_size == 1) ?
-		e->arena[pc->pos] = (unsigned char)input;
-		return;*/
 	while (input && i < arg_size)
 	{
-		tmp = input >> 8 * arg_size - 1;
-		e->arena[pc->pos] = tmp;
+		tmp = input >> 8 * (arg_size - 1);
+		e->arena[pc->pc] = tmp;
 		i++;
 		input = input << 8;
 	}
 }
 
-void	write_2_bytes(t_env *e, unsigned short input, int arg_size)
+void	write_2_bytes(t_env *e, unsigned short input, int arg_size, t_process *pc)
 {
 	unsigned int i = 0;
 	unsigned short tmp = 0;
 
-	/*if (arg_size == 1) ?
-		e->arena[pc->pos] = (unsigned char)input;
-		return;*/
 	while (input && i < arg_size)
 	{
-		tmp = input >> 8 * arg_size - 1;
-		e->arena[pc->pos] = tmp;
+		tmp = input >> 8 * (arg_size - 1);
+		e->arena[pc->pc] = tmp;
 		i++;
 		input = input << 8;
 	}
@@ -155,21 +150,22 @@ int	read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 	i = 1;
 	stock = 0;
 	iter = 1;
-	//printf("ARG SIZE%d\n", arg_size);
-	tab = ft_memalloc(sizeof(unsigned char) * arg_size * 8);
-	//printf("pc : %d | e->arena[process->pc] : %d | i : %d\n", process->pc, e->arena[process->pc], i);
+	printf("ARG SIZE %d\n", arg_size * 8);
+	tab = (unsigned char*) ft_memalloc(sizeof(char) * (arg_size * 8) + 1);
 	while (i < arg_size + 1)
 	{
 		stock = e->arena[process->pc + iter + offset];
-	//	printf("stock : %d\n", stock);
+		printf("stock : %d || pc %d + iter %d + offset %d\n", stock, process->pc, iter, offset);
+		//printf("offset : %d\n", offset);
 		dec_to_bin(stock, tab, i * 8, arg_size * 8);
+		//printf("i b4	: %d\n", i);
 		i++;
-		printf("tab		: %s\n", tab);
 		iter++;
 	}
 	stock = bin_to_dec(arg_size, tab, arg_size * 8);
 	printf("arg		: %zd\n", stock);
 	free(tab);
+	tab = NULL;
 	return (stock);
 }
 
@@ -179,35 +175,37 @@ int	read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 
 void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcode, t_process *pc, t_env *e, t_params *p) //pendant le check_coding byte
 {
+	printf("tota_size %d\n", p->total_size);
 	if (arg_type == 1)
 	{
+		p->total_size += 1;
 		args[num_param].reg = read_nb_bytes(e, 1, pc, p->total_size);
-		//printf("reg : %d\n", args[num_param].reg);
 		if (args[num_param].reg <= 0 || args[num_param].reg > REG_NUMBER)
 			printf("		REG_NUMBER INVALID\n");//faire avancer le pc de 1
 				args[num_param].type = 'r';
-		p->total_size += 1;
-		//printf("p->total_size : %d\n", p->total_size);
+		printf("reg : %d\n", args[num_param].reg);
+		//printf("p->total_size : %d\n\n", p->total_size);
 	}
 	if (arg_type == 4)
 	{
-		args[num_param].ind = read_nb_bytes(e, 2, pc, p->total_size);
-		//printf("ind : %d\n", args[num_param].ind);
-		args[num_param].type = 'i';
 		p->total_size += 2;
+		args[num_param].ind = read_nb_bytes(e, 2, pc, p->total_size);
+		args[num_param].type = 'i';
+		printf("ind : %d\n", args[num_param].ind);
+		//printf("p->total_size : %d\n\n", p->total_size);
 	}
 	if (arg_type == 2)
 	{
-		//printf("DIR SIZE %d\n", g_op_tab[opcode].dir_size);
+		printf("DIR SIZE %d\n", g_op_tab[opcode].dir_size);
 		if (g_op_tab[opcode].dir_size == 0)
 		{
 			args[num_param].dir = read_nb_bytes(e, 4, pc, p->total_size);
-		//printf("dir : %d\n", args[num_param].dir);
+			printf("dir : %d\n", args[num_param].dir);
 			p->total_size += 4;
 		}
 		else
 			args[num_param].dir = read_nb_bytes(e, 2, pc, p->total_size);
-		//printf("dir : %d\n", args[num_param].dir);
+		printf("dir : %d\n", args[num_param].dir);
 		args[num_param].type = 'd';
 		p->total_size += 2;
 	}
@@ -222,11 +220,12 @@ void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcod
 	else if (p->i == p->nb_params_max && p->coding_byte == 0)
 		return (1);
 	tmp = (p->coding_byte >> 6);
-	//printf("tmp : %d\n", tmp);
+	printf("octal tmp : %d\n", tmp);
 	if (tmp == 3)
 		tmp = 4;
 	if ((tmp = tmp & g_op_tab[opcode].arg_type[p->i]) > 0)
 	{
+		printf("mmh : %d\n", tmp);
 		p->coding_byte <<= 2;
 		p->i++;
 		if (fonction_check_coding_byte(e, p, args, opcode, pc) == 1)
@@ -236,6 +235,7 @@ void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcod
 			return (1);
 		}
 	}
+	printf("Error ?\n");
 	return (BAD_CODING_BYTE);
 }
 
@@ -245,8 +245,9 @@ void	fonction_lancement_op(t_env *e, t_process *process)
 	t_params params;
 	t_args_value args[3];
 
+	params.total_size = 0;
 	opcode = e->arena[process->pc] - 1;
-	printf("opcode		: %d\n", opcode);
+	printf("opcode		: %d\nname		: %s\n", opcode, g_op_tab[opcode].name);
 	params.nb_params_max = g_op_tab[opcode].nb_param;
 	params.i = 0;
 	printf("octal		: %d\n", g_op_tab[opcode].octal);
@@ -257,7 +258,9 @@ void	fonction_lancement_op(t_env *e, t_process *process)
 		printf("octet codage	: %x\n", params.coding_byte);
 		if (fonction_check_coding_byte(e, &params, args, opcode, process) == BAD_CODING_BYTE)
 			return ; //faire avancer le pc de 1
+		process->pc -= 1;
 	}
+	//printf("dg\n");
+	e->op_tab[opcode].op(e, process, args);
 	process->pc += params.total_size;
-	//e->op_tab[opcode].op(e, process, args);
 }
