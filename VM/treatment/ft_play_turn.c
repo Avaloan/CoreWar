@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 04:42:08 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/06 03:51:21 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/05 06:31:31 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ int	ft_play_turn(t_env *e)
 		{
 			if (tmp->to_exec == 1)
 			{
-				u = 0;
-				while (u < REG_NUMBER)
-			//	if (!ft_operations(e))//Samy
-			//		return (0);
+				if (!ft_operations(e, tmp))
+					return (0);
 				tmp->to_exec = 0;
 			}
 			else if (ft_load_waiting(e, tmp) == 0)

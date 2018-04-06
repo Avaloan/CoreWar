@@ -6,7 +6,7 @@
 #    By: gquerre <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/24 05:47:01 by gquerre           #+#    #+#              #
-#    Updated: 2018/04/06 02:16:21 by gquerre          ###   ########.fr        #
+#    Updated: 2018/04/05 06:45:42 by snedir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,11 +34,29 @@ V_SRC =	./visual/ft_end_visu.c\
 		./visual/ft_init_visual.c\
 		./visual/ft_maj_visu.c
 
+OP_SRC = ./operations/add.c\
+		 ./operations/aff.c\
+		 ./operations/and.c\
+		 ./operations/fork.c\
+		 ./operations/lfork.c\
+		 ./operations/live.c\
+		 ./operations/lld.c\
+		 ./operations/lldi.c\
+		 ./operations/instructions.c\
+		 ./operations/ld.c\
+		 ./operations/ldi.c\
+		 ./operations/or.c\
+		 ./operations/st.c\
+		 ./operations/sti.c\
+		 ./operations/sub.c\
+		 ./operations/zjmp.c\
+		 ./operations/xor.c
+
 FLAG =	-g -Wextra -Wall -Werror -O3 -lncurses
 
 SUPP =	./includes/corewar_vm.h ./SRC/libft/libft.a
 
-OBJ =	$(SRC:.c=.o) $(V_SRC:.c=.o)
+OBJ =	$(SRC:.c=.o) $(V_SRC:.c=.o) $(OP_SRC:.c=.o)
 
 all: $(NAME)
 

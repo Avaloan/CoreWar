@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 03:48:25 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/31 08:26:37 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/06 02:56:39 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_fill_players(t_env *e)
 		wprintw(e->vi->info, "-> Comment : %.20s", e->players[i].comment);
 		wmove(e->vi->info, line + 5, 4);
 		wprintw(e->vi->info, "-> Last_live : %i", e->players[i].last_live);
+		wmove(e->vi->info, line + 6, 4);
+		wprintw(e->vi->info, "-> Last_live : %i", e->pc_list->pc);
 		i++;
 		line += 7;
 	}
