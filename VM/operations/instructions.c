@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/06 03:18:05 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/06 06:02:01 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	write_4_bytes(t_env *e, unsigned int input, int arg_size, t_process *pc)
 	}
 }
 
-void	write_2_bytes(t_env *e, unsigned short input, t_process *pc, unsigned int off)
+void	write_2_bytes(t_env *e, unsigned short input, int arg_size, t_process *pc)
 {
 	unsigned int i = 0;
 	unsigned short tmp = 0;
@@ -96,7 +96,7 @@ void	write_2_bytes(t_env *e, unsigned short input, t_process *pc, unsigned int o
 	while (input && i < INT_SIZE - 2)
 	{
 		tmp = input >> 8;
-		e->arena[pc->pc + 1 + off] = tmp;
+		e->arena[pc->pc + 1] = tmp;
 		i++;
 		input = input << 8;
 	}

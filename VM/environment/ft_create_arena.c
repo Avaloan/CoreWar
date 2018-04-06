@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 02:07:51 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/31 05:19:36 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/06 04:57:34 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	ft_create_arena(t_env *e)
 {
 	if (!(e->arena = (ft_memalloc(sizeof(unsigned char) * (MEM_SIZE)))))
+		return (0);
+	if (!(e->written_by = (ft_memalloc(sizeof(unsigned char) * (MEM_SIZE)))))
 		return (0);
 	if (!(e->pc_list = ft_memalloc(sizeof(t_process))))
 		return (0);

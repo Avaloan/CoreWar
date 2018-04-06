@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 05:48:31 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/28 06:05:35 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/06 05:11:16 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	ft_add_pc(t_env *e, t_process *father, int i)
 	tmp->waiting = father->waiting;
 	tmp->lives_during_periode = father->lives_during_periode;
 	tmp->carry = father->carry;
+	tmp->from_pl = father->from_pl;
 	while (k < REG_NUMBER)
 	{
 		tmp->reg[k] = father->reg[k];

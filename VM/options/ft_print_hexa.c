@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fill_arena.c                                    :+:      :+:    :+:   */
+/*   ft_print_hexa.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/28 03:41:03 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/06 06:11:15 by gquerre          ###   ########.fr       */
+/*   Created: 2018/04/06 05:30:51 by gquerre           #+#    #+#             */
+/*   Updated: 2018/04/06 06:06:49 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
 
-int	ft_fill_arena(t_env *e)
+int	ft_print_hexa(unsigned char oct)
 {
-	int			i;
-	int			j;
-	int			cmp;
-	static int	cheat = 0;
+	char	*res;
 
-	cmp = 0;
-	i = 1;
-	j = 1;
-	box(e->vi->arena, 0, 0);
-	while (j < e->vi->my - 1 && cmp < MEM_SIZE)
+	if (!(res = ft_ssutoa(oct, 16)))
+		return (0);
+	if (ft_strlen(res) > 2)
 	{
-		while (i < e->vi->mx - 2 && cmp < MEM_SIZE)
-		{
-			wmove(e->vi->arena, j, i);
-			wprintw(e->vi->arena, " ");
-			ft_choose_color(e, cmp);
-			wprintw(e->vi->arena, "%.2x", e->arena[cmp]);
-			i += 3;
-			cmp++;
-		}
-		j++;
-		i = 1;
+		ft_strdel(&res);
+		return (0);
 	}
-	cheat++;
+	if (ft_strlen(res) == 1)
+		ft_putchar('0');
+	ft_putstr(res);
+	ft_strdel(res);
 	return (1);
 }

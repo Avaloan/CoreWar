@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_start_the_game_visu.c                           :+:      :+:    :+:   */
+/*   ft_strjoinfree.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/27 06:16:10 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/06 05:24:59 by gquerre          ###   ########.fr       */
+/*   Created: 2017/04/18 01:19:31 by gquerre           #+#    #+#             */
+/*   Updated: 2018/04/06 05:22:52 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/corewar_vm.h"
+#include "libft.h"
 
-int	ft_start_the_game_visu(t_env *e)
+char		*ft_strjoinfree(char *s1, char *s2)
 {
-	if (ft_fill_arena(e) == 0)
-		return (0);
-	if (ft_fill_info(e) == 0)
-		return (0);
-	start_color();
-	wrefresh(e->vi->arena);
-	wrefresh(e->vi->info);
-	getch();
-	return (1);
+	char	*mem;
+
+	mem = NULL;
+	if (!(s2))
+		return (s1);
+	mem = ft_strjoin(s1, s2);
+	ft_strdel(&s1);
+	ft_strdel(&s2);
+	return (mem);
 }

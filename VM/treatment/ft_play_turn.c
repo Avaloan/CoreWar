@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 04:42:08 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/05 06:31:31 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/06 06:14:01 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int	ft_load_waiting(t_env *e, t_process *proc)
 		// Verifie si la case est un OP code valable et si on doit chercher un temps d attente
 	{
 		proc->to_exec = 1;
-	//	proc->waiting = g_op_tab[e->arena[proc->pc]].nb_cycles;//Vrai ligne => integrer g_op_tab pour fonctionner
-		proc->waiting = 10;// juste pour tester le visu
+		proc->waiting = g_op_tab[e->arena[proc->pc]].nb_cycle;//Vrai ligne => integrer g_op_tab pour fonctionner
 	}
 	else
 		proc->pc++;
@@ -39,8 +38,8 @@ int	ft_play_turn(t_env *e)
 		{
 			if (tmp->to_exec == 1)
 			{
-				if (!ft_operations(e, tmp))
-					return (0);
+		//		if (!ft_operations(e, tmp))
+		//			return (0);
 				tmp->to_exec = 0;
 			}
 			else if (ft_load_waiting(e, tmp) == 0)

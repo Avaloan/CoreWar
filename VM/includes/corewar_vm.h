@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/06 03:26:54 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/06 06:01:12 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct					s_process
 	struct s_process			*next;
 	int							carry;
 	int							to_exec;
+	unsigned int				from_pl;
 }								t_process;
 
 /*
@@ -126,6 +127,7 @@ typedef struct					s_env
 	t_visu						*vi;
 	t_process					*pc_list;
 	unsigned char				*arena;
+	unsigned char				*written_by;
 	t_player					*players;
 	int							cycles_to_die;
 	int							cycles;
@@ -141,7 +143,7 @@ typedef struct					s_env
 
 typedef struct					s_op_info
 {
-	void						(*op)(t_env *, t_process *, t_args_value args[3], int offset);
+	void						(*op)(t_env *, t_process *, t_args_value args[3]);
 	char						*name;
 	int							nb_param;
 	t_arg_type					arg_type[MAX_ARG_TYPE];
@@ -156,6 +158,8 @@ typedef struct					s_op_info
 **	FUNCTIONS
 */
 
+int								ft_print_hexa(unsigned char oct);
+int								ft_comp_with_pl(t_env *e, t_process *pro);
 int								ft_create_arena(t_env *e);
 int								ft_how_many_pl(t_env *e, int argc, char **argv);
 int								ft_init_player(t_env *e, char *argv);
@@ -180,22 +184,22 @@ int								ft_operations(t_env *e, t_process *process);
 */
 
 
-void							live(t_env *, t_process *, t_args_value args[3], unsigned int offset);
-void							ld(t_env *, t_process *, t_args_value args[3], unsigned int offset);
-void							st(t_env *, t_process *, t_args_value args[3], unsigned int offset);
-void							add(t_env *, t_process *, t_args_value args[3] unsigned int offset);
-void							sub(t_env *, t_process *, t_args_value args[3], unsigned int offset);
-void							_and(t_env *, t_process *, t_args_value args[3], unsigned int offset);
-void							_or(t_env *, t_process *, t_args_value args[3], unsigned int offset);
-void							_xor(t_env *, t_process *, t_args_value args[3], unsigned int offset);
-void							zjmp(t_env *, t_process *, t_args_value args[3], unsigned int offset);
-void							ldi(t_env *, t_process *, t_args_value args[3], unsigned int offset);
-void							sti(t_env *, t_process *, t_args_value args[3], unsigned int offset);
-void							_fork(t_env *, t_process *, t_args_value args[3], unsigned int offset);
-void							lld(t_env *, t_process *, t_args_value args[3], unsigned int offset);
-void							lldi(t_env *, t_process *, t_args_value args[3], unsigned int offset);
-void							lfork(t_env *, t_process *, t_args_value args[3]), unsigned int offset;
-void							aff(t_env *, t_process *, t_args_value args[3]), unsigned int offset;
+void							live(t_env *, t_process *, t_args_value args[3]);
+void							ld(t_env *, t_process *, t_args_value args[3]);
+void							st(t_env *, t_process *, t_args_value args[3]);
+void							add(t_env *, t_process *, t_args_value args[3]);
+void							sub(t_env *, t_process *, t_args_value args[3]);
+void							_and(t_env *, t_process *, t_args_value args[3]);
+void							_or(t_env *, t_process *, t_args_value args[3]);
+void							_xor(t_env *, t_process *, t_args_value args[3]);
+void							zjmp(t_env *, t_process *, t_args_value args[3]);
+void							ldi(t_env *, t_process *, t_args_value args[3]);
+void							sti(t_env *, t_process *, t_args_value args[3]);
+void							_fork(t_env *, t_process *, t_args_value args[3]);
+void							lld(t_env *, t_process *, t_args_value args[3]);
+void							lldi(t_env *, t_process *, t_args_value args[3]);
+void							lfork(t_env *, t_process *, t_args_value args[3]);
+void							aff(t_env *, t_process *, t_args_value args[3]);
 
 /*
 **	VISUAL_FUNCTIONS

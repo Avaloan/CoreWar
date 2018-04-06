@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fill_arena.c                                    :+:      :+:    :+:   */
+/*   ft_comp_w_pl.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/28 03:41:03 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/06 06:11:15 by gquerre          ###   ########.fr       */
+/*   Created: 2018/04/06 04:15:37 by gquerre           #+#    #+#             */
+/*   Updated: 2018/04/06 04:42:53 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
 
-int	ft_fill_arena(t_env *e)
+int	ft_comp_with_pl(t_env *e, t_process *pro)
 {
-	int			i;
-	int			j;
-	int			cmp;
-	static int	cheat = 0;
+	int				i;
+	unsigned int	nb;
+	int				j;
 
-	cmp = 0;
-	i = 1;
-	j = 1;
-	box(e->vi->arena, 0, 0);
-	while (j < e->vi->my - 1 && cmp < MEM_SIZE)
+	i = 0;
+	while (i < e->nb_of_pl)
 	{
-		while (i < e->vi->mx - 2 && cmp < MEM_SIZE)
-		{
-			wmove(e->vi->arena, j, i);
-			wprintw(e->vi->arena, " ");
-			ft_choose_color(e, cmp);
-			wprintw(e->vi->arena, "%.2x", e->arena[cmp]);
-			i += 3;
-			cmp++;
-		}
-		j++;
-		i = 1;
+		nb = 0;
+		j = 0;
+		while (j < INT_SIZE)
+			nb += e->arena[pro->pc + j] * ft_pow(256, (INT_SIZE - (j + 1)));
+		if (nb == e->players[i].id)
+			return (i + 1);
+		i++;
 	}
-	cheat++;
-	return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:04:40 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/31 08:35:14 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/06 04:13:51 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ off_t	ft_save_name(t_env *e, int i, int fd)
 		return (0);
 	if (read(fd, e->players[i].name, NAME_SIZE) == -1)
 		return (0);
-	return (136);
+	return (NAME_SIZE + 8);
 }
 
 off_t	ft_save_comment(t_env *e, int i, int fd, off_t pos)
@@ -57,7 +57,7 @@ off_t	ft_save_comment(t_env *e, int i, int fd, off_t pos)
 		return (0);
 	if (read(fd, e->players[i].comment, COMMENT_SIZE) == -1)
 		return (0);
-	return (2192);
+	return (NAME_SIZE + COMMENT_SIZE + 16);
 }
 
 off_t	ft_put_champ_in_arena(t_env *e, int i, int fd, off_t pos)

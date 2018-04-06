@@ -6,7 +6,7 @@
 #    By: gquerre <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/24 05:47:01 by gquerre           #+#    #+#              #
-#    Updated: 2018/04/05 06:45:42 by snedir           ###   ########.fr        #
+#    Updated: 2018/04/06 04:44:29 by gquerre          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC =	./main.c\
 		./environment/ft_how_many_pl.c\
 		./environment/ft_init_players.c\
 		./environment/ft_init_process.c\
+		./environment/ft_comp_w_pl.c\
 		./treatment/ft_game_runner.c\
 		./treatment/ft_play_turn.c\
 		./treatment/ft_add_pc.c\
@@ -69,7 +70,7 @@ SRC/libft/libft.a:
 
 clean:
 	rm -f $(OBJ)
-	rm -f SRC?libft/libft.a
+	rm -f SRC/libft/libft.a
 	make clean -C SRC/libft/
 
 fclean: clean
