@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/06 03:18:05 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/06 05:48:42 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void dec_to_bin(int dec, unsigned char *bin_num, int index, int size)
 	}
 }
 
-void	write_4_bytes(t_env *e, unsigned int input, int arg_size, t_process *pc)
+void	write_4_bytes(t_env *e, unsigned int input, t_process *pc, unsigned int off)
 {
 	unsigned int i = 0;
 	unsigned int tmp = 0;
@@ -81,8 +81,8 @@ void	write_4_bytes(t_env *e, unsigned int input, int arg_size, t_process *pc)
 	while (input && i < INT_SIZE)
 	{
 		tmp = input >> 8 * (INT_SIZE - 1);
-		printf("tmp %u\n", tmp);
-		e->arena[pc->pc + i] = tmp;
+		e->arena[pc->pc + off + i] = tmp;
+		//e->written_by[pc->pc + off + i] = pc->from_pl;
 		i++;
 		input = input << 8;
 	}
@@ -96,7 +96,8 @@ void	write_2_bytes(t_env *e, unsigned short input, t_process *pc, unsigned int o
 	while (input && i < INT_SIZE - 2)
 	{
 		tmp = input >> 8;
-		e->arena[pc->pc + 1 + off] = tmp;
+		e->arena[pc->pc + off + i] = tmp;
+		//e->written_by[pc->pc + off + i] = pc->from_pl;
 		i++;
 		input = input << 8;
 	}
@@ -118,7 +119,7 @@ unsigned int bin_to_dec(int size, unsigned char *number, unsigned int array_size
 	return (result);
 }
 
-int	read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
+int	read_nb_bytes(t_env *e, int arg_size, t_process *process, unsigned int offset)
 {
 	int i;
 	int iter;
@@ -258,15 +259,13 @@ int		ft_operations(t_env *e, t_process *process)
 	params.nb_params_max = g_op_tab[opcode].nb_param;
 	if (g_op_tab[opcode].octal == 1)
 	{
-	printf("lol\n");
 		process->pc += 1;
 		params.coding_byte = e->arena[process->pc];
 		if (check_coding_byte(e, &params, args, opcode, process) == BAD_CODING_BYTE)
 			return (0);
-		process->pc -= 1;
 	}
 	g_op_tab[opcode].op(e, process, args);
-	process->pc += params.total_size;
+	process->pc += params.total_size + 1;
 	return (1);
 }
 
