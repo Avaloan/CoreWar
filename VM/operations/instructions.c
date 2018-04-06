@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/05 06:47:14 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/06 03:18:05 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,18 @@ void dec_to_bin(int dec, unsigned char *bin_num, int index, int size)
 	int i;
 	int limit;
 
-	i = index - 1;// - 500;
+	i = index - 1;
 	limit = 8;
-	//printf("index		: %d\n", i);
 	if (dec == 0)
 	{
 		while (--limit >= 0)
 		{
-			//printf("i %d\n", i);
 			bin_num[i] = '0';
 			i--;
 		}
 	}
 	while (dec > 0 && i >= 0)
 	{
-		//printf("dec = %d, i = %d\n", dec, i);
 		if (dec % 2 == 0)
 			bin_num[i] = '0';
 		else
@@ -69,21 +66,10 @@ void dec_to_bin(int dec, unsigned char *bin_num, int index, int size)
 		if (dec == 0 && limit > 0)
 			while (limit > 0 && i < size)
 			{
-//				printf("limit : %d || i : %d\n", limit, i);
 				bin_num[i] = '0';
 				limit--;
 				i--;
 			}
-		/*if (i >= 0 && dec == 0)
-		{
-			while (i >= 0)
-			{
-				bin_num[i] = '0';
-				printf("fff\n");
-				i++;
-			}
-		
-		}*/
 	}
 }
 
@@ -92,24 +78,25 @@ void	write_4_bytes(t_env *e, unsigned int input, int arg_size, t_process *pc)
 	unsigned int i = 0;
 	unsigned int tmp = 0;
 
-	while (input && i < arg_size)
+	while (input && i < INT_SIZE)
 	{
-		tmp = input >> 8 * (arg_size - 1);
-		e->arena[pc->pc] = tmp;
+		tmp = input >> 8 * (INT_SIZE - 1);
+		printf("tmp %u\n", tmp);
+		e->arena[pc->pc + i] = tmp;
 		i++;
 		input = input << 8;
 	}
 }
 
-void	write_2_bytes(t_env *e, unsigned short input, int arg_size, t_process *pc)
+void	write_2_bytes(t_env *e, unsigned short input, t_process *pc, unsigned int off)
 {
 	unsigned int i = 0;
 	unsigned short tmp = 0;
 
-	while (input && i < arg_size)
+	while (input && i < INT_SIZE - 2)
 	{
-		tmp = input >> 8 * (arg_size - 1);
-		e->arena[pc->pc] = tmp;
+		tmp = input >> 8;
+		e->arena[pc->pc + 1 + off] = tmp;
 		i++;
 		input = input << 8;
 	}
@@ -126,16 +113,10 @@ unsigned int bin_to_dec(int size, unsigned char *number, unsigned int array_size
 	{
 		if (number[i] == '1')
 			result += pow(2, ((size * 8) - i) - 1);
-//		printf("i : %d || size : %d || size * (7-i) : %d || result : %zd\n", i, size, ((size * 8) - i), result);
 		i++;
 	}
 	return (result);
 }
-
-/*
- **	fonction lecture bidule doit etre lancée pour
- ** les indirects aussi faire les modifs
- */
 
 int	read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 {
@@ -147,68 +128,75 @@ int	read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 	i = 1;
 	stock = 0;
 	iter = 1;
-	printf("ARG SIZE %d\n", arg_size * 8);
 	t = (unsigned char*)ft_memalloc(sizeof(char) * (arg_size * 8));
 	while (i < arg_size + 1)
 	{
 		stock = e->arena[process->pc + iter + offset];
-		printf("stock : %d || pc %d + iter %d + offset %d\n", stock, process->pc, iter, offset);
-		//printf("offset : %d\n", offset);
 		dec_to_bin(stock, t, i * 8, arg_size * 8);
-		//printf("i b4	: %d\n", i);
 		i++;
 		iter++;
 	}
 	stock = bin_to_dec(arg_size, t, arg_size * 8);
-	printf("arg		: %zd\n", stock);
 	free(t);
 	t = NULL;
 	return (stock);
 }
 
- /*
- **	Bcp de valeurs en dur faire attention
- */
-
-void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcode, t_process *pc, t_env *e, t_params *p) //pendant le check_coding byte
+void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcode, t_process *pc, t_env *e, t_params *p)
 {
-	printf("tota_size %d\n", p->total_size);
 	if (arg_type == 1)
 	{
-		p->total_size += 1;
 		args[num_param].reg = read_nb_bytes(e, 1, pc, p->total_size);
 		if (args[num_param].reg <= 0 || args[num_param].reg > REG_NUMBER)
 			printf("		REG_NUMBER INVALID\n");//faire avancer le pc de 1
-				args[num_param].type = 'r';
-		printf("reg : %d\n", args[num_param].reg);
-		//printf("p->total_size : %d\n\n", p->total_size);
+		p->total_size += 1;
+		args[num_param].type = 'r';
 	}
 	if (arg_type == 4)
 	{
-		p->total_size += 2;
 		args[num_param].ind = read_nb_bytes(e, 2, pc, p->total_size);
 		args[num_param].type = 'i';
-		printf("ind : %d\n", args[num_param].ind);
-		//printf("p->total_size : %d\n\n", p->total_size);
+		p->total_size += 2;
 	}
 	if (arg_type == 2)
 	{
-		printf("DIR SIZE %d\n", g_op_tab[opcode].dir_size);
 		if (g_op_tab[opcode].dir_size == 0)
 		{
 			args[num_param].dir = read_nb_bytes(e, 4, pc, p->total_size);
-			printf("dir : %d\n", args[num_param].dir);
 			p->total_size += 4;
 		}
 		else
+		{
 			args[num_param].dir = read_nb_bytes(e, 2, pc, p->total_size);
-		printf("dir : %d\n", args[num_param].dir);
+			p->total_size += 2;
+		}
 		args[num_param].type = 'd';
-		p->total_size += 2;
 	}
 }
 
-	int	fonction_check_coding_byte(t_env *e, t_params *p, t_args_value args[3], int opcode, t_process *pc)
+void	init_t_args(t_args_value args[3])
+{
+	int i;
+
+	i = -1;
+	while (++i < 3)
+	{
+		args[i].reg = 0;
+		args[i].dir = 0;
+		args[i].ind = 0;
+		args[i].type = 0;
+	}
+}
+
+void	init_t_params(t_params *params)
+{
+	params->nb_params_max = 0;
+	params->i = 0;
+	params->coding_byte = 0;
+	params->total_size = 0;
+}
+
+int	check_coding_byte(t_env *e, t_params *p, t_args_value args[3], int opcode, t_process *pc)
 {
 	int tmp;
 
@@ -217,47 +205,68 @@ void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcod
 	else if (p->i == p->nb_params_max && p->coding_byte == 0)
 		return (1);
 	tmp = (p->coding_byte >> 6);
-	printf("octal tmp : %d\n", tmp);
 	if (tmp == 3)
 		tmp = 4;
 	if ((tmp = tmp & g_op_tab[opcode].arg_type[p->i]) > 0)
 	{
-		printf("mmh : %d\n", tmp);
 		p->coding_byte <<= 2;
+		get_args_value(args, tmp, p->i, opcode, pc, e, p);
 		p->i++;
-		if (fonction_check_coding_byte(e, p, args, opcode, pc) == 1)
-		{
-			p->i--;
-			get_args_value(args, tmp, p->i, opcode, pc, e, p);
-			return (1);
-		}
+		return (check_coding_byte(e, p, args, opcode, pc));
 	}
-	printf("Error ?\n");
 	return (BAD_CODING_BYTE);
 }
 
-void	ft_operations(t_env *e, t_process *process)
+/*
+int check_coding_byte(t_env *e, t_params *p, t_args_value args[3], int opcode, t_process *pc)
+{
+	int tmp;
+
+	tmp = 0;
+	printf("opcode %d\n", opcode);
+	while (p->i < p->nb_params_max && p->coding_byte != 0)
+	{
+		tmp = p->coding_byte >> 6;
+		if (tmp == 3)
+			tmp = 4;
+		if ((tmp = tmp & g_op_tab[opcode].arg_type[p->i]) > 0)
+		{
+			p->coding_byte <<= 2;
+			get_args_value(args, tmp, p->i, opcode, pc, e, p);
+		}
+		else
+			return (BAD_CODING_BYTE);
+		p->i++;
+	}
+	if (p->i == p->nb_params_max && p->coding_byte != 0)
+		return (BAD_CODING_BYTE);
+	else if (p->i == p->nb_params_max && p->coding_byte == 0)
+		return (1);
+	return (1);
+}*/
+
+
+int		ft_operations(t_env *e, t_process *process)
 {
 	unsigned char opcode;
 	t_params params;
 	t_args_value args[3];
 
-	params.total_size = 0;
+	init_t_args(args);
+	init_t_params(&params);
 	opcode = e->arena[process->pc] - 1;
-	printf("opcode		: %d\nname		: %s\n", opcode, g_op_tab[opcode].name);
 	params.nb_params_max = g_op_tab[opcode].nb_param;
-	params.i = 0;
-	printf("octal		: %d\n", g_op_tab[opcode].octal);
 	if (g_op_tab[opcode].octal == 1)
 	{
+	printf("lol\n");
 		process->pc += 1;
 		params.coding_byte = e->arena[process->pc];
-		printf("octet codage	: %x\n", params.coding_byte);
-		if (fonction_check_coding_byte(e, &params, args, opcode, process) == BAD_CODING_BYTE)
-			return ; //faire avancer le pc de 1
+		if (check_coding_byte(e, &params, args, opcode, process) == BAD_CODING_BYTE)
+			return (0);
 		process->pc -= 1;
 	}
-	//printf("dg\n");
-	//g_op_tab[opcode].op(e, process, args);
+	g_op_tab[opcode].op(e, process, args);
 	process->pc += params.total_size;
+	return (1);
 }
+

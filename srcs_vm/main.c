@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include "../includes/corewar.h"
-#include "../asm_dir/includes/asm.h"
 #define E e->arena
+#include "../VM/includes/corewar_vm.h"
 int main()
 {
 	t_env *e;
@@ -26,7 +25,7 @@ int main()
 	e->arena[12] = 0;
 	e->arena[13] = 0;
 	int i = 0;
-	fonction_lancement_op(e, e->pc_list);
+	ft_operations(e, e->pc_list);
 	while (i < 14)
 	{
 		if (i == 7)

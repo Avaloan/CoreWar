@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/05 06:26:57 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/06 03:26:54 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define IDX_MOD				(MEM_SIZE / 8)
 # define REG_NUMBER				16
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 8)
+# define INT_SIZE				4
 
 /*
 ** ENVIRONMENT
@@ -38,7 +39,7 @@
 # define MAX_CHECKS				10
 # define T_REG					1
 # define T_DIR					2
-# define T_IND					3
+# define T_IND					4
 # define T_LAB					8
 # define MAX_ARG_TYPE			3
 # define NAME_LENGTH			128
@@ -54,7 +55,7 @@ typedef	char	t_arg_type;
 typedef struct					s_process
 {
 	int							pc;
-	int							reg[REG_NUMBER];
+	unsigned int				reg[REG_NUMBER];
 	int							waiting;
 	int							lives_during_periode;
 	struct s_process			*next;
@@ -140,7 +141,7 @@ typedef struct					s_env
 
 typedef struct					s_op_info
 {
-	void						(*op)(t_env *, t_process *, t_args_value args[3]);
+	void						(*op)(t_env *, t_process *, t_args_value args[3], int offset);
 	char						*name;
 	int							nb_param;
 	t_arg_type					arg_type[MAX_ARG_TYPE];
@@ -171,7 +172,7 @@ int								read_nb_bytes(t_env *, int, t_process *, int);
 void							write_2_bytes(t_env *, unsigned short, int, t_process *);
 void							write_4_bytes(t_env *, unsigned int, int, t_process *);
 void							fonction_lancement_op(t_env *, t_process *);
-int								ft_operations(t_env *e, t_process *);
+int								ft_operations(t_env *e, t_process *process);
 
 
 /*
@@ -179,22 +180,22 @@ int								ft_operations(t_env *e, t_process *);
 */
 
 
-void							live(t_env *, t_process *, t_args_value args[3]);
-void							ld(t_env *, t_process *, t_args_value args[3]);
-void							st(t_env *, t_process *, t_args_value args[3]);
-void							add(t_env *, t_process *, t_args_value args[3]);
-void							sub(t_env *, t_process *, t_args_value args[3]);
-void							_and(t_env *, t_process *, t_args_value args[3]);
-void							_or(t_env *, t_process *, t_args_value args[3]);
-void							_xor(t_env *, t_process *, t_args_value args[3]);
-void							zjmp(t_env *, t_process *, t_args_value args[3]);
-void							ldi(t_env *, t_process *, t_args_value args[3]);
-void							sti(t_env *, t_process *, t_args_value args[3]);
-void							_fork(t_env *, t_process *, t_args_value args[3]);
-void							lld(t_env *, t_process *, t_args_value args[3]);
-void							lldi(t_env *, t_process *, t_args_value args[3]);
-void							lfork(t_env *, t_process *, t_args_value args[3]);
-void							aff(t_env *, t_process *, t_args_value args[3]);
+void							live(t_env *, t_process *, t_args_value args[3], unsigned int offset);
+void							ld(t_env *, t_process *, t_args_value args[3], unsigned int offset);
+void							st(t_env *, t_process *, t_args_value args[3], unsigned int offset);
+void							add(t_env *, t_process *, t_args_value args[3] unsigned int offset);
+void							sub(t_env *, t_process *, t_args_value args[3], unsigned int offset);
+void							_and(t_env *, t_process *, t_args_value args[3], unsigned int offset);
+void							_or(t_env *, t_process *, t_args_value args[3], unsigned int offset);
+void							_xor(t_env *, t_process *, t_args_value args[3], unsigned int offset);
+void							zjmp(t_env *, t_process *, t_args_value args[3], unsigned int offset);
+void							ldi(t_env *, t_process *, t_args_value args[3], unsigned int offset);
+void							sti(t_env *, t_process *, t_args_value args[3], unsigned int offset);
+void							_fork(t_env *, t_process *, t_args_value args[3], unsigned int offset);
+void							lld(t_env *, t_process *, t_args_value args[3], unsigned int offset);
+void							lldi(t_env *, t_process *, t_args_value args[3], unsigned int offset);
+void							lfork(t_env *, t_process *, t_args_value args[3]), unsigned int offset;
+void							aff(t_env *, t_process *, t_args_value args[3]), unsigned int offset;
 
 /*
 **	VISUAL_FUNCTIONS

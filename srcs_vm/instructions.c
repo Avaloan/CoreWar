@@ -6,40 +6,37 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/05 04:06:34 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/05 06:46:29 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/corewar.h"
-#include <math.h>
-#include <stdlib.h>
-#include "../asm_dir/includes/asm.h"
+#include "../includes/corewar_vm.h"
 
 t_op_info	 g_op_tab[17] =
 {
-	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
-	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
-	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
-	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0},
-	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0},
-	{"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6,
+	{live, "live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
+	{ld, "ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
+	{st, "st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
+	{add, "add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0},
+	{sub, "sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0},
+	{_and, "and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6,
 	 "et (and  r1, r2, r3   r1&r2 -> r3", 1, 0},
-	{"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6,
+	{_or, "or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6,
 	 "ou  (or   r1, r2, r3   r1 | r2 -> r3", 1, 0},
-	{"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6,
+	{_xor, "xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6,
 	 "ou (xor  r1, r2, r3   r1^r2 -> r3", 1, 0},
-	{"zjmp", 1, {T_DIR}, 9, 20, "jump if zero", 0, 1},
-	{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
+	{zjmp, "zjmp", 1, {T_DIR}, 9, 20, "jump if zero", 0, 1},
+	{ldi, "ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
 	 "load index", 1, 1},
-	{"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,
+	{sti, "sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,
 	 "store index", 1, 1},
-	{"fork", 1, {T_DIR}, 12, 800, "fork", 0, 1},
-	{"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, "long load", 1, 0},
-	{"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50,
+	{_fork, "fork", 1, {T_DIR}, 12, 800, "fork", 0, 1},
+	{lld, "lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, "long load", 1, 0},
+	{lldi, "lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50,
 	 "long load index", 1, 1},
-	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
-	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
-	{0, 0, {0}, 0, 0, 0, 0, 0}
+	{lfork, "lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
+	{aff, "aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
+	{NULL, 0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
 void dec_to_bin(int dec, unsigned char *bin_num, int index, int size)
@@ -144,28 +141,28 @@ int	read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 {
 	int i;
 	int iter;
-	unsigned char *tab;
+	unsigned char *t;
 	unsigned int stock;
 
 	i = 1;
 	stock = 0;
 	iter = 1;
 	printf("ARG SIZE %d\n", arg_size * 8);
-	tab = (unsigned char*) ft_memalloc(sizeof(char) * (arg_size * 8) + 1);
+	t = (unsigned char*)ft_memalloc(sizeof(char) * (arg_size * 8));
 	while (i < arg_size + 1)
 	{
 		stock = e->arena[process->pc + iter + offset];
 		printf("stock : %d || pc %d + iter %d + offset %d\n", stock, process->pc, iter, offset);
 		//printf("offset : %d\n", offset);
-		dec_to_bin(stock, tab, i * 8, arg_size * 8);
+		dec_to_bin(stock, t, i * 8, arg_size * 8);
 		//printf("i b4	: %d\n", i);
 		i++;
 		iter++;
 	}
-	stock = bin_to_dec(arg_size, tab, arg_size * 8);
+	stock = bin_to_dec(arg_size, t, arg_size * 8);
 	printf("arg		: %zd\n", stock);
-	free(tab);
-	tab = NULL;
+	free(t);
+	t = NULL;
 	return (stock);
 }
 
@@ -239,7 +236,7 @@ void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcod
 	return (BAD_CODING_BYTE);
 }
 
-void	fonction_lancement_op(t_env *e, t_process *process)
+void	ft_operations(t_env *e, t_process *process)
 {
 	unsigned char opcode;
 	t_params params;
@@ -261,6 +258,6 @@ void	fonction_lancement_op(t_env *e, t_process *process)
 		process->pc -= 1;
 	}
 	//printf("dg\n");
-	e->op_tab[opcode].op(e, process, args);
+	//g_op_tab[opcode].op(e, process, args);
 	process->pc += params.total_size;
 }
