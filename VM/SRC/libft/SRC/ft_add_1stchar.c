@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/15 03:28:01 by gquerre           #+#    #+#             */
-/*   Updated: 2017/09/15 03:34:08 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/06 02:12:02 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 char	*ft_add_1stchar(char *str, char c)
 {
 	char	*add;
+	char	*res;
 
 	add = NULL;
-	add = ft_strnew(1);
+	res = NULL;
+	if (!(add = ft_strnew(1)))
+		return (NULL);
 	add[0] = c;
-	add = ft_strjoin(add, str);
-	return (add);
+	res = ft_strjoinfree_both(add, str);
+	return (res);
 }

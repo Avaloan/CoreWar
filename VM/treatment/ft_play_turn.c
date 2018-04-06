@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 04:42:08 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/31 08:38:13 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/06 03:51:21 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_load_waiting(t_env *e, t_process *proc)
 int	ft_play_turn(t_env *e)
 {
 	t_process	*tmp;
-
+	int	u;
 	tmp = e->pc_list;
 	while (tmp)
 	{
@@ -39,6 +39,8 @@ int	ft_play_turn(t_env *e)
 		{
 			if (tmp->to_exec == 1)
 			{
+				u = 0;
+				while (u < REG_NUMBER)
 			//	if (!ft_operations(e))//Samy
 			//		return (0);
 				tmp->to_exec = 0;

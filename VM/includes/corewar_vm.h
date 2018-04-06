@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/31 09:24:24 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/06 03:08:57 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define COMMENT_SIZE			2048
 # define NAME_SIZE				128
-# define MEM_SIZE				(4 * 1024)
+# define MEM_SIZE				(2 * 1024)
 # define IDX_MOD				(MEM_SIZE / 8)
 # define REG_NUMBER				16
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 8)
@@ -49,7 +49,7 @@
 typedef struct					s_process
 {
 	int							pc;
-	int							reg[REG_NUMBER];
+	unsigned int				reg[REG_NUMBER];
 	int							waiting;
 	int							lives_during_periode;
 	struct s_process			*next;
@@ -129,6 +129,8 @@ int								ft_options(t_env *e, char *argv);
 int								ft_apply_option(t_env *e, char *argv, int i);
 int								ft_dump(t_env *e);
 int								ft_add_pc(t_env *e, t_process *father, int i);
+int								ft_print_hexa(unsigned char x);
+
 /*
 **	VISUAL_FUNCTIONS
 */

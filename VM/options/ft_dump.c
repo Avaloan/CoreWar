@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 05:21:24 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/31 05:28:29 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/06 02:18:42 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	ft_dump(t_env *e)
 		v = 0;
 		while (i < MEM_SIZE && v < 32)
 		{
-			printf(" ");
-			printf("%.2x", e->arena[i]);
+			ft_print_hexa(e->arena[i]);
 			if (v != 31)
-				printf(" ");
+				ft_putchar(' ');
 			v++;
 			i++;
 		}
+		ft_putchar('\n');
 	}
 	return (1);
 }
