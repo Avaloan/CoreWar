@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/06 06:01:12 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/07 03:31:34 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define COMMENT_SIZE			2048
 # define NAME_SIZE				128
-# define MEM_SIZE				(2 * 1024)
+# define MEM_SIZE				(4 * 1024)
 # define IDX_MOD				(MEM_SIZE / 8)
 # define REG_NUMBER				16
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 8)
@@ -68,7 +68,6 @@ typedef struct					s_process
 ** OPS
 */
 
-
 typedef struct					s_params
 {
 	int							nb_params_max;
@@ -97,7 +96,7 @@ typedef struct					s_visu
 	int							my;
 	WINDOW						*arena;
 	WINDOW						*info;
-
+	int							color;
 }								t_visu;
 
 /*
@@ -108,9 +107,9 @@ typedef struct					s_player
 {
 	int							num_player;
 	unsigned int				id;
-	int							lives_periode;
-	int							total_lives;
-	int							last_live;
+	unsigned int				lives_periode;
+	unsigned int				total_lives;
+	unsigned int				last_live;
 	char						*name;
 	char						*comment;
 	int							size;
@@ -133,7 +132,7 @@ typedef struct					s_env
 	int							cycles;
 	int							cycles_periode;
 	int							checks_done;
-	int							lives_periode;
+	unsigned int				lives_periode;
 	char						*winner_name;
 	int							winner_value;
 	int							option;
@@ -143,7 +142,8 @@ typedef struct					s_env
 
 typedef struct					s_op_info
 {
-	void						(*op)(t_env *, t_process *, t_args_value args[3]);
+	void						(*op)(t_env *, t_process *,
+			t_args_value args[3]);
 	char						*name;
 	int							nb_param;
 	t_arg_type					arg_type[MAX_ARG_TYPE];
@@ -154,6 +154,7 @@ typedef struct					s_op_info
 	int							dir_size;
 }								t_op_info;
 
+extern t_op_info				g_op_tab[17];
 /*
 **	FUNCTIONS
 */

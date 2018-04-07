@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:30:51 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/06 06:06:49 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/07 00:53:50 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int	ft_print_hexa(unsigned char oct)
 	if (ft_strlen(res) == 1)
 		ft_putchar('0');
 	ft_putstr(res);
-	ft_strdel(res);
+	ft_strdel(&res);
 	return (1);
 }
