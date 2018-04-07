@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/07 03:31:34 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/07 05:58:00 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ typedef struct					s_op_info
 	int							dir_size;
 }								t_op_info;
 
-extern t_op_info				g_op_tab[17];
+//extern t_op_info				g_op_tab[17];
 /*
 **	FUNCTIONS
 */
@@ -172,6 +172,7 @@ int								ft_play_turn(t_env *e);
 int								ft_options(t_env *e, char *argv);
 int								ft_apply_option(t_env *e, char *argv, int i);
 int								ft_dump(t_env *e);
+int								ft_dump_by(t_env *e);
 int								ft_add_pc(t_env *e, t_process *father, int i);
 int								read_nb_bytes(t_env *, int arg_size, t_process *pc, unsigned int offset);
 void							write_2_bytes(t_env *, unsigned short, t_process *pc, unsigned int offset);

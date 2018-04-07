@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 06:14:13 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/07 04:02:45 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/07 05:44:36 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	live(t_env *e, t_process *process, t_args_value args[3])
 
 	i = -1;
 	done = 1;
-	parameter = ft_comp_with_pl;
+	parameter = (unsigned int)args[0].dir;
 
-	printf("param %u && id = e->players[i].id = %u && pc %d\n", parameter, e->players[0].id, e->pc_list->pc);
+	//printf("param %u && id = e->players[i].id = %u && pc %d\n", parameter, e->players[0].id, e->pc_list->pc);
 	while (++i < e->nb_of_pl)
 		if (e->players[i].id == parameter)
 		{

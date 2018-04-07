@@ -6,7 +6,7 @@
 #    By: gquerre <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/24 05:47:01 by gquerre           #+#    #+#              #
-#    Updated: 2018/04/06 04:44:29 by gquerre          ###   ########.fr        #
+#    Updated: 2018/04/07 05:57:44 by snedir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC =	./main.c\
 		./options/ft_options.c\
 		./options/ft_apply_option.c\
 		./options/ft_dump.c\
+		./options/ft_dump_by.c\
 		./options/ft_print_hexa.c
 
 V_SRC =	./visual/ft_end_visu.c\

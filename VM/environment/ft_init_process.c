@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:02:45 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/06 05:23:23 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/07 06:46:33 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,16 @@ int		ft_init_process(t_env *e)
 	int			k;
 
 	i = 0;
-	k = 0;
 	tmp = e->pc_list;
 	ft_save_first(e, tmp);
 	while (++i < e->nb_of_pl)
 	{
+		k = 0;
 		if (!(tmp->next = ft_memalloc(sizeof(t_process))))
 			return (0);
 		tmp->next->pc = i * MEM_SIZE / e->nb_of_pl;
 		tmp->next->reg[k] = e->players[i].id;
+//		printf("before = %i && pl = %i\n", tmp->reg[k], tmp->next->reg[k]);
 		tmp->next->waiting = 0;
 		tmp->next->lives_during_periode = 0;
 		tmp->next->carry = 0;

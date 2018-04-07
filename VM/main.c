@@ -6,13 +6,13 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:20:17 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/07 03:00:41 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/07 06:23:45 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/corewar_vm.h"
 
-t_op_info	g_op_tab[17] =
+/*t_op_info	g_op_tab[17] =
 {
 	{live, "live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{ld, "ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
@@ -37,7 +37,7 @@ t_op_info	g_op_tab[17] =
 	{lfork, "lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
 	{aff, "aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
 	{NULL, 0, 0, {0}, 0, 0, 0, 0, 0}
-};
+};*/
 
 int	main(int argc, char **argv)
 {
@@ -68,6 +68,11 @@ int	main(int argc, char **argv)
 		return (ft_error(e, 9));
 	if (ft_init_process(e) == 0)
 		return (ft_error(e, 5));
+/*	while (e->pc_list)
+	{
+		printf("e->arena_init = [%.2x]\n", e->pc_list->pc);
+		e->pc_list = e->pc_list->next;
+	}*/
 	if (ft_game_runner(e) == 0)
 		return (ft_error(e, 6));
 	getch();

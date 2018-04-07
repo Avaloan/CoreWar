@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 03:48:25 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/07 03:42:15 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/07 05:47:53 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_fill_players(t_env *e)
 	int	i;
 
 	i = 0;
-	line = (e->vi->my - 1) / 2;
+	line = (e->vi->my - 1) / 2 - 5;
 	while (i < e->nb_of_pl)
 	{
 		wmove(e->vi->info, line, 3);
@@ -34,7 +34,7 @@ void	ft_fill_players(t_env *e)
 		wmove(e->vi->info, line + 6, 4);
 		wprintw(e->vi->info, "-> Live : %i", e->pc_list->lives_during_periode);
 		i++;
-		line += 7;
+		line += 8;
 	}
 }
 
