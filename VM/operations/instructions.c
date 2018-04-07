@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/06 05:48:42 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/07 03:51:13 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,35 +217,6 @@ int	check_coding_byte(t_env *e, t_params *p, t_args_value args[3], int opcode, t
 	}
 	return (BAD_CODING_BYTE);
 }
-
-/*
-int check_coding_byte(t_env *e, t_params *p, t_args_value args[3], int opcode, t_process *pc)
-{
-	int tmp;
-
-	tmp = 0;
-	printf("opcode %d\n", opcode);
-	while (p->i < p->nb_params_max && p->coding_byte != 0)
-	{
-		tmp = p->coding_byte >> 6;
-		if (tmp == 3)
-			tmp = 4;
-		if ((tmp = tmp & g_op_tab[opcode].arg_type[p->i]) > 0)
-		{
-			p->coding_byte <<= 2;
-			get_args_value(args, tmp, p->i, opcode, pc, e, p);
-		}
-		else
-			return (BAD_CODING_BYTE);
-		p->i++;
-	}
-	if (p->i == p->nb_params_max && p->coding_byte != 0)
-		return (BAD_CODING_BYTE);
-	else if (p->i == p->nb_params_max && p->coding_byte == 0)
-		return (1);
-	return (1);
-}*/
-
 
 int		ft_operations(t_env *e, t_process *process)
 {

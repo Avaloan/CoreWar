@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/06 04:35:53 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/07 04:02:51 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct					s_params
 typedef struct					s_args_value
 {
 	unsigned char				reg;
-	int							dir;
+	unsigned int				dir;
 	short						ind;
 	char						type;
 }								t_args_value;

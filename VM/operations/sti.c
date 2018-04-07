@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/06 05:27:27 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/07 00:59:18 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	sti(t_env *e, t_process *process, t_args_value args[3])
 	if (args[1].type == 'r')
 		parameter += process->reg[args[1].reg - 1];
 	else if (args[1].type == 'i')
-		parameter += read_nb_bytes(e, 4, process, args[1].ind);
+		parameter += read_nb_bytes(e, 4, process, args[1].ind % IDX_MOD);
 	else if (args[1].type == 'd')
 		parameter += args[1].dir;
 	if (args[2].type == 'd')

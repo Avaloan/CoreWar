@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 03:48:25 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/06 02:56:39 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/07 03:42:15 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_fill_players(t_env *e)
 		wmove(e->vi->info, line + 5, 4);
 		wprintw(e->vi->info, "-> Last_live : %i", e->players[i].last_live);
 		wmove(e->vi->info, line + 6, 4);
-		wprintw(e->vi->info, "-> Last_live : %i", e->pc_list->pc);
+		wprintw(e->vi->info, "-> Live : %i", e->pc_list->lives_during_periode);
 		i++;
 		line += 7;
 	}
