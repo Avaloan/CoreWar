@@ -6,18 +6,25 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 03:41:03 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/31 08:26:27 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/07 03:24:30 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
 
-int	ft_fill_arena(t_env *e)
+void	ft_choose_color(t_env *e, int cmp)
 {
-	int			i;
-	int			j;
-	int			cmp;
-	static int	cheat = 0;
+	unsigned char	tmp;
+
+	tmp = e->written_by[cmp];
+	attron(COLOR_PAIR((int)tmp));
+}
+
+int		ft_fill_arena(t_env *e)
+{
+	int				i;
+	int				j;
+	int				cmp;
 
 	cmp = 0;
 	i = 1;
@@ -29,6 +36,8 @@ int	ft_fill_arena(t_env *e)
 		{
 			wmove(e->vi->arena, j, i);
 			wprintw(e->vi->arena, " ");
+			if (e->written_by[cmp] != e->vi->color)
+				ft_choose_color(e, cmp);
 			wprintw(e->vi->arena, "%.2x", e->arena[cmp]);
 			i += 3;
 			cmp++;
@@ -36,6 +45,5 @@ int	ft_fill_arena(t_env *e)
 		j++;
 		i = 1;
 	}
-	cheat++;
 	return (1);
 }

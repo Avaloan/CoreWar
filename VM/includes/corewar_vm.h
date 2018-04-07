@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/07 04:02:51 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/07 03:31:34 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ typedef struct					s_process
 	struct s_process			*next;
 	int							carry;
 	int							to_exec;
+	unsigned int				from_pl;
 }								t_process;
 
 /*
 ** OPS
 */
-
 
 typedef struct					s_params
 {
@@ -96,7 +96,7 @@ typedef struct					s_visu
 	int							my;
 	WINDOW						*arena;
 	WINDOW						*info;
-
+	int							color;
 }								t_visu;
 
 /*
@@ -107,9 +107,9 @@ typedef struct					s_player
 {
 	int							num_player;
 	unsigned int				id;
-	int							lives_periode;
-	int							total_lives;
-	int							last_live;
+	unsigned int				lives_periode;
+	unsigned int				total_lives;
+	unsigned int				last_live;
 	char						*name;
 	char						*comment;
 	int							size;
@@ -126,12 +126,13 @@ typedef struct					s_env
 	t_visu						*vi;
 	t_process					*pc_list;
 	unsigned char				*arena;
+	unsigned char				*written_by;
 	t_player					*players;
 	int							cycles_to_die;
 	int							cycles;
 	int							cycles_periode;
 	int							checks_done;
-	int							lives_periode;
+	unsigned int				lives_periode;
 	char						*winner_name;
 	int							winner_value;
 	int							option;
@@ -141,7 +142,8 @@ typedef struct					s_env
 
 typedef struct					s_op_info
 {
-	void						(*op)(t_env *, t_process *, t_args_value args[3]);
+	void						(*op)(t_env *, t_process *,
+			t_args_value args[3]);
 	char						*name;
 	int							nb_param;
 	t_arg_type					arg_type[MAX_ARG_TYPE];
@@ -152,10 +154,13 @@ typedef struct					s_op_info
 	int							dir_size;
 }								t_op_info;
 
+extern t_op_info				g_op_tab[17];
 /*
 **	FUNCTIONS
 */
 
+int								ft_print_hexa(unsigned char oct);
+int								ft_comp_with_pl(t_env *e, t_process *pro);
 int								ft_create_arena(t_env *e);
 int								ft_how_many_pl(t_env *e, int argc, char **argv);
 int								ft_init_player(t_env *e, char *argv);

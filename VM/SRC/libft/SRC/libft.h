@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 19:35:19 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/31 08:36:38 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/06 02:05:57 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include "./files.h/get_next_line.h"
 
+char				*ft_strjoinfree_both(char *s1, char *s2);
 unsigned int		ft_atou(char *str);
 unsigned char		*ft_strcpy_until_unsigned(unsigned char *dst,
 						unsigned char *str, size_t i);

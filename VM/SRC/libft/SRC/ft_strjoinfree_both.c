@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strjoinfree.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 15:29:53 by fdidelot          #+#    #+#             */
-/*   Updated: 2014/11/12 19:00:22 by fdidelot         ###   ########.fr       */
+/*   Created: 2017/04/18 01:19:31 by gquerre           #+#    #+#             */
+/*   Updated: 2018/04/06 05:22:52 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, const char *src)
+char		*ft_strjoinfree(char *s1, char *s2)
 {
-	int		i;
+	char	*mem;
 
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = src[i];
-	return (dest);
+	mem = NULL;
+	if (!(s2))
+		return (s1);
+	mem = ft_strjoin(s1, s2);
+	ft_strdel(&s1);
+	ft_strdel(&s2);
+	return (mem);
 }

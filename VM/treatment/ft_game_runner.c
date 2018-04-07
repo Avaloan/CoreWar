@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 01:34:47 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/31 08:41:12 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/01 03:45:54 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,9 @@ int		ft_up_periode(t_env *e)
 		tmp = tmp->next;
 	}
 	if (e->lives_periode > NBR_LIVE || e->checks_done >= MAX_CHECKS)
-	{
-		if (ft_maj(e, 1) == 0)
-			return (0);
-	}
-	else if (ft_maj(e, 2) == 0)
-		return (0);
+		ft_maj(e, 1);
+	else
+		ft_maj(e, 2);
 	return (1);
 }
 

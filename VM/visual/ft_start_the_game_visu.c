@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 06:16:10 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/29 07:31:15 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/07 03:16:08 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ int	ft_start_the_game_visu(t_env *e)
 		return (0);
 	if (ft_fill_info(e) == 0)
 		return (0);
+	start_color();
+	init_pair(0, COLOR_WHITE, use_default_colors());
+	init_pair(1, COLOR_RED, use_default_colors());
+	init_pair(2, COLOR_BLUE, use_default_colors());
+	init_pair(3, COLOR_GREEN, use_default_colors());
+	init_pair(4, COLOR_YELLOW, use_default_colors());
+	init_pair(5, COLOR_MAGENTA, use_default_colors());
+	init_pair(6, COLOR_CYAN, use_default_colors());
 	wrefresh(e->vi->arena);
 	wrefresh(e->vi->info);
 	getch();

@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dump.c                                          :+:      :+:    :+:   */
+/*   ft_comp_w_pl.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/31 05:21:24 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/06 02:22:31 by snedir           ###   ########.fr       */
+/*   Created: 2018/04/06 04:15:37 by gquerre           #+#    #+#             */
+/*   Updated: 2018/04/06 04:42:53 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
 
-int	ft_dump(t_env *e)
+int	ft_comp_with_pl(t_env *e, t_process *pro)
 {
-	int	i;
-	int	u;
-	int	v;
+	int				i;
+	unsigned int	nb;
+	int				j;
 
 	i = 0;
-	while (i < MEM_SIZE)
+	while (i < e->nb_of_pl)
 	{
-		v = 0;
-		while (i < MEM_SIZE && v < 32)
-		{
-			ft_print_hexa(e->arena[i]);
-			if (v != 31)
-				ft_putchar(' ');
-			v++;
-			i++;
-		}
-		printf("\n");
+		nb = 0;
+		j = 0;
+		while (j < INT_SIZE)
+			nb += e->arena[pro->pc + j] * ft_pow(256, (INT_SIZE - (j + 1)));
+		if (nb == e->players[i].id)
+			return (i + 1);
+		i++;
 	}
-	return (1);
+	return (0);
 }

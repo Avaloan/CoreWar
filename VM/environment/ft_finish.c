@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 03:57:39 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/31 08:31:19 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/06 05:21:23 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_fresh(t_env *e)
 	int			i;
 
 	i = -1;
-	tmp = NULL;
 	if (e->pc_list)
 	{
 		tmp = e->pc_list;
@@ -31,6 +30,7 @@ void	ft_fresh(t_env *e)
 		free(e->pc_list);
 	}
 	free(e->arena);
+	free(e->written_by);
 	while (++i < e->nb_of_pl)
 	{
 		free(e->players[i].name);

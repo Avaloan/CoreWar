@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 05:46:54 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/28 05:08:09 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/07 03:01:44 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int	ft_error(t_env *e, int i)
 		printf("Error.\nRunning Crashed\n");
 	else if (i == 7)
 		printf("Error.\nFinishing function failed\n");
+	else if (i == 9)
+		printf("Error.\nwat the else\n");
 	return (1);
 }
