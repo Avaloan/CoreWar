@@ -30,4 +30,6 @@ void	lldi(t_env *e, t_process *process, t_args_value args[3])
 		parameter += process->reg[args[1].reg - 1];
 	process->reg[args[2].reg - 1] =
 		read_nb_bytes(e, 4, process, parameter % MEM_SIZE);
+	if (parameter == 0)
+		process->carry = 1;
 }

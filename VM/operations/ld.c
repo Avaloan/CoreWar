@@ -20,5 +20,7 @@ void	ld(t_env *e, t_process *process, t_args_value args[3])
 		parameter = args[0].dir;
 	else
 		parameter = read_nb_bytes(e, 4, process, args[0].ind % IDX_MOD);
-	process->reg[args[1].reg] = parameter;
+	process->reg[args[1].reg - 1] = parameter;
+	if (parameter == 0)
+		process->carry = 1;
 }

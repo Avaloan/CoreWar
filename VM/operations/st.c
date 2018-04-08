@@ -17,5 +17,5 @@ void	st(t_env *e, t_process *process, t_args_value args[3])
 	if (args[1].type == 'r')
 		process->reg[args[1].reg] = process->reg[args[0].reg];
 	else if (args[1].type == 'i')
-		write_4_bytes(e, process->reg[args[0].reg - 1], process, args[1].ind);
+		write_4_bytes(e, process->reg[args[0].reg - 1], process, args[1].ind % IDX_MOD);
 }
