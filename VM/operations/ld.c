@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/05 06:23:34 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/06 05:12:33 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ld(t_env *e, t_process *process, t_args_value args[3])
 	if (args[0].type == 'd')
 		parameter = args[0].dir;
 	else
-		parameter = read_nb_bytes(e, 2, process, args[0].ind % IDX_MOD);
-	process->reg[args[1].reg] = parameter;
+		parameter = read_nb_bytes(e, 4, process, args[0].ind % IDX_MOD);
+	process->reg[args[1].reg - 1] = parameter;
+	if (parameter == 0)
+		process->carry = 1;
 }
