@@ -6,13 +6,13 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/07 05:44:14 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/09 05:22:49 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
 
-t_op_info	g_op_tab[17] =
+/*t_op_info	g_op_tab[17] =
 {
 	{live, "live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{ld, "ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
@@ -37,12 +37,12 @@ t_op_info	g_op_tab[17] =
 	{lfork, "lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
 	{aff, "aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
 	{NULL, 0, 0, {0}, 0, 0, 0, 0, 0}
-};
+};*/
 
-void dec_to_bin(int dec, unsigned char *bin_num, int index, int size)
+void			dec_to_bin(int dec, unsigned char *bin_num, int index, int size)
 {
-	int i;
-	int limit;
+	int				i;
+	int				limit;
 
 	i = index - 1;
 	limit = 8;
@@ -73,11 +73,13 @@ void dec_to_bin(int dec, unsigned char *bin_num, int index, int size)
 	}
 }
 
-void	write_4_bytes(t_env *e, unsigned int input, t_process *pc, unsigned int off)
+void			write_4_bytes(t_env *e, unsigned int input, t_process *pc, unsigned int off)
 {
-	unsigned int i = 0;
-	unsigned int tmp = 0;
+	unsigned int	i;
+	unsigned int	tmp;
 
+	i = 0;
+	tmp = 0;
 	while (input && i < INT_SIZE)
 	{
 		tmp = input >> 8 * (INT_SIZE - 1);
@@ -88,25 +90,27 @@ void	write_4_bytes(t_env *e, unsigned int input, t_process *pc, unsigned int off
 	}
 }
 
-void	write_2_bytes(t_env *e, unsigned short input, t_process *pc, unsigned int off)
+void			write_2_bytes(t_env *e, unsigned short input, t_process *pc, unsigned int off)
 {
-	unsigned int i = 0;
-	unsigned short tmp = 0;
+	unsigned int	i;
+	unsigned short	tmp;
 
+	i = 0;
+	tmp = 0;
 	while (input && i < INT_SIZE - 2)
 	{
 		tmp = input >> 8;
 		e->arena[pc->pc + off + i] = tmp;
-		//e->written_by[pc->pc + off + i] = pc->from_pl;
+		e->written_by[pc->pc + off + i] = pc->from_pl;
 		i++;
 		input = input << 8;
 	}
 }
 
-unsigned int bin_to_dec(int size, unsigned char *number, unsigned int array_size)
+unsigned int	bin_to_dec(int size, unsigned char *number, unsigned int array_size)
 {
-	unsigned int result;
-	int i;
+	unsigned int	result;
+	int				i;
 
 	i = 0;
 	result = 0;
@@ -119,12 +123,12 @@ unsigned int bin_to_dec(int size, unsigned char *number, unsigned int array_size
 	return (result);
 }
 
-int	read_nb_bytes(t_env *e, int arg_size, t_process *process, unsigned int offset)
+int				read_nb_bytes(t_env *e, int arg_size, t_process *process, unsigned int offset)
 {
-	int i;
-	int iter;
-	unsigned char *t;
-	unsigned int stock;
+	int				i;
+	int				iter;
+	unsigned char	*t;
+	unsigned int	stock;
 
 	i = 1;
 	stock = 0;
@@ -143,7 +147,7 @@ int	read_nb_bytes(t_env *e, int arg_size, t_process *process, unsigned int offse
 	return (stock);
 }
 
-void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcode, t_process *pc, t_env *e, t_params *p)
+void			get_args_value(t_args_value args[3], int arg_type, int num_param, int opcode, t_process *pc, t_env *e, t_params *p)
 {
 	if (arg_type == 1)
 	{
@@ -175,9 +179,9 @@ void get_args_value(t_args_value args[3], int arg_type, int num_param, int opcod
 	}
 }
 
-void	init_t_args(t_args_value args[3])
+void			init_t_args(t_args_value args[3])
 {
-	int i;
+	int				i;
 
 	i = -1;
 	while (++i < 3)
@@ -189,7 +193,7 @@ void	init_t_args(t_args_value args[3])
 	}
 }
 
-void	init_t_params(t_params *params)
+void			init_t_params(t_params *params)
 {
 	params->nb_params_max = 0;
 	params->i = 0;
@@ -197,9 +201,9 @@ void	init_t_params(t_params *params)
 	params->total_size = 0;
 }
 
-int	check_coding_byte(t_env *e, t_params *p, t_args_value args[3], int opcode, t_process *pc)
+int				check_coding_byte(t_env *e, t_params *p, t_args_value args[3], int opcode, t_process *pc)
 {
-	int tmp;
+	int				tmp;
 
 	if (p->i == p->nb_params_max && p->coding_byte != 0)
 		return (BAD_CODING_BYTE);
@@ -218,11 +222,11 @@ int	check_coding_byte(t_env *e, t_params *p, t_args_value args[3], int opcode, t
 	return (BAD_CODING_BYTE);
 }
 
-int		ft_operations(t_env *e, t_process *process)
+int				ft_operations(t_env *e, t_process *process)
 {
-	unsigned char opcode;
-	t_params params;
-	t_args_value args[3];
+	unsigned char	opcode;
+	t_params		params;
+	t_args_value	args[3];
 
 	init_t_args(args);
 	init_t_params(&params);
@@ -238,7 +242,7 @@ int		ft_operations(t_env *e, t_process *process)
 	}
 	else
 	{
-		params.total_size = (g_op_tab[opcode].dir_size)? 2 : 4;
+		params.total_size = (g_op_tab[opcode].dir_size) ? 2 : 4;
 		args[0].dir = read_nb_bytes(e, params.total_size, process, 0);
 	}
 	//printf("CASE READ = %.2x\n", e->arena[process->pc]);
@@ -248,4 +252,3 @@ int		ft_operations(t_env *e, t_process *process)
 	//printf("new read = [%.2x]\n", e->arena[process->pc]);
 	return (1);
 }
-

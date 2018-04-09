@@ -1,18 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lfork.c                                            :+:      :+:    :+:   */
+/*   ft_idx.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/05 06:15:38 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/09 05:12:58 by gquerre          ###   ########.fr       */
+/*   Created: 2018/04/09 05:43:00 by gquerre           #+#    #+#             */
+/*   Updated: 2018/04/09 06:19:00 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../VM/includes/corewar_vm.h"
+#include "../includes/corewar_vm.h"
 
-void	lfork(t_env *e, t_process *process, t_args_value args[3])
-{
-	ft_add_pc(e, process, args[0].dir % MEM_SIZE);
-}
+int	ft_idx(t_arg_value arg[3])

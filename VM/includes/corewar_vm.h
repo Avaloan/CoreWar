@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/07 05:58:00 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/09 06:44:42 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <math.h>
 # include "../SRC/libft/SRC/libft.h"
 
+//# include <SDL/SDL.h>
+//# include <SDL2/SDL.h>
+//void	SDL_Delay(Uint32 ms);
+
 # define COMMENT_SIZE			2048
 # define NAME_SIZE				128
 # define MEM_SIZE				(4 * 1024)
@@ -26,6 +30,7 @@
 # define REG_NUMBER				16
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 8)
 # define INT_SIZE				4
+# define FREQ					1000
 
 /*
 ** ENVIRONMENT
@@ -97,6 +102,7 @@ typedef struct					s_visu
 	WINDOW						*arena;
 	WINDOW						*info;
 	int							color;
+	int							speed;
 }								t_visu;
 
 /*
@@ -143,7 +149,7 @@ typedef struct					s_env
 typedef struct					s_op_info
 {
 	void						(*op)(t_env *, t_process *,
-			t_args_value args[3]);
+								t_args_value args[3]);
 	char						*name;
 	int							nb_param;
 	t_arg_type					arg_type[MAX_ARG_TYPE];
@@ -154,7 +160,8 @@ typedef struct					s_op_info
 	int							dir_size;
 }								t_op_info;
 
-//extern t_op_info				g_op_tab[17];
+extern	t_op_info				g_op_tab[17];
+
 /*
 **	FUNCTIONS
 */
@@ -172,36 +179,52 @@ int								ft_play_turn(t_env *e);
 int								ft_options(t_env *e, char *argv);
 int								ft_apply_option(t_env *e, char *argv, int i);
 int								ft_dump(t_env *e);
-int								ft_dump_by(t_env *e);
 int								ft_add_pc(t_env *e, t_process *father, int i);
-int								read_nb_bytes(t_env *, int arg_size, t_process *pc, unsigned int offset);
-void							write_2_bytes(t_env *, unsigned short, t_process *pc, unsigned int offset);
-void							write_4_bytes(t_env *, unsigned int, t_process *pc, unsigned int offset);
+int								read_nb_bytes(t_env *e, int arg_size,
+								t_process *pc, unsigned int offset);
+void							write_2_bytes(t_env *e, unsigned short input,
+								t_process *pc, unsigned int offset);
+void							write_4_bytes(t_env *e, unsigned int input,
+								t_process *pc, unsigned int offset);
 void							fonction_lancement_op(t_env *e, t_process *pc);
 int								ft_operations(t_env *e, t_process *process);
-
 
 /*
 ** OP PROTOTYPES
 */
 
-
-void							live(t_env *, t_process *, t_args_value args[3]);
-void							ld(t_env *, t_process *, t_args_value args[3]);
-void							st(t_env *, t_process *, t_args_value args[3]);
-void							add(t_env *, t_process *, t_args_value args[3]);
-void							sub(t_env *, t_process *, t_args_value args[3]);
-void							_and(t_env *, t_process *, t_args_value args[3]);
-void							_or(t_env *, t_process *, t_args_value args[3]);
-void							_xor(t_env *, t_process *, t_args_value args[3]);
-void							zjmp(t_env *, t_process *, t_args_value args[3]);
-void							ldi(t_env *, t_process *, t_args_value args[3]);
-void							sti(t_env *, t_process *, t_args_value args[3]);
-void							_fork(t_env *, t_process *, t_args_value args[3]);
-void							lld(t_env *, t_process *, t_args_value args[3]);
-void							lldi(t_env *, t_process *, t_args_value args[3]);
-void							lfork(t_env *, t_process *, t_args_value args[3]);
-void							aff(t_env *, t_process *, t_args_value args[3]);
+void							live(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							ld(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							st(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							add(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							sub(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							c_and(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							c_or(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							c_xor(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							zjmp(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							ldi(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							sti(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							c_fork(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							lld(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							lldi(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							lfork(t_env *e, t_process *process,
+									t_args_value args[3]);
+void							aff(t_env *e, t_process *process,
+									t_args_value args[3]);
 
 /*
 **	VISUAL_FUNCTIONS
@@ -213,5 +236,7 @@ int								ft_fill_info(t_env *e);
 int								ft_visual(t_env *e);
 int								ft_start_the_game_visu(t_env *e);
 int								ft_maj_visu(t_env *e);
+int								unix_text_knhit(void);
+int								ft_keypad(WINDOW *win, boof bf);
 
 #endif
