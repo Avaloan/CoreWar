@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/09 06:44:42 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/09 07:46:04 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <curses.h>
 # include <term.h>
 # include <limits.h>
+#include <unistd.h> 
+#include <sys/time.h> 
 # include <math.h>
 # include "../SRC/libft/SRC/libft.h"
 
@@ -30,7 +32,7 @@
 # define REG_NUMBER				16
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 8)
 # define INT_SIZE				4
-# define FREQ					1000
+# define FREQ					100000
 
 /*
 ** ENVIRONMENT
@@ -237,6 +239,6 @@ int								ft_visual(t_env *e);
 int								ft_start_the_game_visu(t_env *e);
 int								ft_maj_visu(t_env *e);
 int								unix_text_knhit(void);
-int								ft_keypad(WINDOW *win, boof bf);
+int								ft_keypad(t_env *e, int key_pressed);
 
 #endif
