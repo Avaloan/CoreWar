@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 03:48:25 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/09 04:51:20 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/09 07:34:09 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int		ft_fill_info(t_env *e)
 	ft_fill_players(e);
 	ft_fill_process(e);
 	wmove(e->vi->info, e->vi->my - 2, 4);
+	wprintw(e->vi->info, "e->vi->speed + freq = %i", e->vi->speed + FREQ);
 	wprintw(e->vi->info, "Press X to know using");
 	return (1);
 }

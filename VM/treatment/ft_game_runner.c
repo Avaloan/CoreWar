@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 01:34:47 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/09 06:20:41 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/09 07:26:54 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		ft_game_runner(t_env *e)
 			return (0);
 	while (e->pc_list)
 	{
-		while (e->pc_list && e->cycles_periode < e->cycles_to_die)
+		while (e->pc_list && e->cycles_periode < e->cycles_to_die && ft_keypad(e, unix_text_kbhit()))
 		{
 			if (e->cycles == e->dump_on)
 				return (ft_dump(e));
@@ -110,8 +110,8 @@ int		ft_game_runner(t_env *e)
 				}
 			e->cycles_periode++;
 			e->cycles++;
-			sleep(1);
-			timeout(FREQ + e->vi->speed);
+		//	sleep(1);
+			usleep(FREQ + e->vi->speed);
 //			SDL_Delay(500);
 		}
 //		SDL_Quit();

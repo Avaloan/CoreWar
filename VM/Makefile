@@ -6,7 +6,7 @@
 #    By: gquerre <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/24 05:47:01 by gquerre           #+#    #+#              #
-#    Updated: 2018/04/09 06:43:43 by gquerre          ###   ########.fr        #
+#    Updated: 2018/04/09 07:00:29 by gquerre          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ V_SRC =	./visual/ft_end_visu.c\
 		./visual/ft_start_the_game_visu.c\
 		./visual/ft_init_visual.c\
 		./visual/ft_maj_visu.c\
-		./visual/ft_keypad.c
+		./visual/ft_keypad.c\
+		./visual/unix_text_kbhit.c
 
 OP_SRC = ./operations/add.c\
 		 ./operations/aff.c\
