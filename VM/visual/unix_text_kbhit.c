@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
-  
-int unix_text_kbhit(void) 
+
+int unix_text_kbhit(void)
 {
 	struct timeval tv = {0, 0};
 	fd_set readfds;
 	FD_ZERO(&readfds);
-	FD_SET(STDIN_FILENO, &readfds); 
+	FD_SET(STDIN_FILENO, &readfds);
 	return (select(STDIN_FILENO + 1, &readfds, NULL, NULL, &tv) == 1); 
 }
 
