@@ -6,11 +6,29 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 03:48:25 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/07 05:47:53 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/09 04:51:20 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
+
+void	ft_fill_process(t_env *e)
+{
+	int			i;
+	int			pos;
+	t_process	*tmp;
+
+	tmp = e->pc_list;
+	i = -1;
+	pos = 9;
+	while (++i < e->nb_of_pl)
+	{
+		wmove(e->vi->info, pos + i, 4);
+		wprintw(e->vi->info, "PC[%i] = %i || Carry = %i || Exec = %i",
+				i, tmp->pc, tmp->carry, tmp->to_exec);
+		tmp = tmp->next;
+	}
+}
 
 void	ft_fill_players(t_env *e)
 {
@@ -48,19 +66,18 @@ int		ft_fill_info(t_env *e)
 	box(e->vi->info, 0, 0);
 	wmove(e->vi->info, pos, 10);
 	wprintw(e->vi->info, "COREWAR : IN");
-	pos += 2;
-	wmove(e->vi->info, pos, 4);
+	wmove(e->vi->info, pos + 2, 4);
 	wprintw(e->vi->info, "Cycle : %i", e->cycles);
-	pos += 1;
-	wmove(e->vi->info, pos, 4);
+	wmove(e->vi->info, pos + 3, 4);
 	wprintw(e->vi->info, "Cycles_to_Die : %i", e->cycles_to_die);
-	pos += 1;
-	wmove(e->vi->info, pos, 4);
+	wmove(e->vi->info, pos + 4, 4);
 	wprintw(e->vi->info, "Checks_Done : %i/%i", e->checks_done, MAX_CHECKS);
-	pos += 1;
-	wmove(e->vi->info, pos, 4);
+	wmove(e->vi->info, pos + 5, 4);
+	wprintw(e->vi->info, "Lives_read : %i/%i", e->lives_periode, MAX_CHECKS);
+	wmove(e->vi->info, pos + 6, 4);
 	wprintw(e->vi->info, "Nbr_of_Players : %i", e->nb_of_pl);
 	ft_fill_players(e);
+	ft_fill_process(e);
 	wmove(e->vi->info, e->vi->my - 2, 4);
 	wprintw(e->vi->info, "Press X to know using");
 	return (1);

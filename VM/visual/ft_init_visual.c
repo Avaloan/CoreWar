@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 00:18:51 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/07 02:44:33 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/09 06:21:18 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_init_visual(t_env *e)
 	e->vi->mx = 0;
 	e->vi->my = 0;
 	e->vi->color = 0;
+	e->vi->speed = 0;
 }
 
 int		ft_visual(t_env *e)

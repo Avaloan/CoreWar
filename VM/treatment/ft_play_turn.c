@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 04:42:08 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/07 06:47:49 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/09 05:27:40 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 int	ft_load_waiting(t_env *e, t_process *proc)
 {
-	if (e->arena[proc->pc] == 9 && proc->carry == 0)
-		proc->pc++;
-	else if (e->arena[proc->pc] < 18 && e->arena[proc->pc] > 0)
+	if (e->arena[proc->pc] < 18 && e->arena[proc->pc] > 0)
 	{
 		proc->to_exec = 1;
-		proc->waiting = 1;//g_op_tab[e->arena[proc->pc]].nb_cycle;
+		proc->waiting = g_op_tab[e->arena[proc->pc] - 1].nb_cycle - 1;
 	}
 	else
 		proc->pc++;

@@ -6,13 +6,13 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 06:11:44 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/06 06:17:32 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/09 05:38:37 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../VM/includes/corewar_vm.h"
 
-void	_and(t_env *e, t_process *process, t_args_value args[3])
+void	c_and(t_env *e, t_process *process, t_args_value args[3])
 {
 	unsigned int first;
 	unsigned int second;
@@ -31,5 +31,7 @@ void	_and(t_env *e, t_process *process, t_args_value args[3])
 		second = args[1].dir;
 	else if (args[1].type == 'i')
 		second = read_nb_bytes(e, 4, process, args[1].ind % IDX_MOD);
-	process->reg[args[2].reg] = first & second;
+	process->reg[args[2].reg - 1] = first & second;
+	if (process->reg[args[2].reg - 1] == 0)
+		process->carry = 1;
 }
