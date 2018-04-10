@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:04:40 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/07 06:15:52 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/10 16:27:57 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ off_t	ft_put_champ_in_arena(t_env *e, int i, int fd, off_t pos)
 	off_t			end;
 	int				place_in_arena;
 	unsigned char	*buff;
+	int				a;
 
 	place_in_arena = (MEM_SIZE * i / e->nb_of_pl);
+	a = place_in_arena - 1;
 	end = 0;
 	buff = NULL;
 	if (lseek(fd, pos, SEEK_SET) == -1)
@@ -75,6 +77,8 @@ off_t	ft_put_champ_in_arena(t_env *e, int i, int fd, off_t pos)
 		return (0);
 	if (read(fd, buff, e->players[i].size) == -1)
 		return (0);
+	while (++a < e->players[i].size + place_in_arena)
+		e->written_by[a] = i + 1;
 	if (ft_strcpy_until_unsigned(&e->arena[place_in_arena],
 				buff, e->players[i].size) == NULL)
 	{

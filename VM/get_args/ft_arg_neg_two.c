@@ -1,15 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_idx.c                                           :+:      :+:    :+:   */
+/*   ft_arg_neg_two.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/09 05:43:00 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/09 06:19:00 by gquerre          ###   ########.fr       */
+/*   Created: 2018/04/10 12:55:51 by gquerre           #+#    #+#             */
+/*   Updated: 2018/04/10 15:59:51 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
 
-int	ft_idx(t_arg_value arg[3])
+short	ft_arg_neg_two(unsigned short nb, int mod)
+{
+	short	res;
+
+	res = 0;
+	//printf("nb = %i\n", nb);
+	if (nb < 32768)
+		return (nb % mod);
+	else
+		res = (short)nb;
+	//printf("%hd\n", res);
+	return ((res % mod));
+}

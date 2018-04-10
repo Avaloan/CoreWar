@@ -6,7 +6,7 @@
 #    By: gquerre <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/24 05:47:01 by gquerre           #+#    #+#              #
-#    Updated: 2018/04/09 07:00:29 by gquerre          ###   ########.fr        #
+#    Updated: 2018/04/10 13:33:06 by gquerre          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,9 @@ ARG_SRC =	./get_args/converter.c\
 			./get_args/ft_operations.c\
 			./get_args/get_args.c\
 			./get_args/init_struct.c\
-			./get_args/write_args.c
+			./get_args/write_args.c\
+			./get_args/ft_arg_neg_two.c\
+			./get_args/ft_arg_neg_three.c
 
 FLAG =	-I SDL/SDL -g -Wextra -Wall -Werror -O3 -lncurses
 

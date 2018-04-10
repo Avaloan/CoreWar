@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/09 05:22:49 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/10 16:05:27 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_process *pc)
 
 int				ft_operations(t_env *e, t_process *process)
 {
-	unsigned char	opcode;
 	t_params		params;
 	t_args_value	args[3];
 
@@ -43,8 +42,8 @@ int				ft_operations(t_env *e, t_process *process)
 	init_t_params(&params);
 	params.opcode = e->arena[process->pc] - 1;
 	//printf("opcode = %x\n", opcode);
-	params.nb_params_max = g_op_tab[opcode].nb_param;
-	if (g_op_tab[opcode].octal == 1)
+	params.nb_params_max = g_op_tab[params.opcode].nb_param;
+	if (g_op_tab[params.opcode].octal == 1)
 	{
 		process->pc += 1;
 		params.coding_byte = e->arena[process->pc];
@@ -53,13 +52,17 @@ int				ft_operations(t_env *e, t_process *process)
 	}
 	else
 	{
-		params.total_size = (g_op_tab[opcode].dir_size) ? 2 : 4;
-		args[0].dir = read_nb_bytes(e, params.total_size, process, 0);
+		params.total_size = (g_op_tab[params.opcode].dir_size) ? 2 : 4;
+		if (params.total_size == 4)
+			args[0].dir = read_nb_bytes(e, params.total_size, process, 0);
+		else
+			args[0].dir_short = read_nb_bytes(e, params.total_size, process, 0);
 	}
 	//printf("CASE READ = %.2x\n", e->arena[process->pc]);
-	g_op_tab[opcode].op(e, process, args);
+	g_op_tab[params.opcode].op(e, process, args);
 	//printf("param_size = %i\n", params.total_size);
-	process->pc += params.total_size + 1;
+	if (params.opcode + 1 != 9)
+		process->pc += params.total_size + 1;
 	//printf("new read = [%.2x]\n", e->arena[process->pc]);
 	return (1);
 }

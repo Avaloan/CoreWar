@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 06:15:06 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/09 05:13:25 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/10 14:45:57 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ void	ldi(t_env *e, t_process *process, t_args_value args[3])
 	if (args[0].type == 'r')
 		parameter += process->reg[args[0].reg - 1];
 	else if (args[0].type == 'd')
-		parameter += args[0].dir;
+		parameter += args[0].dir_short;
 	else if (args[0].type == 'i')
-		parameter += read_nb_bytes(e, 4, process, args[0].ind % IDX_MOD);
+		parameter += read_nb_bytes(e, 4, process,
+				ft_arg_neg_two(args[0].ind, IDX_MOD));
 	if (args[1].type == 'd')
-		parameter += args[1].dir;
+		parameter += args[1].dir_short;
 	if (args[1].type == 'r')
 		parameter += process->reg[args[1].reg - 1];
 	process->reg[args[2].reg - 1] =
-		read_nb_bytes(e, 4, process, parameter % IDX_MOD);
+		read_nb_bytes(e, 4, process, ft_arg_neg_three(parameter, IDX_MOD));
 }

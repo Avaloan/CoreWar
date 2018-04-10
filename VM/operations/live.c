@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 06:14:13 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/09 05:15:21 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/10 14:35:40 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	live(t_env *e, t_process *process, t_args_value args[3])
 	int				i;
 
 	i = -1;
-	parameter = (unsigned int)args[0].dir;
-	//printf("param %u && id = e->players[i].id = %u && pc %d\n", parameter, e->players[0].id, e->pc_list->pc);
+	parameter = args[0].dir;
 	while (++i < e->nb_of_pl)
 	{
 		if (e->players[i].id == parameter)

@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/09 05:22:49 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/10 13:43:13 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void			init_t_args(t_args_value args[3])
 		args[i].dir = 0;
 		args[i].ind = 0;
 		args[i].type = 0;
+		args[i].dir_short = 0;
 	}
 }
 

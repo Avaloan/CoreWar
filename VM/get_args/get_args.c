@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/09 05:22:49 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/10 13:45:38 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ t_params *p)
 		return (REG_INVALID);
 	p->total_size += 1;
 	args[p->num_param].type = 'r';
-	
+	return (1);	
 }
 
-int			get_ind_value(t_args_value args[3], t_process *pc, t_env *e,
+void		get_ind_value(t_args_value args[3], t_process *pc, t_env *e,
 t_params *p)
 {
 
@@ -56,7 +56,7 @@ t_params *p)
 	p->total_size += 2;
 }
 
-int			get_dir_value(t_args_value args[3], t_process *pc, t_env *e,
+void		get_dir_value(t_args_value args[3], t_process *pc, t_env *e,
 t_params *p)
 {
 	if (g_op_tab[p->opcode].dir_size == 0)
@@ -66,7 +66,7 @@ t_params *p)
 	}
 	else
 	{
-		args[p->num_param].dir = read_nb_bytes(e, 2, pc, p->total_size);
+		args[p->num_param].dir_short = read_nb_bytes(e, 2, pc, p->total_size);
 		p->total_size += 2;
 	}
 	args[p->num_param].type = 'd';
@@ -76,8 +76,10 @@ int			get_args_value(t_args_value args[3],t_process *pc, t_env *e,
 t_params *p)
 {
 	if (p->arg_type == 1)
+	{
 		if (get_reg_value(args, pc, e, p) == REG_INVALID)
 			return (REG_INVALID);
+	}
 	else if (p->arg_type == 4)
 		get_ind_value(args, pc, e, p);
 	else if (p->arg_type == 2)

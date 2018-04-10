@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/09 07:46:04 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/10 14:20:57 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define REG_NUMBER				16
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 8)
 # define INT_SIZE				4
-# define FREQ					100000
+# define FREQ					500000
 
 /*
 ** ENVIRONMENT
@@ -82,7 +82,7 @@ typedef struct					s_params
 	int							num_param;
 	unsigned char				coding_byte;
 	int							total_size;
-	int							opcode;
+	unsigned char				opcode;
 	int							arg_type;
 }								t_params;
 
@@ -90,7 +90,8 @@ typedef struct					s_args_value
 {
 	unsigned char				reg;
 	unsigned int				dir;
-	short						ind;
+	unsigned short				ind;
+	unsigned short				dir_short;
 	char						type;
 }								t_args_value;
 
@@ -201,12 +202,14 @@ void							init_t_args(t_args_value args[3]);
 void							init_t_params(t_params *params);
 int								get_args_value(t_args_value args[3],
 								t_process *pc, t_env *e, t_params *p);
+short							ft_arg_neg_two(unsigned short nb, int mod);
+int								ft_arg_neg_three(unsigned int nb, int mod);
 
 /*
 ** OP PROTOTYPES
 */
 
-void							live(t_env *e, t_process *process,
+void							live(t_env *e, t_process *pc,
 									t_args_value args[3]);
 void							ld(t_env *e, t_process *process,
 									t_args_value args[3]);
@@ -249,7 +252,7 @@ int								ft_fill_info(t_env *e);
 int								ft_visual(t_env *e);
 int								ft_start_the_game_visu(t_env *e);
 int								ft_maj_visu(t_env *e);
-int								unix_text_knhit(void);
+int								unix_text_kbhit(void);
 int								ft_keypad(t_env *e, int key_pressed);
 
 #endif
