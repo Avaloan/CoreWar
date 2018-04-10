@@ -1,0 +1,65 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_operations.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
+/*   Updated: 2018/04/09 05:22:49 by gquerre          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/corewar_vm.h"
+
+int				check_coding_byte(t_env *e, t_params *p, t_args_value args[3],
+t_process *pc)
+{
+	if (p->num_param == p->nb_params_max && p->coding_byte != 0)
+		return (BAD_CODING_BYTE);
+	else if (p->num_param == p->nb_params_max && p->coding_byte == 0)
+		return (1);
+	p->arg_type = (p->coding_byte >> 6);
+	if (p->arg_type == 3)
+		p->arg_type = 4;
+	if ((p->arg_type = p->arg_type & g_op_tab[p->opcode].arg_type[p->num_param]) > 0)
+	{
+		p->coding_byte <<= 2;
+		if (get_args_value(args, pc, e, p) == REG_INVALID)
+			return (BAD_CODING_BYTE);
+		p->num_param++;
+		return (check_coding_byte(e, p, args, pc));
+	}
+	return (BAD_CODING_BYTE);
+}
+
+int				ft_operations(t_env *e, t_process *process)
+{
+	unsigned char	opcode;
+	t_params		params;
+	t_args_value	args[3];
+
+	init_t_args(args);
+	init_t_params(&params);
+	params.opcode = e->arena[process->pc] - 1;
+	//printf("opcode = %x\n", opcode);
+	params.nb_params_max = g_op_tab[opcode].nb_param;
+	if (g_op_tab[opcode].octal == 1)
+	{
+		process->pc += 1;
+		params.coding_byte = e->arena[process->pc];
+		if (check_coding_byte(e, &params, args, process) == BAD_CODING_BYTE)
+			return (0);
+	}
+	else
+	{
+		params.total_size = (g_op_tab[opcode].dir_size) ? 2 : 4;
+		args[0].dir = read_nb_bytes(e, params.total_size, process, 0);
+	}
+	//printf("CASE READ = %.2x\n", e->arena[process->pc]);
+	g_op_tab[opcode].op(e, process, args);
+	//printf("param_size = %i\n", params.total_size);
+	process->pc += params.total_size + 1;
+	//printf("new read = [%.2x]\n", e->arena[process->pc]);
+	return (1);
+}

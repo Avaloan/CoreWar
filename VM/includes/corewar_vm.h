@@ -39,6 +39,7 @@
 */
 
 # define BAD_CODING_BYTE		666
+# define REG_INVALID			667
 # define MAX_PLAYERS			4
 # define CYCLE_TO_DIE			1536
 # define CYCLE_DELTA			50
@@ -78,9 +79,11 @@ typedef struct					s_process
 typedef struct					s_params
 {
 	int							nb_params_max;
-	int							i;
+	int							num_param;
 	unsigned char				coding_byte;
 	int							total_size;
+	int							opcode;
+	int							arg_type;
 }								t_params;
 
 typedef struct					s_args_value
@@ -190,6 +193,14 @@ void							write_4_bytes(t_env *e, unsigned int input,
 								t_process *pc, unsigned int offset);
 void							fonction_lancement_op(t_env *e, t_process *pc);
 int								ft_operations(t_env *e, t_process *process);
+void							dec_to_bin(int dec, unsigned char *bin_num,
+								int index, int size);
+unsigned int					bin_to_dec(int size, unsigned char *number,
+								unsigned int array_size);
+void							init_t_args(t_args_value args[3]);
+void							init_t_params(t_params *params);
+int								get_args_value(t_args_value args[3],
+								t_process *pc, t_env *e, t_params *p);
 
 /*
 ** OP PROTOTYPES

@@ -14,12 +14,10 @@
 
 char	*ft_insert(char *str, int i, char *addon)
 {
-	int		u;
 	int		size;
 	char	*mem;
 
 	size = ft_strlen(addon);
-	u = ft_strlen(str) + size;
 	mem = NULL;
 	if (i == 0)
 	{
