@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 06:21:41 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/10 11:26:32 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/13 12:55:38 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_keypad(t_env *e, int key_pressed)
 		{
 		}
 	if (key_pressed == 'r')
-		e->vi->speed = 0;
+		e->vi->speed = (e->vi->speed == 0)? -FREQ : 0;
 	if (key_pressed == '+' && ((e->vi->speed + FREQ) >= 0) &&
 			((e->vi->speed + FREQ) < 1000000))
 	{

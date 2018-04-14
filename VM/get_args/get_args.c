@@ -6,13 +6,13 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/10 13:45:38 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/14 16:57:58 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
 
-int				read_nb_bytes(t_env *e, int arg_size, t_process *process, unsigned int offset)
+int				read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 {
 	int				i;
 	int				iter;
@@ -33,6 +33,7 @@ int				read_nb_bytes(t_env *e, int arg_size, t_process *process, unsigned int of
 	stock = bin_to_dec(arg_size, t, arg_size * 8);
 	free(t);
 	t = NULL;
+	printf("stock = %u\n", stock);
 	return (stock);
 }
 

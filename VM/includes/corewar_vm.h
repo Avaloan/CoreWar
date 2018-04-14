@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/10 14:20:57 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/14 15:34:24 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define MAX_PLAYERS			4
 # define CYCLE_TO_DIE			1536
 # define CYCLE_DELTA			50
-# define NBR_LIVE				21
+# define NBR_LIVE				10
 # define MAX_CHECKS				10
 # define T_REG					1
 # define T_DIR					2
@@ -187,10 +187,10 @@ int								ft_apply_option(t_env *e, char *argv, int i);
 int								ft_dump(t_env *e);
 int								ft_add_pc(t_env *e, t_process *father, int i);
 int								read_nb_bytes(t_env *e, int arg_size,
-								t_process *pc, unsigned int offset);
+								t_process *pc, int offset);
 void							write_2_bytes(t_env *e, unsigned short input,
 								t_process *pc, unsigned int offset);
-void							write_4_bytes(t_env *e, unsigned int input,
+void							write_4_bytes(t_env *e, int input,
 								t_process *pc, unsigned int offset);
 void							fonction_lancement_op(t_env *e, t_process *pc);
 int								ft_operations(t_env *e, t_process *process);

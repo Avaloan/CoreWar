@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:20:17 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/10 09:49:16 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/13 13:18:48 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,7 @@ int	main(int argc, char **argv)
 	}*/
 	if (ft_game_runner(e) == 0)
 		return (ft_error(e, 6));
-		printf("yolo5\n");
-	getch();
-		printf("yolo6\n");
+//	getch();
 	if (ft_finish(e) == 0)
 		return (ft_error(e, 7));
 	return (0);

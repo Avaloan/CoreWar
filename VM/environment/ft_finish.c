@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 03:57:39 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/06 05:21:23 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/13 13:17:52 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ int		ft_claim_winner(t_env *e)
 
 int		ft_finish(t_env *e)
 {
-	if (ft_claim_winner(e) == 0)
-		return (0);
 	if (e->visu == 1)
 		ft_end_visu(e);
+	if (ft_claim_winner(e) == 0)
+		return (0);
 	ft_fresh(e);
 	return (1);
 }

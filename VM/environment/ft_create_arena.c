@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 02:07:51 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/06 04:57:34 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/14 12:46:26 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	ft_create_arena(t_env *e)
 	if (!(e->pc_list = ft_memalloc(sizeof(t_process))))
 		return (0);
 	e->cycles_to_die = CYCLE_TO_DIE;
-	e->cycles = 0;
-	e->cycles_periode = 0;
+	e->cycles = 1;
+	e->cycles_periode = 1;
 	e->checks_done = 0;
 	e->lives_periode = 0;
 	e->option = 0;

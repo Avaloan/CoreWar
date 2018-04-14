@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 12:55:51 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/10 15:59:51 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/14 14:51:52 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ short	ft_arg_neg_two(unsigned short nb, int mod)
 		return (nb % mod);
 	else
 		res = (short)nb;
-	//printf("%hd\n", res);
+	printf("%hd\n", res);
 	return ((res % mod));
 }
