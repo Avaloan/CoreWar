@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/14 16:47:00 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/14 17:03:55 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int				ft_operations(t_env *e, t_process *process)
 	init_t_params(&params);
 	params.opcode = e->arena[process->pc] - 1;
 	params.nb_params_max = g_op_tab[params.opcode].nb_param;
+	
 	if (g_op_tab[params.opcode].octal == 1)
 	{
 		process->pc += 1;
