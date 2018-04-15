@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/14 16:57:58 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/15 19:53:06 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int				read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 	i = 1;
 	stock = 0;
 	iter = 1;
+//	printf("arg_size_from_read = %i\n", arg_size);
 	t = (unsigned char*)ft_memalloc(sizeof(char) * (arg_size * 8));
 	while (i < arg_size + 1)
 	{
@@ -33,7 +34,7 @@ int				read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 	stock = bin_to_dec(arg_size, t, arg_size * 8);
 	free(t);
 	t = NULL;
-	printf("stock = %u\n", stock);
+//	printf("stock = %u\n", stock);
 	return (stock);
 }
 
@@ -51,7 +52,6 @@ t_params *p)
 void		get_ind_value(t_args_value args[3], t_process *pc, t_env *e,
 t_params *p)
 {
-
 	args[p->num_param].ind = read_nb_bytes(e, 2, pc, p->total_size);
 	args[p->num_param].type = 'i';
 	p->total_size += 2;

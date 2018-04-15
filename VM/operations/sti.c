@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/14 14:57:48 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/15 19:52:37 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ void	sti(t_env *e, t_process *process, t_args_value args[3])
 	else if (args[1].type == 'd')
 		parameter += args[1].dir_short;
 	if (args[2].type == 'd')
+	{
+	//	printf("ICI\n");
 		parameter += args[2].dir_short;
+	}
 	else if (args[2].type == 'r')
 		parameter += process->reg[args[1].reg - 1];
 	write_4_bytes(e, process->reg[args[0].reg - 1], process,
-			ft_arg_neg_three(parameter, IDX_MOD));
+			ft_arg_neg_two(parameter, IDX_MOD));
 }
