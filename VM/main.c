@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:20:17 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/13 13:18:48 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/15 19:57:28 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	main(int argc, char **argv)
 		return (ft_error(e, 9));
 	if (ft_init_process(e) == 0)
 		return (ft_error(e, 5));
-		printf("yolo4\n");
 /*	while (e->pc_list)
 	{
 		printf("e->arena_init = [%.2x]\n", e->pc_list->pc);

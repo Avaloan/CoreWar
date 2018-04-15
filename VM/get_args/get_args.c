@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/15 19:53:06 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/15 22:07:42 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,19 @@ int				read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 	int				iter;
 	unsigned char	*t;
 	unsigned int	stock;
+	int				pos;
 
 	i = 1;
 	stock = 0;
 	iter = 1;
+	pos = 0;
 //	printf("arg_size_from_read = %i\n", arg_size);
 	t = (unsigned char*)ft_memalloc(sizeof(char) * (arg_size * 8));
 	while (i < arg_size + 1)
 	{
-		stock = e->arena[process->pc + iter + offset];
+		pos = process->pc + iter + offset;
+		pos  = (pos < 0) ? MEM_SIZE + pos : pos;
+		stock = e->arena[pos];
 		dec_to_bin(stock, t, i * 8, arg_size * 8);
 		i++;
 		iter++;
@@ -34,7 +38,7 @@ int				read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 	stock = bin_to_dec(arg_size, t, arg_size * 8);
 	free(t);
 	t = NULL;
-//	printf("stock = %u\n", stock);
+	printf("stock = %i\n", stock);
 	return (stock);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 02:07:51 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/15 19:52:43 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/15 23:27:32 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,18 @@ void			write_2_bytes(t_env *e, unsigned short input, t_process *pc, unsigned int
 {
 	unsigned int	i;
 	unsigned short	tmp;
+	short			targ;
 
+	targ = 0;
 	i = 0;
 	tmp = 0;
 	while (i < INT_SIZE - 2)
 	{
+		targ = pc->pc + off + i - 1;
+		targ = (targ < 0) ? MEM_SIZE - targ : targ;
 		tmp = input >> 8;
-		e->arena[pc->pc + off + i - 1] = tmp;
-		e->written_by[pc->pc + off + i - 1] = pc->from_pl;
+		e->arena[targ] = tmp;
+		e->written_by[targ] = pc->from_pl;
 		i++;
 		input = input << 8;
 	}
