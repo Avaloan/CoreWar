@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 01:34:47 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/16 16:23:23 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/16 20:22:08 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		ft_up_periode(t_env *e)
 		tmp_2 = tmp->next;
 		if (tmp_2 && tmp_2->lives_during_periode == 0)
 		{
-			tmp->next = (tmp_2->next)? tmp_2->next : NULL;;
+			tmp->next = (tmp_2->next)? tmp_2->next : NULL;
 			free(tmp_2);
 		}
 		tmp->lives_during_periode = 0;

@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 04:42:08 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/16 18:55:47 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/16 19:43:37 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_play_turn(t_env *e)
 			{
 //				printf("AKApl = %i, location = %i && r1 = %u\n", tmp->from_pl, tmp->pc, tmp->reg[0]);
 				if ((i = ft_operations(e, tmp)) < 0)
-					tmp->pc = (tmp->pc - i) % MEM_SIZE;
+					tmp->pc = (tmp->pc - (i + 1)) % MEM_SIZE;
 				tmp->to_exec = 0;
 			//	printf("R1 = %x\n", tmp->reg[0]);
 			}

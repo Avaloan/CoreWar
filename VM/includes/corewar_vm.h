@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/16 14:30:06 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/16 20:07:43 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define MAX_PLAYERS			4
 # define CYCLE_TO_DIE			1536
 # define CYCLE_DELTA			50
-# define NBR_LIVE				10
+# define NBR_LIVE				21
 # define MAX_CHECKS				10
 # define T_REG					1
 # define T_DIR					2
