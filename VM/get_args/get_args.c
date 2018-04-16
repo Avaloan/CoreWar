@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/15 22:07:42 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/16 18:08:43 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int				read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 	{
 		pos = process->pc + iter + offset;
 		pos  = (pos < 0) ? MEM_SIZE + pos : pos;
-		stock = e->arena[pos];
+		stock = e->arena[pos % MEM_SIZE];
 		dec_to_bin(stock, t, i * 8, arg_size * 8);
 		i++;
 		iter++;
@@ -38,7 +38,7 @@ int				read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 	stock = bin_to_dec(arg_size, t, arg_size * 8);
 	free(t);
 	t = NULL;
-	printf("stock = %i\n", stock);
+//	printf("stock = %i\n", stock);
 	return (stock);
 }
 
@@ -49,6 +49,7 @@ t_params *p)
 	if (args[p->num_param].reg <= 0 || args[p->num_param].reg > REG_NUMBER)
 		return (REG_INVALID);
 	p->total_size += 1;
+	printf("arg = %d\n",  args[p->num_param].reg);
 	args[p->num_param].type = 'r';
 	return (1);	
 }

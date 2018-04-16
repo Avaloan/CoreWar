@@ -6,12 +6,24 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 06:01:56 by gquerre           #+#    #+#             */
-/*   Updated: 2018/03/31 06:08:45 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/16 15:07:32 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
+int	ft_load_dump(t_env *e, char *argv)
+{
+	int		k;
+	char	*tmp;
 
+	k = 0;
+	tmp = NULL;
+	e->dump_on = ft_atoi(argv);
+	tmp = ft_itoa(e->dump_on);
+	k = ft_strcmp(tmp, argv);
+	free(tmp);
+	return ((k) ? 0 : 1);
+}
 int	ft_apply_option(t_env *e, char *argv, int i)
 {
 	int	k;
@@ -24,12 +36,7 @@ int	ft_apply_option(t_env *e, char *argv, int i)
 		if (!ft_isdigit(argv[k]))
 			return (0);
 	if (tmp == 1)
-	{
-		e->dump_on = ft_atoi(argv);
-		if (ft_strcmp(ft_itoa(e->dump_on), argv))
-			return (0);
-		return (1);
-	}
+		return (ft_load_dump(e, argv));
 	else if (tmp == 2)
 	{
 		e->forced_nb_for_pl = ft_atou(argv);

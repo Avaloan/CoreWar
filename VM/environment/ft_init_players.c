@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:04:40 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/10 16:27:57 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/16 16:22:02 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ off_t	ft_save_comment(t_env *e, int i, int fd, off_t pos)
 		return (0);
 	if ((tmp[0] != 0) || (tmp[1] != 0) ||
 				(e->players[i].size = tmp[2] * 256 + tmp[3]) > CHAMP_MAX_SIZE)
+	{
+		printf("Casse = %i\n", e->players[i].size);
 		return (0);
+	}
 	if (!(e->players[i].comment = ft_memalloc(sizeof(char) * (COMMENT_SIZE))))
 		return (0);
 	if (read(fd, e->players[i].comment, COMMENT_SIZE) == -1)

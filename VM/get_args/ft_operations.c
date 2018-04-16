@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/15 18:59:32 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/16 18:58:40 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,13 @@ int				ft_operations(t_env *e, t_process *process)
 	
 	if (g_op_tab[params.opcode].octal == 1)
 	{
-		process->pc += 1;
+		process->pc = (process->pc + 1) % MEM_SIZE;
 		params.coding_byte = e->arena[process->pc];
 		if (check_coding_byte(e, &params, args, process) == BAD_CODING_BYTE)
-			return (0);
+		{
+		//	process->pc += (params.total_size + 1);
+			return (-(params.total_size));
+		}
 	}
 	else
 	{
@@ -62,7 +65,8 @@ int				ft_operations(t_env *e, t_process *process)
 	g_op_tab[params.opcode].op(e, process, args);
 	//printf("param_size = %i\n", params.total_size);
 	if (params.opcode + 1 != 9)
-		process->pc += params.total_size + 1;
-	//printf("new read = [%.2x]\n", e->arena[process->pc]);
+		process->pc += (params.total_size + 1);
+	process->pc = process->pc % MEM_SIZE;
+	//printf("new read = [%.2x], process->pc = %i\n", e->arena[process->pc], process->pc);
 	return (1);
 }

@@ -6,13 +6,13 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 05:48:31 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/13 15:08:53 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/16 13:52:34 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
 
-int	ft_add_pc(t_env *e, t_process *father, int i)
+int	ft_add_pc(t_env *e, t_process *father, short i)
 {
 	t_process	*tmp;
 	int			k;
@@ -22,7 +22,8 @@ int	ft_add_pc(t_env *e, t_process *father, int i)
 	if (!(tmp = ft_memalloc(sizeof(t_process))))
 		return (0);
 //	tmp->pc = father->pc + (int)(e->arena[father->pc + i]);
-	tmp->pc = father->pc + (int)i;
+	tmp->pc = father->pc + (short)i;
+	tmp->pc = (tmp->pc < 0) ? MEM_SIZE + tmp->pc : tmp->pc;
 	tmp->waiting = father->waiting;
 	tmp->lives_during_periode = father->lives_during_periode;
 	tmp->carry = father->carry;
