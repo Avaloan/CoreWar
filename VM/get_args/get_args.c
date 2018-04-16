@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/16 18:08:43 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/16 20:23:29 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_params *p)
 	if (args[p->num_param].reg <= 0 || args[p->num_param].reg > REG_NUMBER)
 		return (REG_INVALID);
 	p->total_size += 1;
-	printf("arg = %d\n",  args[p->num_param].reg);
+//	printf("arg = %d\n",  args[p->num_param].reg);
 	args[p->num_param].type = 'r';
 	return (1);	
 }
