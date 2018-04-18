@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 01:34:47 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/16 20:22:08 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/18 10:21:30 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		ft_maj(t_env *e, int i)
 	else
 		e->checks_done++;
 	e->lives_periode = 0;
-	e->cycles_periode = 1;
+	e->cycles_periode = 0;
 	while (tmp)
 	{
 		tmp->lives_during_periode = 0;
@@ -85,34 +85,25 @@ int		ft_game_runner(t_env *e)
 	int	a;
 
 	a = 0;
-//	printf("game1\n");
 	if (e->visu == 1)
 		if (ft_start_the_game_visu(e) == 0)
 			return (0);
-//	printf("game2\n");
 	while (e->pc_list)
 	{
-//	printf("game3\n");
 		while (e->pc_list && e->cycles_periode < e->cycles_to_die && ft_keypad(e, unix_text_kbhit()))
 		{
-//	printf("game4\n");
 			if (e->cycles == e->dump_on)
 				return (ft_dump(e));
-//	printf("game5\n");
 			if (ft_play_turn(e) == 0)
 				return (0);
-//	printf("game6\n");
 			if (e->visu == 1)
 				if (ft_maj_visu(e) == 0)
 					return (0);
-//	printf("game7\n");
 			e->cycles_periode++;
 			e->cycles++;
 			if (e->visu)
 				usleep(FREQ + e->vi->speed);
-//	printf("game8\n");
 		}
-//	printf("game9\n");
 		if (e->cycles_periode >= e->cycles_to_die)
 			if ((a = ft_up_periode(e)) == 0 || a == 2)
 				return (a);

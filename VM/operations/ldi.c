@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 06:15:06 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/15 23:18:48 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/18 11:07:43 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ldi(t_env *e, t_process *process, t_args_value args[3])
 	unsigned int parameter;
 
 	parameter = 0;
-//	printf("arg[0].type = %c, arg[1].type = %c\, arg[0].dir_short = %hu"
 	if (args[0].type == 'r')
 		parameter += process->reg[args[0].reg - 1];
 	else if (args[0].type == 'd')

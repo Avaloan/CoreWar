@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/16 18:58:40 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/18 09:44:34 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ t_process *pc)
 	if ((p->arg_type = p->arg_type & g_op_tab[p->opcode].arg_type[p->num_param]) > 0)
 	{
 		p->coding_byte <<= 2;
+		//printf("In coding byte %d\n", p->total_size);
 		if (get_args_value(args, pc, e, p) == REG_INVALID)
+		{
+			//printf("la diff in coding byte %d\n", p->total_size);
 			return (BAD_CODING_BYTE);
+		}
 		p->num_param++;
 		return (check_coding_byte(e, p, args, pc));
 	}
@@ -49,8 +53,9 @@ int				ft_operations(t_env *e, t_process *process)
 		params.coding_byte = e->arena[process->pc];
 		if (check_coding_byte(e, &params, args, process) == BAD_CODING_BYTE)
 		{
-		//	process->pc += (params.total_size + 1);
-			return (-(params.total_size));
+			//printf("params.total_size %d || process->pc %d\n", params.total_size, process->pc);
+			process->pc += (params.total_size);
+			return (0);
 		}
 	}
 	else

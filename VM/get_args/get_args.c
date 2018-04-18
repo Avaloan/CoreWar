@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/16 20:23:29 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/18 09:40:58 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int			get_reg_value(t_args_value args[3], t_process *pc, t_env *e,
 t_params *p)
 {
 	args[p->num_param].reg = read_nb_bytes(e, 1, pc, p->total_size);
+	p->total_size += 1;
 	if (args[p->num_param].reg <= 0 || args[p->num_param].reg > REG_NUMBER)
 		return (REG_INVALID);
-	p->total_size += 1;
 //	printf("arg = %d\n",  args[p->num_param].reg);
 	args[p->num_param].type = 'r';
 	return (1);	
