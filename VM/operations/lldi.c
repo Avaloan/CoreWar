@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 06:15:30 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/10 14:46:35 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/18 14:48:49 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	lldi(t_env *e, t_process *process, t_args_value args[3])
 	if (args[0].type == 'r')
 		parameter += process->reg[args[0].reg - 1];
 	else if (args[0].type == 'd')
-		parameter += args[0].dir_short;
+		parameter += args[0].dir_short - 2;
 	else if (args[0].type == 'i')
 		parameter += read_nb_bytes(e, 4, process,
 				ft_arg_neg_two(args[0].ind, MEM_SIZE));

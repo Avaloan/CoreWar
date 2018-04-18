@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 03:57:39 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/16 15:05:27 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/18 16:50:51 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_fresh(t_env *e)
 	if (e->pc_list)
 	{
 		tmp = e->pc_list;
-		while (tmp && tmp->next)
+		while (tmp->next)
 		{
 			tmp = e->pc_list;
 			e->pc_list = tmp->next;

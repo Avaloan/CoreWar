@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 04:42:08 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/18 10:21:08 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/18 17:27:20 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	ft_play_turn(t_env *e)
 	tmp = e->pc_list;
 	while (tmp)
 	{
+	//	printf("waiting = %d, player[%d] && case = [%d]\n", tmp->waiting, tmp->from_pl, e->arena[tmp->pc]);
 		tmp->pc = tmp->pc % (MEM_SIZE);
 		if (tmp->waiting == 0)
 		{

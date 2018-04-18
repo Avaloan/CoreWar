@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 03:48:25 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/13 13:03:58 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/18 19:05:16 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,16 @@ void	ft_fill_process(t_env *e)
 	tmp = e->pc_list;
 	i = 0;
 	pos = 9;
-	while (tmp)
+	while (tmp && i < 20)
 	{
 		wmove(e->vi->info, pos + i, 4);
 		wprintw(e->vi->info, "PC[%i] = %i | Carry = %i | Ex = %i",
 				i, tmp->pc, tmp->carry, tmp->to_exec);
+		wmove(e->vi->info, pos + i + 1, 4);
+		wprintw(e->vi->info, "Live_during_p = %.5d and Death = %.5d", tmp->lives_during_periode, (tmp->lives_during_periode) ? 0 : e->cycles_to_die - e->cycles_periode);
+
 		tmp = tmp->next;
-		i++;
+		i += 2;
 	}
 }
 

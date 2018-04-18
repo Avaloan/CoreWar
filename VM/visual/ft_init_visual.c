@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 00:18:51 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/09 06:21:18 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/18 19:06:19 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ int		ft_visual(t_env *e)
 	e->vi->my = (e->vi->root) + 2;
 	initscr();
 	e->vi->arena = newwin(e->vi->my, e->vi->mx, 0, 0);
-	e->vi->info = newwin(e->vi->my, 40, 0, e->vi->mx + 2);
+	e->vi->info = newwin(e->vi->my, 50, 0, e->vi->mx + 2);
 	return (1);
 }
