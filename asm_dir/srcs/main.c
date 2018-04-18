@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:02:28 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/03/29 03:37:20 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/18 04:18:00 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,24 @@ t_op    g_op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
+int	check_command(t_env *e)
+{
+	int	sl;
+
+	while (e->count != e->off_set)
+	{
+	printf("of = %d\n", e->off_set);
+	printf("count = %d\n", e->count);
+		sl = size_line(e->stock, e->count);
+	printf("of = %d\n", e->off_set);
+	printf("count = %d\n", e->count);
+		if (!(check_line(e, sl)))
+			return (0);
+		e->count += sl + 1;
+	}
+	return (1);
+}
+
 int	valid_player(t_env *e)
 {
 	e->count += skip_empty_and_com(e->stock);
@@ -58,13 +76,9 @@ int	valid_player(t_env *e)
 	else
 		return (0);
 	e->count += skip_empty_and_com(e->stock + e->count);
-/*	while (e->stock[e->count])
-	{
-	}*/
-	printf("%s\n", e->name_player);
-	printf("%s\n", e->comment);
-	e->count += skip_empty_and_com(e->stock + e->count);
-	printf("%s\n", e->stock + e->count);
+//	printf("%s\n", e->stock + e->count);
+	if (!check_command(e))
+		return (0);
 	return (1);
 }
 
@@ -120,6 +134,11 @@ int	main(int ac, char **av)
 	close(fd);
 	if (!valid_player(e))
 		ft_perror("Invalid player, i smell some bullshit.\n");
+	while (e->lst_label)
+	{
+		printf("Label = %s\n", e->lst_label->name);
+		e->lst_label = e->lst_label->next;
+	}
 //	if (!create_binary_player(stock, e))
 //		ft_perror("I'm too bad for this player, pls call another developer.\n");
 //	fd = open(e->name_file, O_CREAT | O_WRONLY, 0777);

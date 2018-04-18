@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/03/29 02:52:04 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/18 03:59:10 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@
 
 typedef	char	t_arg_type;
 
+typedef struct s_label
+{
+	int				placement;
+	char			*name;
+	struct s_label	*next;
+}				t_label;
+
 typedef struct	s_op
 {
 	char		*name;
@@ -48,6 +55,8 @@ typedef struct	s_op
 
 typedef struct	s_env
 {
+	int			size_player;
+	int			valid_line;
 	char		*name_file;
 	char		*stock;
 	char		*player_buff;
@@ -57,8 +66,11 @@ typedef struct	s_env
 	char		*comment;
 	int			name_ok;
 	int			comment_ok;
+	t_label		*lst_label;
 }				t_env;
 
+void	create_label_lst(t_env *e, int start, int end);
+int	check_line(t_env *e, int sl);
 int	name(t_env *e);
 int	comment(t_env *e);
 int	size_line(char *stock, int count);

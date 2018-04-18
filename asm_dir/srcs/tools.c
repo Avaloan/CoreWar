@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 01:27:44 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/03/29 03:36:46 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/17 23:09:39 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int size_line(char *stock, int count)
 	int size;
 
 	size = 0;
-	while(stock[size + count] != '\n')
+	while(stock[size + count] != '\n' && stock[size + count] != '\0')
 		size++;
 	return (size);
 }
