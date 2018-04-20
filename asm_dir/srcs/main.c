@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:02:28 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/18 04:18:00 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/20 04:21:29 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ int	check_command(t_env *e)
 
 	while (e->count != e->off_set)
 	{
-	printf("of = %d\n", e->off_set);
-	printf("count = %d\n", e->count);
+//	printf("of = %d\n", e->off_set);
+//	printf("count = %d\n", e->count);
 		sl = size_line(e->stock, e->count);
-	printf("of = %d\n", e->off_set);
-	printf("count = %d\n", e->count);
+//	printf("of = %d\n", e->off_set);
+//	printf("count = %d\n", e->count);
 		if (!(check_line(e, sl)))
 			return (0);
 		e->count += sl + 1;

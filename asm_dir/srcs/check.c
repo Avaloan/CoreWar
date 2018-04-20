@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/07 01:02:47 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/18 05:17:59 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/20 04:22:32 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@ int	stock_label(t_env *e, int end)
 	while (end > -1)
 	{
 		if ((!(e->stock[e->count + end] > 96 && e->stock[e->count + end] < 123)) && !ft_isdigit(e->stock[e->count + end]) && e->stock[e->count + end] != '_')
-		{printf("end = %c\n", e->stock[e->count + end]);
-			break;}
+			break;
 		end--;
 	}
 	if (end == -1)
 		start = 0;
 	else
 		start = end + 1;
-	printf("start = %d, end = %d\n", start, end);
 	while (end > -1)
 	{
 		if (e->stock[e->count + end] > 32)
@@ -81,19 +79,14 @@ int	check_line(t_env *e, int sl)
 	int	i;
 
 	i = 0;
-	printf("stock [%s]\n", e->stock + e->count);
+//	printf("stock [%s]\n", e->stock + e->count);
 	if (sl == 0 || e->stock[e->count] == COMMENT_CHAR)
 		return (1);
 	if (!check_char(e, sl) || !check_label(e, sl))
 		return (0);
-/*	e->valid_line = 1;
-	while (i < sl && e->valid_line)
-	{
-		
-		if (e->stock[e->count + i] == '#' || e->stock[e->count + i] == '\n')
-			return (1);
-		
-		i++;
-		}*/
+	if (!valid_command(e, sl))
+		return (0);
+//	else
+//		write_player(e);
 	return (1);
 }

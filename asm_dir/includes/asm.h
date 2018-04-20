@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/18 03:59:10 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/20 01:27:39 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct	s_env
 }				t_env;
 
 void	create_label_lst(t_env *e, int start, int end);
+int	skip_label(t_env *e, int sl);
+int	valid_command(t_env *e, int sl);
 int	check_line(t_env *e, int sl);
 int	name(t_env *e);
 int	comment(t_env *e);
