@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 05:48:31 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/18 15:51:27 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/22 07:24:08 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_add_pc(t_env *e, t_process *father, short i)
 	tmp2 = NULL;
 	if (!(tmp = ft_memalloc(sizeof(t_process))))
 		return (0);
-/*//	tmp->pc = father->pc + (int)(e->arena[father->pc + i]);
+/*	tmp->pc = father->pc + (int)(e->arena[father->pc + i]);
 	tmp->pc = father->pc + (short)i;
 	tmp->pc = (tmp->pc < 0) ? MEM_SIZE + tmp->pc : tmp->pc;
 	tmp->waiting = father->waiting;
@@ -52,6 +52,6 @@ int	ft_add_pc(t_env *e, t_process *father, short i)
 		k++;
 	}
 	tmp->next = e->pc_list;
-	e->pc_list = tmp;;
+	e->pc_list = tmp;
 	return (1);
 }
