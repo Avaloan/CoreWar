@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/16 20:07:43 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/22 06:16:30 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ typedef struct					s_env
 	unsigned int				lives_periode;
 	char						*winner_name;
 	int							winner_value;
+	int							winner_num_player;
 	int							option;
 	int							dump_on;
 	unsigned int				forced_nb_for_pl;

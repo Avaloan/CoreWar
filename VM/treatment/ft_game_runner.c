@@ -6,34 +6,80 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 01:34:47 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/18 19:25:26 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/22 00:51:59 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
 
-int		ft_free_process(t_env *e)
+int		ft_free_process(t_env *e, t_process *pc, int i)
 {
 	t_process	*tmp;
-
-	tmp = e->pc_list;
-	if (e->pc_list->next)
+	t_process	*tmp_bis;
+	
+	tmp = NULL;
+	tmp_bis = NULL;
+	if (i == 0)
 	{
-		e->pc_list = e->pc_list->next;
-		free(tmp);
-		return (1);
+		tmp = (e->pc_list->next ) ? e->pc_list->next : NULL;
+		free (e->pc_list);
+		if (tmp == NULL)
+			return (2);
+		e->pc_list = (tmp) ? tmp : NULL;
 	}
-	else
-		return (0);
+	else if (i == -1)
+	{
+		tmp = pc;
+		tmp_bis = tmp->next->next;
+		free(tmp->next);
+		tmp->next = tmp_bis;
+	}
+//	else
+//		printf("YOLO\n");
+	return (1);
+}
+
+int		ft_clean_process_list(t_env *e)
+{
+	t_process	*tmp;
+	int			i;
+	int			ret;
+
+	ret = 0;
+	i = 0;
+	tmp = e->pc_list;
+	while (tmp)
+	{
+		if (tmp->lives_during_periode == 0)
+		{
+			if ((ret = ft_free_process(e, tmp, i)) != 1)
+				return (ret);
+			tmp = e->pc_list;
+		}
+		else
+		{
+			if (tmp->next && tmp->next->lives_during_periode == 0)
+			{
+				if ((ret = ft_free_process(e, tmp, -1)) != 1)
+					return (ret);
+			}
+			else
+				tmp = tmp->next;
+			i++;
+		}
+	}
+	return (1);
 }
 
 int		ft_maj(t_env *e, int i)
 {
-	t_process	*tmp;
+	t_player	*tmp;
+	int			k;
 
+	k = 0;
 	if (!(e->pc_list))
 		return (0);
-	tmp = e->pc_list;
+	tmp = e->players;
 	if (i == 1)
 	{
 		e->cycles_to_die = e->cycles_to_die - CYCLE_DELTA;
@@ -43,10 +89,10 @@ int		ft_maj(t_env *e, int i)
 		e->checks_done++;
 	e->lives_periode = 0;
 	e->cycles_periode = 0;
-	while (tmp)
+	while (k < e->nb_of_pl)
 	{
-		tmp->lives_during_periode = 0;
-		tmp = tmp->next;
+		tmp[k].lives_periode = 0;
+		k++;
 	}
 	return ((e->cycles_to_die > 0)? 1 : 2);
 }
@@ -54,15 +100,22 @@ int		ft_maj(t_env *e, int i)
 int		ft_up_periode(t_env *e)
 {
 	t_process	*tmp;
-	t_process	*tmp_2;
 	int			a;
 
 	a = 0;
-	while (e->pc_list && e->pc_list->lives_during_periode == 0)
+	if ((a = ft_clean_process_list(e)) == 0 || a == 2)
+		return (a);
+	tmp = e->pc_list;
+	while (tmp)
+	{
+		tmp->lives_during_periode = 0;
+		tmp = tmp->next;
+	}
+	/*while (e->pc_list && e->pc_list->lives_during_periode == 0)
 		if (ft_free_process(e) == 0)
 			return (2);
 	tmp = e->pc_list;
-	while (tmp && tmp->next)
+	while (tmp)
 	{
 		tmp_2 = tmp->next;
 		if (tmp_2 && tmp_2->lives_during_periode == 0)
@@ -72,7 +125,7 @@ int		ft_up_periode(t_env *e)
 		}
 		tmp->lives_during_periode = 0;
 		tmp = tmp->next;
-	}
+	}*/
 	if (e->visu)
 	{
 		wclear(e->vi->info);

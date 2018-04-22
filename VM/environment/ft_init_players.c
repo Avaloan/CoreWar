@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:04:40 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/16 16:22:02 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/22 06:56:02 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ off_t	ft_save_comment(t_env *e, int i, int fd, off_t pos)
 		return (0);
 	if ((tmp[0] != 0) || (tmp[1] != 0) ||
 				(e->players[i].size = tmp[2] * 256 + tmp[3]) > CHAMP_MAX_SIZE)
-	{
-		printf("Casse = %i\n", e->players[i].size);
 		return (0);
-	}
 	if (!(e->players[i].comment = ft_memalloc(sizeof(char) * (COMMENT_SIZE))))
 		return (0);
 	if (read(fd, e->players[i].comment, COMMENT_SIZE) == -1)
@@ -121,8 +118,8 @@ int		ft_init_player(t_env *e, char *argv)
 		e->forced_nb_for_pl = 0;
 	}
 	else
-		e->players[i].num_player = i + 1;
-	e->players[i].id = UINT_MAX - e->players[i].num_player + 1;
+		e->players[i].num_player = -(i + 1);
+	e->players[i].id = (unsigned int)e->players[i].num_player;
 	e->players[i].lives_periode = 0;
 	e->players[i].total_lives = 0;
 	e->players[i].last_live = 0;
