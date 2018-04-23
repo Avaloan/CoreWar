@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/22 06:16:30 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/23 06:06:49 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct					s_process
 	struct s_process			*next;
 	int							carry;
 	int							to_exec;
+	int							opcode;
 	unsigned int				from_pl;
 }								t_process;
 
@@ -84,6 +85,7 @@ typedef struct					s_params
 	int							total_size;
 	unsigned char				opcode;
 	int							arg_type;
+	int							bad_byte;
 }								t_params;
 
 typedef struct					s_args_value

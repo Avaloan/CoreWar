@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/18 17:46:48 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/23 03:59:29 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@ int				read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 	while (i < arg_size + 1)
 	{
 		pos = process->pc + iter + offset;
-	//	printf("pos = %d && offset = %d\n", pos, offset);
+//		printf("PC_NBR = process->from_pl = %d\n", process->from_pl);
+//		printf("e->arena[pos] = %.2x\n", e->arena[pos]);
+//		printf("pos = %d && offset = %d\n", pos, offset);
 		pos  = (pos < 0) ? MEM_SIZE + pos : pos;
 		stock = e->arena[pos % MEM_SIZE];
+//		printf("stock = %.2x\n", stock);
 		dec_to_bin(stock, t, i * 8, arg_size * 8);
 		i++;
 		iter++;
@@ -47,7 +50,11 @@ t_params *p)
 	args[p->num_param].reg = read_nb_bytes(e, 1, pc, p->total_size);
 	p->total_size += 1;
 	if (args[p->num_param].reg <= 0 || args[p->num_param].reg > REG_NUMBER)
+	{
+	//	printf("REGpc->pc = %d && params.total_size = %d\n", pc->pc , p->total_size);
+	//	printf("&& args[p->num_param].reg = %d // e->arena[pc->pc] = %.2x\n", args[p->num_param].reg, e->arena[pc->pc]);
 		return (REG_INVALID);
+	}
 	args[p->num_param].type = 'r';
 	return (1);	
 }
@@ -88,5 +95,7 @@ t_params *p)
 		get_ind_value(args, pc, e, p);
 	else if (p->arg_type == 2)
 		get_dir_value(args, pc, e, p);
+	else
+		return (REG_INVALID);
 	return (1);
 }

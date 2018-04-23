@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 01:34:47 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/22 00:51:59 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/23 06:16:47 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,28 +143,37 @@ int		ft_game_runner(t_env *e)
 	int	a;
 
 	a = 0;
+//	printf("1\n");
 	if (e->visu == 1)
 		if (ft_start_the_game_visu(e) == 0)
 			return (0);
+//	printf("2\n");
 	while (e->pc_list)
 	{
 		while (e->pc_list && e->cycles_periode < e->cycles_to_die && ft_keypad(e, unix_text_kbhit()))
 		{
+//	printf("3\n");
 			if (e->cycles == e->dump_on)
 				return (ft_dump(e));
+//	printf("4\n");
 			if (ft_play_turn(e) == 0)
 				return (0);
+//	printf("5\n");
 			if (e->visu == 1)
 				if (ft_maj_visu(e) == 0)
 					return (0);
+//	printf("6\n");
 			e->cycles_periode++;
 			e->cycles++;
 			if (e->visu)
 				usleep(FREQ + e->vi->speed);
+//	printf("7\n");
 		}
+//	printf("8\n");
 		if (e->cycles_periode >= e->cycles_to_die)
 			if ((a = ft_up_periode(e)) == 0 || a == 2)
 				return (a);
+//	printf("9\n");
 	}
 	return (1);
 }

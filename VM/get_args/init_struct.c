@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/10 13:43:13 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/23 04:11:36 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void			init_t_params(t_params *params)
 	params->total_size = 0;
 	params->opcode = 0;
 	params->arg_type = 0;
+	params->bad_byte = 1;
 }
 
 
