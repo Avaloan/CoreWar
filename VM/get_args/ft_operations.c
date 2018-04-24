@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/23 06:11:09 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/24 01:18:08 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 int				check_coding_byte(t_env *e, t_params *p, t_args_value args[3],
 		t_process *pc)
 {
-	if (p->num_param == p->nb_params_max && p->coding_byte != 0)
-		return (BAD_CODING_BYTE);
-	else if (p->num_param == p->nb_params_max && p->coding_byte == 0)
+//	if (p->num_param == p->nb_params_max && p->coding_byte != 0)
+//		return (BAD_CODING_BYTE);
+	if (p->num_param == p->nb_params_max/* && p->coding_byte == 0*/)
 		return (p->bad_byte);
 	p->arg_type = (p->coding_byte >> 6);
 	if (p->arg_type == 3)
 		p->arg_type = 4;
-//	if (p->arg_type - g_op_tab[p->opcode].arg_type[p->num_param] != 0)
-//		a = BAD_CODING_BYTE;
+	if ((p->arg_type & g_op_tab[p->opcode].arg_type[p->num_param]) == 0)
+		p->bad_byte = BAD_CODING_BYTE;
 	if (p->num_param < p->nb_params_max)
 	{
 		p->coding_byte <<= 2;
