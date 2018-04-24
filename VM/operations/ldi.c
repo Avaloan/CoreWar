@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 06:15:06 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/23 04:00:32 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/24 07:13:07 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ldi(t_env *e, t_process *process, t_args_value args[3])
 				ft_arg_neg_two(args[0].ind, IDX_MOD));
 //	printf("PARAM1 = %u\n", parameter);
 	if (args[1].type == 'd')
-		parameter += ft_arg_neg_two(args[1].dir_short, IDX_MOD);
+		parameter += ft_arg_neg_two(args[1].dir_short, IDX_MOD) - 2;
 	else if (args[1].type == 'r')
 		parameter += process->reg[args[1].reg - 1];
 //	printf("PARAM1+2 = %u\n", parameter);
