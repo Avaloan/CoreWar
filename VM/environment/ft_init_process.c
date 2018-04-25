@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:02:45 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/23 06:06:07 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/25 07:45:19 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_save_first(t_env *e, t_process *first)
 	first->next = NULL;
 }
 
-int		ft_init_process(t_env *e)
+/*int		ft_init_process(t_env *e)
 {
 	t_process	*tmp;
 	int			i;
@@ -57,6 +57,37 @@ int		ft_init_process(t_env *e)
 			tmp->next->reg[k] = 0;
 		tmp->next->next = NULL;
 		tmp = tmp->next;
+	}
+	return (1);
+}
+*/
+int		ft_init_process(t_env *e)
+{
+	t_process	*tmp;
+	int			i;
+	int			k;
+
+	i = 0;
+	tmp = NULL;
+	ft_save_first(e, e->pc_list);
+	while (++i < e->nb_of_pl)
+	{
+		k = 0;
+		if (!(tmp = ft_memalloc(sizeof(t_process))))
+			return (0);
+		tmp->pc = i * MEM_SIZE / e->nb_of_pl;
+		tmp->reg[k] = e->players[i].id;
+//		printf("before = %i && pl = %i\n", tmp->reg[k], tmp->next->reg[k]);
+		tmp->waiting = 0;
+		tmp->lives_during_periode = 0;
+		tmp->carry = 0;
+		tmp->to_exec = 0;
+		tmp->opcode = 0;
+		tmp->from_pl = i + 1;
+		while (++k < REG_NUMBER)
+			tmp->reg[k] = 0;
+		tmp->next = e->pc_list;
+		e->pc_list = tmp;
 	}
 	return (1);
 }

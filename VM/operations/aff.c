@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 06:15:44 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/22 01:18:08 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/25 04:16:12 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	aff(t_env *e, t_process *process, t_args_value args[3])
 {
-	char c;
+	unsigned char c;
 
 	c = process->reg[args[0].reg - 1] % 256;
-	write(1, &c, 1);
+	if (c < 128 && c > 47)
+		printf("[%c]", c);
+		//write(1, &c, 1);
 }

@@ -2,3 +2,9 @@
 *.a
 
 VM/corewar\.dSYM/
+
+VM/options/ft_verbal\.c
+
+*.swp
+
+VM/Torpille\.s

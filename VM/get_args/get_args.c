@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/23 03:59:29 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/25 04:14:13 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ int				read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 	unsigned int	stock;
 	int				pos;
 
+//	printf("offset = %d\n", offset);
 	i = 1;
 	stock = 0;
-	iter = 1;
+	iter = 0;
 	pos = 0;
 	t = (unsigned char*)ft_memalloc(sizeof(char) * (arg_size * 8));
 	while (i < arg_size + 1)
@@ -47,7 +48,7 @@ int				read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 int			get_reg_value(t_args_value args[3], t_process *pc, t_env *e,
 t_params *p)
 {
-	args[p->num_param].reg = read_nb_bytes(e, 1, pc, p->total_size);
+	args[p->num_param].reg = read_nb_bytes(e, 1, pc, p->total_size + 1);
 	p->total_size += 1;
 	if (args[p->num_param].reg <= 0 || args[p->num_param].reg > REG_NUMBER)
 	{
@@ -62,7 +63,7 @@ t_params *p)
 void		get_ind_value(t_args_value args[3], t_process *pc, t_env *e,
 t_params *p)
 {
-	args[p->num_param].ind = read_nb_bytes(e, 2, pc, p->total_size);
+	args[p->num_param].ind = read_nb_bytes(e, 2, pc, p->total_size + 1);
 	args[p->num_param].type = 'i';
 	p->total_size += 2;
 }
@@ -72,12 +73,12 @@ t_params *p)
 {
 	if (g_op_tab[p->opcode].dir_size == 0)
 	{
-		args[p->num_param].dir = read_nb_bytes(e, 4, pc, p->total_size);
+		args[p->num_param].dir = read_nb_bytes(e, 4, pc, p->total_size + 1);
 		p->total_size += 4;
 	}
 	else
 	{
-		args[p->num_param].dir_short = read_nb_bytes(e, 2, pc, p->total_size);
+		args[p->num_param].dir_short = read_nb_bytes(e, 2, pc, p->total_size + 1);
 		p->total_size += 2;
 	}
 	args[p->num_param].type = 'd';

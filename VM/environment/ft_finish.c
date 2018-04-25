@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 03:57:39 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/23 06:28:12 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/25 07:56:13 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		ft_claim_winner(t_env *e)
 	i = 0;
 	while (i < e->nb_of_pl)
 	{
-		if (e->players[i].last_live >= e->winner_value)
+		if (e->players[i].last_live > e->winner_value)
 		{
 			e->winner_value = e->players[i].last_live;
 			if ((e->winner_name = ft_strdup(e->players[i].name)) == 0)
@@ -67,6 +67,7 @@ int		ft_claim_winner(t_env *e)
 
 int		ft_finish(t_env *e)
 {
+	getch();
 	if (e->visu == 1)
 		ft_end_visu(e);
 	if (ft_claim_winner(e) == 0)

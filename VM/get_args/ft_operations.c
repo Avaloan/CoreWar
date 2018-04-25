@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/24 01:18:08 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/25 05:50:28 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ int				ft_operations(t_env *e, t_process *process)
 	if (g_op_tab[params.opcode].octal == 1)
 	{
 		params.bad_byte = 1;
-		process->pc = (process->pc + 1) % MEM_SIZE;
-		if ((params.coding_byte = e->arena[process->pc]) == 0)
-			return (0);
-		if (check_coding_byte(e, &params, args, process) == BAD_CODING_BYTE)
+		params.total_size += 1;
+		//process->pc = (process->pc + 1) % MEM_SIZE;
+		if (((params.coding_byte = e->arena[(process->pc + 1) % MEM_SIZE]) == 0) ||
+				(check_coding_byte(e, &params, args, process) == BAD_CODING_BYTE))
 		{
 //			printf("cycle = %d process->pc = %d && params.total_size = %d\n", e->cycles, process->pc, params.total_size);
 			process->pc = (process->pc + params.total_size) % MEM_SIZE;
@@ -64,14 +64,14 @@ int				ft_operations(t_env *e, t_process *process)
 	{
 		params.total_size = (g_op_tab[params.opcode].dir_size) ? 2 : 4;
 		if (params.total_size == 4)
-			args[0].dir = read_nb_bytes(e, params.total_size, process, 0);
+			args[0].dir = read_nb_bytes(e, params.total_size, process, 1);
 		else
-			args[0].dir_short = read_nb_bytes(e, params.total_size, process, 0);
+			args[0].dir_short = read_nb_bytes(e, params.total_size, process, 1);
 	}
 	process->pc = process->pc % MEM_SIZE;
 	g_op_tab[params.opcode].op(e, process, args);
 	if (params.opcode + 1 != 9)
-		process->pc += (params.total_size + 1);
+		process->pc += (params.total_size) + 1;
 	process->pc = process->pc % MEM_SIZE;
 	return (1);
 }

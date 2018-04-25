@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:04:40 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/22 06:56:02 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/25 01:37:06 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ off_t	ft_save_name(t_env *e, int i, int fd)
 
 off_t	ft_save_comment(t_env *e, int i, int fd, off_t pos)
 {
-	char	tmp[5];
+	unsigned char	tmp[5];
 
 	tmp[4] = '\0';
 	if ((lseek(fd, pos, SEEK_SET) == -1))
