@@ -6,7 +6,7 @@
 #    By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/07 22:22:27 by fdidelot          #+#    #+#              #
-#    Updated: 2018/04/20 03:09:25 by fdidelot         ###   ########.fr        #
+#    Updated: 2018/04/24 02:46:30 by fdidelot         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -18,6 +18,8 @@ SRCS = 		main.c \
 			check.c \
 			label.c \
 			command.c \
+			operator.c \
+			check_param.c \
 
 OBJS = 		$(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 16:09:33 by fdidelot          #+#    #+#             */
-/*   Updated: 2014/11/28 15:02:49 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/25 04:36:38 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_atoi(const char *str)
 {
-	unsigned int	res;
-	int				sign;
+	unsigned long long	res;
+	int					sign;
 
 	res = 0;
 	sign = 1;
@@ -29,6 +29,12 @@ int	ft_atoi(const char *str)
 	{
 		res = (res * 10) + (*str - '0');
 		str++;
+	}
+	if (res > 9223372036854775807)
+	{
+		if (sign < 0)
+			return (0x00000000);
+		return (0xffffffff);
 	}
 	return (sign * res);
 }

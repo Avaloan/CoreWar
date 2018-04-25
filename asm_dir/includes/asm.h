@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/20 01:27:39 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/24 02:46:05 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct	s_op
 	int			dir_size;
 }				t_op;
 
+extern t_op		g_op_tab[17];
+
 typedef struct	s_env
 {
 	int			size_player;
@@ -78,5 +80,11 @@ int	comment(t_env *e);
 int	size_line(char *stock, int count);
 int	skip_space(char *str);
 int	skip_empty_and_com(char *str);
+int	check_nb_param(t_env *e, int start, int sl, int n_op);
+int live_operator(t_env *e, int start, int sl);
+int	valid_param(t_env *e, int start, int n_op);
+int	check_reg(t_env *e, int start);
+int	check_dir(t_env *e, int start);
+int	check_ind(t_env *e, int start);
 
 #endif

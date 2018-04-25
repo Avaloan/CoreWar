@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 01:23:42 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/20 05:28:33 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/24 06:41:58 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 int	xozf_command(t_env *e, int i, int sl)
 {
+//	printf("||||||||%d\n", (int)g_op_tab[0].arg_type[0]);
 	if (ft_strncmp(e->stock + e->count + i, "xor", 3) == 0 && (e->stock[e->count + i + 3] > 126 || e->stock[e->count + i + 3] < 33))
 		printf("xor\n");
 //		return (xor_operator(e, i, sl));
 	if (ft_strncmp(e->stock + e->count + i, "or", 2) == 0 && (e->stock[e->count + i + 2] > 126 || e->stock[e->count + i + 2] < 33))
 		printf("or\n");
 //		return (or_operator(e, i, sl));
-	if (ft_strncmp(e->stock + e->count + i, "zjump", 5) == 0 && (e->stock[e->count + i + 5] > 126 || e->stock[e->count + i + 5] < 33))
+	if (ft_strncmp(e->stock + e->count + i, "zjmp", 4) == 0 && (e->stock[e->count + i + 4] > 126 || e->stock[e->count + i + 4] < 33))
 		printf("zjump\n");
 //		return (zjump_operator(e, i, sl));
 	if (ft_strncmp(e->stock + e->count + i, "fork", 4) == 0 && (e->stock[e->count + i + 4] > 126 || e->stock[e->count + i + 4] < 33))
@@ -66,8 +67,7 @@ int	l_command(t_env *e, int i, int sl)
 		printf("ld\n");
 //		return (ld_operator(e, i, sl));
 	if (ft_strncmp(e->stock + e->count + i, "live", 4) == 0 && (e->stock[e->count + i + 4] > 126 || e->stock[e->count + i + 4] < 33))
-		printf("live\n");
-//		return (live_operator(e, i, sl));
+		return (live_operator(e, i + 4, sl));
 	if (ft_strncmp(e->stock + e->count + i, "ldi", 3) == 0 && (e->stock[e->count + i + 3] > 126 || e->stock[e->count + i + 3] < 33))
 		printf("ldi\n");
 //		return (ldi_operator(e, i, sl));
