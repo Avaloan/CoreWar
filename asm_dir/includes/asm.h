@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/26 04:36:57 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/26 23:11:54 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@
 # define MAX_ARG_TYPE		3
 # define T_REG				1
 # define T_DIR				2
-# define T_IND				4
+# define IND				192
+# define REG				64
+# define _DIR				128
 
 typedef	char	t_arg_type;
 
