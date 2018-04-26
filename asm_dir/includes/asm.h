@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/24 02:46:05 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/26 01:20:47 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct	s_env
 	int			valid_line;
 	char		*name_file;
 	char		*stock;
-	char		*player_buff;
+	unsigned char		*player_buff;
 	int			off_set;
 	int			count;
 	char		*name_player;
@@ -69,9 +69,12 @@ typedef struct	s_env
 	int			name_ok;
 	int			comment_ok;
 	t_label		*lst_label;
+	t_label		*stock_label;
 }				t_env;
 
+void	get_label(t_env *e, int start);
 void	create_label_lst(t_env *e, int start, int end);
+void	create_label_stock(t_env *e, int start, int end);
 int	skip_label(t_env *e, int sl);
 int	valid_command(t_env *e, int sl);
 int	check_line(t_env *e, int sl);

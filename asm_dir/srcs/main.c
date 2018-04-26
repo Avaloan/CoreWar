@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:02:28 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/20 04:21:29 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/26 01:02:29 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,23 @@ int	main(int ac, char **av)
 	while (e->lst_label)
 	{
 		printf("Label = %s\n", e->lst_label->name);
+		printf("Placement = %d\n", e->lst_label->placement);
 		e->lst_label = e->lst_label->next;
 	}
+	while (e->stock_label)
+	{
+		printf("Label = %s\n", e->stock_label->name);
+		printf("Placement = %d\n", e->stock_label->placement);
+		e->stock_label = e->stock_label->next;
+	}
+	printf("Size = %d\n",e->size_player);
+	int i = 0;
+	while (i < e->size_player)
+	{
+		printf("%.2x", e->player_buff[i]);
+		i++;
+	}
+	printf("\n");
 //	if (!create_binary_player(stock, e))
 //		ft_perror("I'm too bad for this player, pls call another developer.\n");
 //	fd = open(e->name_file, O_CREAT | O_WRONLY, 0777);

@@ -7,16 +7,11 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 02:38:44 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/25 06:11:29 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/26 02:36:05 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
-
-void	get_label(t_env *e, int start, unsigned char *command)
-{
-	
-}
 
 void	add_command(t_env *e, unsigned char *command, int size)
 {
@@ -25,7 +20,7 @@ void	add_command(t_env *e, unsigned char *command, int size)
 	i = 0;
 	if (e->player_buff == NULL)
 	{
-		if (!(e->player_buff = (char *)ft_memalloc(sizeof(char) * CHAMP_MAX_SIZE)))
+		if (!(e->player_buff = (unsigned char *)ft_memalloc(sizeof(unsigned char) * CHAMP_MAX_SIZE)))
 			ft_perror("malloc() failed.\n");
 	}
 	while (i < size)
@@ -56,10 +51,8 @@ void	number_to_hex(unsigned int num, unsigned char *dest)
 int	live_operator(t_env *e, int start, int sl)
 {
 	int				retatoi;
-	int				label;
 	unsigned char	*command;
 
-	label = 0;
 	start += skip_space(e->stock + e->count + start);
 	if (!check_nb_param(e, start, sl, 0) || !valid_param(e, start, 0))
 		return (0);
@@ -69,12 +62,13 @@ int	live_operator(t_env *e, int start, int sl)
 		ft_perror("malloc() failed.\n");
 	command[0] = 0x01;
 	if (e->stock[e->count + start] == LABEL_CHAR)
-		get_label(e, start, command);
+		get_label(e, start);
 	else
 	{
 		retatoi = ft_atoi(e->stock + e->count + start);
 		number_to_hex(retatoi, command + 1);
 	}
 	add_command(e, command, 5);
+	free(command);
 	return (1);
 }
