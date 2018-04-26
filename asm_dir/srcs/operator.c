@@ -7,7 +7,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 02:38:44 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/26 02:36:05 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/26 04:37:09 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,10 @@ void	add_command(t_env *e, unsigned char *command, int size)
 
 void	number_to_hex(unsigned int num, unsigned char *dest)
 {
-	int i = 0;
 	dest[0] = num >> 24 & 0x000000ff;
 	dest[1] = (num << 8 & 0xff000000) >> 24 & 0x000000ff;
 	dest[2] = (num << 16 & 0xff000000) >> 24 & 0x000000ff;
 	dest[3] = (num << 24 & 0xff000000) >> 24 & 0x000000ff;
-	while (i < 4)
-	{
-		printf("num[%d] = %x\n", i, dest[i]);
-		i++;
-	}
 }
 
 int	live_operator(t_env *e, int start, int sl)

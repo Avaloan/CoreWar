@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/26 01:20:47 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/26 04:36:57 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ typedef struct	s_env
 	t_label		*stock_label;
 }				t_env;
 
+int		lfork_operator(t_env *e, int start, int sl);
+int		fork_operator(t_env *e, int start, int sl);
+int		zjmp_operator(t_env *e, int start, int sl);
+void	add_command(t_env *e, unsigned char *command, int size);
+void	number_to_hex_size_two(unsigned int num, unsigned char *dest);
+void	number_to_hex(unsigned int num, unsigned char *dest);
 void	get_label(t_env *e, int start);
 void	create_label_lst(t_env *e, int start, int end);
 void	create_label_stock(t_env *e, int start, int end);

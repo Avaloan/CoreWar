@@ -1,0 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ld.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/26 05:22:45 by fdidelot          #+#    #+#             */
+/*   Updated: 2018/04/26 05:27:27 by fdidelot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/asm.h"
+
+int	ld_operator(t_env *e, int start, int sl)
+{
+	start += skip_space(e->stock + e->count + start);
+	if (!check_nb_param(e, start, sl, 0) || !valid_param(e, start, 0))
+		return (0);
+}

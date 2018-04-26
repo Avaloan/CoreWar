@@ -6,7 +6,7 @@
 #    By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/07 22:22:27 by fdidelot          #+#    #+#              #
-#    Updated: 2018/04/26 06:39:09 by fdidelot         ###   ########.fr        #
+#    Updated: 2018/04/26 04:01:04 by fdidelot         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -21,9 +21,6 @@ SRCS = 		main.c \
 			operator.c \
 			check_param.c \
 			lfork.c \
-			zjump.c \
-			fork.c \
-			ld.c \
 
 OBJS = 		$(SRCS:.c=.o)
 

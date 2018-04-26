@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/07 01:02:47 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/20 04:22:32 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/26 03:06:54 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ int	stock_label(t_env *e, int end)
 	stock_end = end;
 	while (end > -1)
 	{
-		if ((!(e->stock[e->count + end] > 96 && e->stock[e->count + end] < 123)) && !ft_isdigit(e->stock[e->count + end]) && e->stock[e->count + end] != '_')
-			break;
+		if ((!(e->stock[e->count + end] > 96 &&
+			e->stock[e->count + end] < 123)) &&
+			!ft_isdigit(e->stock[e->count + end]) &&
+			e->stock[e->count + end] != '_')
+			break ;
 		end--;
 	}
 	if (end == -1)
@@ -47,7 +50,9 @@ int	check_label(t_env *e, int sl)
 	{
 		if (e->stock[e->count + i] == COMMENT_CHAR)
 			return (1);
-		if (e->stock[e->count + i] == LABEL_CHAR && e->stock[e->count + i - 1] != ' ' && e->stock[e->count + i - 1] != DIRECT_CHAR)
+		if (e->stock[e->count + i] == LABEL_CHAR &&
+			e->stock[e->count + i - 1] != ' ' &&
+			e->stock[e->count + i - 1] != DIRECT_CHAR)
 			if (i == 0 || !stock_label(e, i - 1))
 				return (0);
 		i++;
@@ -64,9 +69,16 @@ int	check_char(t_env *e, int sl)
 	{
 		if (e->stock[e->count + i] == COMMENT_CHAR)
 			return (1);
-		if ((!(e->stock[e->count + i] > 96 && e->stock[e->count + i] < 123)) && !ft_isdigit(e->stock[e->count + i]))
+		if ((!(e->stock[e->count + i] > 96 &&
+			e->stock[e->count + i] < 123)) &&
+			!ft_isdigit(e->stock[e->count + i]))
 		{
-			if (e->stock[e->count + i] > 33 && e->stock[e->count + i] != LABEL_CHAR && e->stock[e->count + i] != DIRECT_CHAR && e->stock[e->count + i] != '_' && e->stock[e->count + i] != SEPARATOR_CHAR && e->stock[e->count + i] != '-')
+			if (e->stock[e->count + i] > 33 &&
+				e->stock[e->count + i] != LABEL_CHAR &&
+				e->stock[e->count + i] != DIRECT_CHAR &&
+				e->stock[e->count + i] != '_' &&
+				e->stock[e->count + i] != SEPARATOR_CHAR &&
+				e->stock[e->count + i] != '-')
 				return (0);
 		}
 		i++;

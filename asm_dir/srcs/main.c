@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:02:28 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/26 01:02:29 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/26 03:36:34 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	main(int ac, char **av)
 {
 	int		fd;
 	t_env	*e;
-
+ 
 	if (!(e = (t_env *)ft_memalloc(sizeof(t_env))))
 		ft_perror("malloc() failed.\n");
 	if (ac != 2 || !check_s_ponkt(av[1], e))

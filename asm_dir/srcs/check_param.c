@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 02:42:35 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/25 00:57:10 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/26 03:20:07 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ int	valid_num(t_env *e, int start)
 	sl = size_line(e->stock, e->count + start);
 	while (ft_isdigit(e->stock[e->count + start + i]))
 		i++;
-	if (e->stock[e->count + start + i] != SEPARATOR_CHAR && e->stock[e->count + start + i] != '\n' && e->stock[e->count + start + i] != COMMENT_CHAR)
+	if (e->stock[e->count + start + i] != SEPARATOR_CHAR &&
+		e->stock[e->count + start + i] != '\n' &&
+		e->stock[e->count + start + i] != COMMENT_CHAR)
 	{
 		while (i < sl)
 		{
@@ -74,9 +76,12 @@ int	valid_label(t_env *e, int start)
 
 	i = 0;
 	sl = size_line(e->stock, e->count + start);
-	while (ft_isalnum(e->stock[e->count + start + i]) || e->stock[e->count + start + i] == '_')
+	while (ft_isalnum(e->stock[e->count + start + i]) ||
+		e->stock[e->count + start + i] == '_')
 		i++;
-	if (e->stock[e->count + start + i] != SEPARATOR_CHAR && e->stock[e->count + start + i] != '\n' && e->stock[e->count + start + i] != COMMENT_CHAR)
+	if (e->stock[e->count + start + i] != SEPARATOR_CHAR &&
+		e->stock[e->count + start + i] != '\n' &&
+		e->stock[e->count + start + i] != COMMENT_CHAR)
 	{
 		while (i < sl)
 		{
@@ -100,7 +105,8 @@ int	check_dir(t_env *e, int start)
 	start++;
 	if (e->stock[e->count + start] == LABEL_CHAR)
 		return (valid_label(e, start + 1));
-	if (ft_isdigit(e->stock[e->count + start]) || e->stock[e->count + start] == '-')
+	if (ft_isdigit(e->stock[e->count + start]) ||
+		e->stock[e->count + start] == '-')
 		return (valid_num(e, start));
 	return (0);
 }
@@ -109,7 +115,8 @@ int	check_ind(t_env *e, int start)
 {
 	if (e->stock[e->count + start] == LABEL_CHAR)
 		return (valid_label(e, start + 1));
-	if (ft_isdigit(e->stock[e->count + start]) || e->stock[e->count + start] == '-')
+	if (ft_isdigit(e->stock[e->count + start]) ||
+		e->stock[e->count + start] == '-')
 		return (valid_num(e, start));
 	return (0);
 }
