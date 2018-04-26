@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 01:34:47 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/26 00:47:38 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/26 07:13:28 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int		ft_free_process(t_env *e, t_process *pc, int i)
 {
 	t_process	*tmp;
 	t_process	*tmp_bis;
-	
+
 	tmp = NULL;
 	tmp_bis = NULL;
 	if (i == 0)
 	{
-		tmp = (e->pc_list->next ) ? e->pc_list->next : NULL;
-		free (e->pc_list);
+		tmp = (e->pc_list->next) ? e->pc_list->next : NULL;
+		free(e->pc_list);
 		if (tmp == NULL)
 			return (2);
 		e->pc_list = (tmp) ? tmp : NULL;
@@ -34,8 +34,6 @@ int		ft_free_process(t_env *e, t_process *pc, int i)
 		free(tmp->next);
 		tmp->next = tmp_bis;
 	}
-//	else
-//		printf("YOLO\n");
 	return (1);
 }
 
@@ -94,7 +92,7 @@ int		ft_maj(t_env *e, int i)
 		tmp[k].lives_periode = 0;
 		k++;
 	}
-	return ((e->cycles_to_die > 0)? 1 : 2);
+	return ((e->cycles_to_die > 0) ? 1 : 2);
 }
 
 int		ft_up_periode(t_env *e)
@@ -111,21 +109,6 @@ int		ft_up_periode(t_env *e)
 		tmp->lives_during_periode = 0;
 		tmp = tmp->next;
 	}
-	/*while (e->pc_list && e->pc_list->lives_during_periode == 0)
-		if (ft_free_process(e) == 0)
-			return (2);
-	tmp = e->pc_list;
-	while (tmp)
-	{
-		tmp_2 = tmp->next;
-		if (tmp_2 && tmp_2->lives_during_periode == 0)
-		{
-			tmp->next = (tmp_2->next) ? tmp_2->next : NULL;
-			free(tmp_2);
-		}
-		tmp->lives_during_periode = 0;
-		tmp = tmp->next;
-	}*/
 	if (e->visu)
 	{
 		wclear(e->vi->info);
@@ -148,7 +131,8 @@ int		ft_game_runner(t_env *e)
 			return (0);
 	while (e->pc_list)
 	{
-		while (e->pc_list && e->cycles_periode < e->cycles_to_die && ft_keypad(e, unix_text_kbhit()))
+		while (e->pc_list && e->cycles_periode < e->cycles_to_die &&
+				ft_keypad(e, unix_text_kbhit()))
 		{
 			if (e->cycles == e->dump_on)
 				return (ft_dump(e));

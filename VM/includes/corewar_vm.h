@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/26 02:22:16 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/26 07:14:26 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,10 @@
 # include <curses.h>
 # include <term.h>
 # include <limits.h>
-#include <unistd.h> 
-#include <sys/time.h> 
+# include <unistd.h>
+# include <sys/time.h>
 # include <math.h>
 # include "../SRC/libft/SRC/libft.h"
-
-//# include <SDL/SDL.h>
-//# include <SDL2/SDL.h>
-//void	SDL_Delay(Uint32 ms);
 
 # define COMMENT_SIZE			2048
 # define NAME_SIZE				128

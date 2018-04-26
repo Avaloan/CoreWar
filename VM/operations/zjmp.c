@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 06:15:00 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/25 02:19:55 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/26 03:23:34 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,4 @@ void	zjmp(t_env *e, t_process *process, t_args_value args[3])
 	}
 	else
 		process->pc += 3;
-	
-	/*	printf("%i\n", process->pc);
-	printf("%hu\n", args[0].dir_short);
-	printf("%hi\n", ft_arg_neg_two(args[0].dir_short, IDX_MOD));
-	exit(0);*/
 }

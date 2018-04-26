@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 02:07:51 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/26 02:21:19 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/26 06:48:25 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_create_arena(t_env *e)
 	e->lives_periode = 0;
 	e->option = 0;
 	e->winner_value = 0;
-	e->winner_flag = 0;
+	e->winner_flag = -1;
 	e->very_last_flag = 0;
 	e->winner_num_player = 0;
 	e->winner_name = NULL;

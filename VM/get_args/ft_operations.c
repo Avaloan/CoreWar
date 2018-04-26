@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/25 05:50:28 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/26 07:06:36 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 int				check_coding_byte(t_env *e, t_params *p, t_args_value args[3],
 		t_process *pc)
 {
-//	if (p->num_param == p->nb_params_max && p->coding_byte != 0)
-//		return (BAD_CODING_BYTE);
-	if (p->num_param == p->nb_params_max/* && p->coding_byte == 0*/)
+	if (p->num_param == p->nb_params_max)
 		return (p->bad_byte);
 	p->arg_type = (p->coding_byte >> 6);
 	if (p->arg_type == 3)
@@ -27,10 +25,8 @@ int				check_coding_byte(t_env *e, t_params *p, t_args_value args[3],
 	if (p->num_param < p->nb_params_max)
 	{
 		p->coding_byte <<= 2;
-		//printf("In coding byte %d\n", p->total_size);
 		if (get_args_value(args, pc, e, p) == REG_INVALID)
 			p->bad_byte = BAD_CODING_BYTE;
-			//printf("la diff in coding byte %d // pos arena = [%d]\n", p->total_size, pc->pc);
 		p->num_param++;
 		return (check_coding_byte(e, p, args, pc));
 	}
@@ -51,11 +47,9 @@ int				ft_operations(t_env *e, t_process *process)
 	{
 		params.bad_byte = 1;
 		params.total_size += 1;
-		//process->pc = (process->pc + 1) % MEM_SIZE;
 		if (((params.coding_byte = e->arena[(process->pc + 1) % MEM_SIZE]) == 0) ||
 				(check_coding_byte(e, &params, args, process) == BAD_CODING_BYTE))
 		{
-//			printf("cycle = %d process->pc = %d && params.total_size = %d\n", e->cycles, process->pc, params.total_size);
 			process->pc = (process->pc + params.total_size) % MEM_SIZE;
 			return (0);
 		}

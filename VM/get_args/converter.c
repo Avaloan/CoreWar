@@ -6,13 +6,14 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/09 05:22:49 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/26 07:05:43 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
 
-void			set_string(unsigned char *bin_num, int index, unsigned char ins)
+void			set_string(unsigned char *bin_num, int index,
+		unsigned char ins)
 {
 	int				limit;
 	int				i;
@@ -26,7 +27,8 @@ void			set_string(unsigned char *bin_num, int index, unsigned char ins)
 	}
 }
 
-void			dec_to_bin(int dec, unsigned char *bin_num, int index, int size)
+void			dec_to_bin(int dec, unsigned char *bin_num,
+		int index, int size)
 {
 	int				i;
 	int				limit;
@@ -53,7 +55,9 @@ void			dec_to_bin(int dec, unsigned char *bin_num, int index, int size)
 			}
 	}
 }
-unsigned int	bin_to_dec(int size, unsigned char *number, unsigned int array_size)
+
+unsigned int	bin_to_dec(int size, unsigned char *number,
+		unsigned int array_size)
 {
 	unsigned int	result;
 	int				i;
