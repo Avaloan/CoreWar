@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 03:57:39 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/25 08:11:34 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/26 02:30:46 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,23 @@ void	ft_fresh(t_env *e)
 	free(e);
 }
 
+int		ft_fight_under_the_moon(t_env *e, int i)
+{
+	
+	if ((e->players[i].last_live > e->winner_value) ||
+			((e->players[i].last_live == e->winner_value) &&
+			(e->players[i].very_last_flag > e->winner_flag)))
+	{
+		printf("e->pl = %u, e->pl_last_live = %u, e->pl_flag = %u\n", i, e->players[i].last_live, e->players[i].very_last_flag);
+		e->winner_value = e->players[i].last_live;
+		e->winner_flag = e->players[i].very_last_flag;
+		if ((e->winner_name = ft_strdup(e->players[i].name)) == 0)
+			return (0);
+			e->winner_num_player = e->players[i].num_player;
+	}
+	return (1);
+}
+
 int		ft_claim_winner(t_env *e)
 {
 	int	i;
@@ -47,20 +64,23 @@ int		ft_claim_winner(t_env *e)
 	i = 0;
 	while (i < e->nb_of_pl)
 	{
-		if (e->players[i].last_live > e->winner_value)
+		if (ft_fight_under_the_moon(e, i) == 0)
+			return (0);
+		/*if (e->players[i].last_live >= e->winner_value)
 		{
+
 			e->winner_value = e->players[i].last_live;
 			if ((e->winner_name = ft_strdup(e->players[i].name)) == 0)
 				return (0);
 			e->winner_num_player = e->players[i].num_player;
-		}
+		}*/
 		i++;
 	}
 	ft_putstr("The Winner is ");
 	ft_putchar('"');
 	ft_putstr(e->winner_name);
 	ft_putchar('"');
-	ft_putstr(" Player");
+	ft_putstr(" Player ");
 	ft_putnbr(e->winner_num_player);
 	return (1);
 }

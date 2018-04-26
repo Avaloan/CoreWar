@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:04:40 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/25 01:37:06 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/26 02:27:59 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,19 +111,22 @@ int		ft_import_champ(t_env *e, int i, char *argv)
 int		ft_init_player(t_env *e, char *argv)
 {
 	static int	i = 0;
+	static int	k = 0;
 
 	if (e->forced_nb_for_pl)
 	{
 		e->players[i].num_player = e->forced_nb_for_pl;
 		e->forced_nb_for_pl = 0;
+		k++;
 	}
 	else
-		e->players[i].num_player = -(i + 1);
+		e->players[i].num_player = -(i + 1 - k);
 	e->players[i].id = (unsigned int)e->players[i].num_player;
 	e->players[i].lives_periode = 0;
 	e->players[i].total_lives = 0;
 	e->players[i].last_live = 0;
 	e->players[i].size = 0;
+	e->players[i].very_last_flag = 0;
 	if (!(ft_import_champ(e, i, argv)))
 		return (0);
 	i++;

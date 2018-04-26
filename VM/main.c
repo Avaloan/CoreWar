@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:20:17 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/22 06:33:33 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/26 01:38:45 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 		if (e->option > 0)
 		{
 			if (ft_apply_option(e, argv[i], i) == 0)
-				return (ft_error(e, 1));
+				return (ft_error(e, 8));
 		}
 		else if (argv[i] && argv[i][0] == '-')
 		{
@@ -68,11 +68,6 @@ int	main(int argc, char **argv)
 		return (ft_error(e, 9));
 	if (ft_init_process(e) == 0)
 		return (ft_error(e, 5));
-/*	while (e->pc_list)
-	{
-		printf("e->arena_init = [%.2x]\n", e->pc_list->pc);
-		e->pc_list = e->pc_list->next;
-	}*/
 	if (ft_game_runner(e) == 0)
 		return (ft_error(e, 6));
 //	getch();

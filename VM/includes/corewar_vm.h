@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/25 07:57:49 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/26 02:22:16 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct					s_player
 	unsigned int				lives_periode;
 	unsigned int				total_lives;
 	unsigned int				last_live;
+	unsigned int				very_last_flag;
 	char						*name;
 	char						*comment;
 	int							size;
@@ -152,6 +153,8 @@ typedef struct					s_env
 	int							winner_num_player;
 	int							option;
 	int							dump_on;
+	unsigned int				very_last_flag;
+	unsigned int				winner_flag;
 	unsigned int				forced_nb_for_pl;
 }								t_env;
 
