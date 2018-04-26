@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 01:23:42 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/26 04:39:25 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/27 00:07:05 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	xozf_command(t_env *e, int i, int sl)
 	if (ft_strncmp(e->stock + e->count + i, "fork", 4) == 0 &&
 		(e->stock[e->count + i + 4] > 126 ||
 		e->stock[e->count + i + 4] < 33))
-		return (fork_operator(e, i, sl));
+		return (fork_operator(e, i + 4, sl));
 	sl = 0;
 	return (1);
 }

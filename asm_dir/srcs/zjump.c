@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 04:22:44 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/26 04:31:43 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/26 23:59:07 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	zjmp_operator(t_env *e, int start, int sl)
 	unsigned char	*command;
 
 	start += skip_space(e->stock + e->count + start);
-	if (!check_nb_param(e, start, sl, 0) || !valid_param(e, start, 0))
+	if (!check_nb_param(e, start, sl, 8) || !valid_param(e, start, 8))
 		return (0);
 	start++;
 	if (!(command = (unsigned char *)ft_memalloc(sizeof(unsigned char) * 3)))

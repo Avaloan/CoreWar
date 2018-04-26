@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 03:46:12 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/26 04:06:55 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/26 23:58:28 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	lfork_operator(t_env *e, int start, int sl)
 	unsigned char	*command;
 
 	start += skip_space(e->stock + e->count + start);
-	if (!check_nb_param(e, start, sl, 0) || !valid_param(e, start, 0))
+	if (!check_nb_param(e, start, sl, 14) || !valid_param(e, start, 14))
 		return (0);
 	start++;
 	if (!(command = (unsigned char *)ft_memalloc(sizeof(unsigned char) * 3)))
