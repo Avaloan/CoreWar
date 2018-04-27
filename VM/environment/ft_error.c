@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 05:46:54 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/26 01:39:40 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/27 06:56:46 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,24 @@
 
 int	ft_error(t_env *e, int i)
 {
-	if (e->visu == 1)
-		ft_end_visu(e);
+	ft_finish(e);
 	if (i == 1)
-		printf("Error.\nMalloc of environment\n");
+		ft_putstr("Error.\nMalloc of environment have failed\n");
 	else if (i == 2)
-		printf("Error.\nWrong number of players\n");
+		ft_putstr("Error.\nWrong number of players\n");
 	else if (i == 3)
-		printf("Error.\nWrong options\n");
+		ft_putstr("Error.\nWrong option input\n");
 	else if (i == 4)
-		printf("Error.\nChampions read failed\n");
+		ft_putstr("Error.\nChampion read failed\n");
 	else if (i == 5)
-		printf("Error.\nA process initialization failed\n");
+		ft_putstr("Error.\nProcess initialization failed\n");
 	else if (i == 6)
-		printf("Error.\nRunning Crashed\n");
+		ft_putstr("Error.\nGame_is_Over\n");
 	else if (i == 7)
-		printf("Error.\nFinishing function failed\n");
+		ft_putstr("Error.\nFinishing function failed\n");
 	else if (i == 8)
-		printf("Error.\nWrong option\n");
+		ft_putstr("Error.\nWrong options, try again\n");
 	else if (i == 9)
-		printf("Error.\nwat the else\n");
+		ft_putstr("Error.\nwat the else\n");
 	return (1);
 }

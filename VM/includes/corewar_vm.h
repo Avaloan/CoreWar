@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/26 07:14:26 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/27 01:04:06 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ typedef struct					s_env
 	int							option;
 	int							dump_on;
 	unsigned int				very_last_flag;
-	unsigned int				winner_flag;
+	int							winner_flag;
 	unsigned int				forced_nb_for_pl;
 }								t_env;
 

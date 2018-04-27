@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 01:34:47 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/26 07:13:28 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/27 06:21:06 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int		ft_up_periode(t_env *e)
 		tmp->lives_during_periode = 0;
 		tmp = tmp->next;
 	}
-	if (e->visu)
+	if (e->visu == 1)
 	{
 		wclear(e->vi->info);
 		wclear(e->vi->arena);
@@ -126,9 +126,6 @@ int		ft_game_runner(t_env *e)
 	int	a;
 
 	a = 0;
-	if (e->visu == 1)
-		if (ft_start_the_game_visu(e) == 0)
-			return (0);
 	while (e->pc_list)
 	{
 		while (e->pc_list && e->cycles_periode < e->cycles_to_die &&
@@ -143,7 +140,7 @@ int		ft_game_runner(t_env *e)
 					return (0);
 			e->cycles_periode++;
 			e->cycles++;
-			if (e->visu)
+			if (e->visu == 1)
 				usleep(FREQ + e->vi->speed);
 		}
 		if (e->cycles_periode >= e->cycles_to_die)

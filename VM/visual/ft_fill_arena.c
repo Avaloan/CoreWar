@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 03:41:03 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/26 07:16:14 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/27 00:39:24 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	ft_choose_color(t_env *e, int cmp)
 		}
 		pc = pc->next;
 	}
-
 	tmp = e->written_by[cmp];
 	wattroff(e->vi->arena, COLOR_PAIR((int)tmp));
 	wattron(e->vi->arena, COLOR_PAIR((int)tmp));

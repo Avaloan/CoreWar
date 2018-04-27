@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:04:40 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/26 07:22:18 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/27 06:49:23 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ off_t	ft_save_name(t_env *e, int i, int fd)
 			return (0);
 		}
 	free(buff);
-	if (!(e->players[i].name = ft_memalloc(sizeof(char) * (NAME_SIZE))))
+	if (!(e->players[i].name = ft_memalloc(sizeof(char) * (NAME_SIZE + 1))))
 		return (0);
 	if (read(fd, e->players[i].name, NAME_SIZE) == -1)
 		return (0);
@@ -53,7 +53,8 @@ off_t	ft_save_comment(t_env *e, int i, int fd, off_t pos)
 	if ((tmp[0] != 0) || (tmp[1] != 0) ||
 				(e->players[i].size = tmp[2] * 256 + tmp[3]) > CHAMP_MAX_SIZE)
 		return (0);
-	if (!(e->players[i].comment = ft_memalloc(sizeof(char) * (COMMENT_SIZE))))
+	if (!(e->players[i].comment =
+				ft_memalloc(sizeof(char) * (COMMENT_SIZE + 1))))
 		return (0);
 	if (read(fd, e->players[i].comment, COMMENT_SIZE) == -1)
 		return (0);
@@ -73,7 +74,7 @@ off_t	ft_put_champ_in_arena(t_env *e, int i, int fd, off_t pos)
 	buff = NULL;
 	if (lseek(fd, pos, SEEK_SET) == -1)
 		return (0);
-	if (!(buff = ft_memalloc(sizeof(char) * (e->players[i].size))))
+	if (!(buff = ft_memalloc(sizeof(char) * (e->players[i].size + 1))))
 		return (0);
 	if (read(fd, buff, e->players[i].size) == -1)
 		return (0);

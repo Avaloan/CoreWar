@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 06:14:13 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/26 06:46:07 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/27 07:09:54 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	live(t_env *e, t_process *process, t_args_value args[3])
 			e->players[i].last_live = e->cycles;
 			e->very_last_flag += 1;
 			e->players[i].very_last_flag = e->very_last_flag;
-			break ;
 		}
 	}
 	process->lives_during_periode++;

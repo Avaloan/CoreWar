@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 03:48:25 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/22 06:59:44 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/27 06:09:50 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void	ft_fill_players(t_env *e)
 		wmove(e->vi->info, line + 3, 4);
 		wprintw(e->vi->info, "-> NAME : %.16s", e->players[i].name);
 		wmove(e->vi->info, line + 4, 4);
-//		wprintw(e->vi->info, "-> Comment : %.16s", e->players[i].comment);
-//		wmove(e->vi->info, line + 5, 4);
 		wprintw(e->vi->info, "-> Last_live : %.6i", e->players[i].last_live);
 		wmove(e->vi->info, line + 5, 4);
 		wprintw(e->vi->info, "-> Live : %.6i", e->players[i].lives_periode);
@@ -80,9 +78,9 @@ int		ft_fill_info(t_env *e)
 	wmove(e->vi->info, pos, 10);
 	wprintw(e->vi->info, "COREWAR : *IN PROGRESS*");
 	wmove(e->vi->info, pos + 2, 4);
-	wprintw(e->vi->info, "Cycle_periode : %.5i", e->cycles_periode);
+	wprintw(e->vi->info, "Cycles : %.5i", e->cycles);
 	wmove(e->vi->info, pos + 3, 4);
-	wprintw(e->vi->info, "Cycle : %.5i", e->cycles);
+	wprintw(e->vi->info, "Cycles_periode : %.5i", e->cycles_periode);
 	wmove(e->vi->info, pos + 4, 4);
 	wprintw(e->vi->info, "Cycles_to_Die : %.4i", e->cycles_to_die);
 	wmove(e->vi->info, pos + 5, 4);
