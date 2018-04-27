@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 01:34:47 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/27 06:21:06 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/27 07:22:31 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int		ft_free_process(t_env *e, t_process *pc, int i)
 	{
 		tmp = (e->pc_list->next) ? e->pc_list->next : NULL;
 		free(e->pc_list);
-		if (tmp == NULL)
-			return (2);
 		e->pc_list = (tmp) ? tmp : NULL;
 	}
 	else if (i == -1)
@@ -34,7 +32,7 @@ int		ft_free_process(t_env *e, t_process *pc, int i)
 		free(tmp->next);
 		tmp->next = tmp_bis;
 	}
-	return (1);
+	return ((e->pc_list) ? 1 : 2);
 }
 
 int		ft_clean_process_list(t_env *e)
@@ -43,30 +41,26 @@ int		ft_clean_process_list(t_env *e)
 	int			i;
 	int			ret;
 
-	ret = 0;
+	ret = 1;
 	i = 0;
 	tmp = e->pc_list;
 	while (tmp)
 	{
 		if (tmp->lives_during_periode == 0)
 		{
-			if ((ret = ft_free_process(e, tmp, i)) != 1)
-				return (ret);
+			ret = ft_free_process(e, tmp, i);
 			tmp = e->pc_list;
 		}
 		else
 		{
 			if (tmp->next && tmp->next->lives_during_periode == 0)
-			{
-				if ((ret = ft_free_process(e, tmp, -1)) != 1)
-					return (ret);
-			}
+				ret = ft_free_process(e, tmp, -1);
 			else
 				tmp = tmp->next;
 			i++;
 		}
 	}
-	return (1);
+	return (ret);
 }
 
 int		ft_maj(t_env *e, int i)

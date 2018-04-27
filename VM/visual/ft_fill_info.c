@@ -6,13 +6,24 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 03:48:25 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/27 06:09:50 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/27 07:40:25 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
 
-void	ft_fill_process(t_env *e)
+void	ft_print_info_process(t_env *e, int i, t_process *tmp, int pos)
+{
+	wmove(e->vi->info, pos + (i * 2), 4);
+	wprintw(e->vi->info, "PC[%i] = %i | Carry = %i | Ex = %i",
+		i, tmp->pc, tmp->carry, tmp->to_exec);
+	wmove(e->vi->info, pos + (i * 2) + 1, 4);
+	wprintw(e->vi->info, "Live_during_p = %.5d and Death = %.5d",
+		tmp->lives_during_periode, (tmp->lives_during_periode) ? 0 :
+		e->cycles_to_die - e->cycles_periode);
+}
+
+int		ft_fill_process(t_env *e)
 {
 	int			i;
 	int			pos;
@@ -24,14 +35,8 @@ void	ft_fill_process(t_env *e)
 	while (tmp)
 	{
 		if (i <= 6)
-		{
-			wmove(e->vi->info, pos + (i * 2), 4);
-			wprintw(e->vi->info, "PC[%i] = %i | Carry = %i | Ex = %i",
-				i, tmp->pc, tmp->carry, tmp->to_exec);
-			wmove(e->vi->info, pos + (i * 2) + 1, 4);
-			wprintw(e->vi->info, "Live_during_p = %.5d and Death = %.5d", tmp->lives_during_periode, (tmp->lives_during_periode) ? 0 : e->cycles_to_die - e->cycles_periode);
-		}
-		if (i > 6)
+			ft_print_info_process(e, i, tmp, pos);
+		else
 		{
 			wmove(e->vi->info, pos + 14, 4);
 			wprintw(e->vi->info, "%i PC More...", i - 6);
@@ -39,8 +44,7 @@ void	ft_fill_process(t_env *e)
 		tmp = tmp->next;
 		i += 1;
 	}
-	wmove(e->vi->info, pos - 2, 4);
-	wprintw(e->vi->info, "Nbrs of process = [%.5i]", i);
+	return (i);
 }
 
 void	ft_fill_players(t_env *e)
@@ -67,14 +71,11 @@ void	ft_fill_players(t_env *e)
 	}
 }
 
-int		ft_fill_info(t_env *e)
+void	ft_print_global_info(t_env *e)
 {
-	int	i;
 	int	pos;
 
-	i = 0;
 	pos = 1;
-	box(e->vi->info, 0, 0);
 	wmove(e->vi->info, pos, 10);
 	wprintw(e->vi->info, "COREWAR : *IN PROGRESS*");
 	wmove(e->vi->info, pos + 2, 4);
@@ -89,12 +90,24 @@ int		ft_fill_info(t_env *e)
 	wprintw(e->vi->info, "Lives_read : %.3i/%.3i", e->lives_periode, NBR_LIVE);
 	wmove(e->vi->info, pos + 7, 4);
 	wprintw(e->vi->info, "Nbr_of_Players : %i", e->nb_of_pl);
+}
+
+int		ft_fill_info(t_env *e)
+{
+	int	i;
+	int	pos;
+
+	i = 0;
+	pos = 1;
+	box(e->vi->info, 0, 0);
+	ft_print_global_info(e);
 	ft_fill_players(e);
-	ft_fill_process(e);
+	i = ft_fill_process(e);
+	wmove(e->vi->info, 9, 4);
+	wprintw(e->vi->info, "Nbrs of process = [%.5i]", i);
 	wmove(e->vi->info, e->vi->my - 3, 4);
-	wprintw(e->vi->info, "VITESSE = %.2i", 10 - ((e->vi->speed + FREQ) / 100000));
+	wprintw(e->vi->info, "VITESSE = %.2i",
+			10 - ((e->vi->speed + FREQ) / 100000));
 	wmove(e->vi->info, e->vi->my + 2, 0);
-//	wmove(e->vi->info, e->vi->my - 2, 4);
-//	wprintw(e->vi->info, "Press X to know using");
 	return (1);
 }
