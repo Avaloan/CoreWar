@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/26 23:11:54 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/27 02:42:46 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define MAX_ARG_TYPE		3
 # define T_REG				1
 # define T_DIR				2
+# define T_IND				4
 # define IND				192
 # define REG				64
 # define _DIR				128
@@ -83,6 +84,7 @@ void	number_to_hex(unsigned int num, unsigned char *dest);
 void	get_label(t_env *e, int start);
 void	create_label_lst(t_env *e, int start, int end);
 void	create_label_stock(t_env *e, int start, int end);
+void	menu_args_coding_byte(t_env *e, int start, int opcode);
 int	skip_label(t_env *e, int sl);
 int	valid_command(t_env *e, int sl);
 int	check_line(t_env *e, int sl);
