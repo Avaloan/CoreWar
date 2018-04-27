@@ -6,7 +6,7 @@
 #    By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/07 22:22:27 by fdidelot          #+#    #+#              #
-#    Updated: 2018/04/26 06:39:09 by fdidelot         ###   ########.fr        #
+#    Updated: 2018/04/27 03:01:26 by snedir           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -24,6 +24,7 @@ SRCS = 		main.c \
 			zjump.c \
 			fork.c \
 			ld.c \
+			create_coding_byte.c \
 
 OBJS = 		$(SRCS:.c=.o)
 
