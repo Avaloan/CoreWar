@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 02:42:35 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/27 00:04:25 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/27 03:42:42 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	check_reg(t_env *e, int start)
 {
 	int	reg_val;
-
 	if (e->stock[e->count + start] != 'r')
 		return (0);
 	start++;
@@ -26,15 +25,20 @@ int	check_reg(t_env *e, int start)
 		return (0);
 	while (ft_isdigit(e->stock[e->count + start]))
 		start++;
-	while (e->stock[e->count + start] != '\n')
+	if (e->stock[e->count + start] != SEPARATOR_CHAR &&
+		e->stock[e->count + start] != '\n' &&
+		e->stock[e->count + start] != COMMENT_CHAR)
 	{
-		if (ft_isprint(e->stock[e->count + start]))
+		while (e->stock[e->count + start] != '\n')
 		{
-			if (e->stock[e->count + start] == COMMENT_CHAR)
-				return (1);
-			return (0);
+			if (ft_isprint(e->stock[e->count + start]))
+			{
+				if (e->stock[e->count + start] == COMMENT_CHAR)
+					return (1);
+				return (0);
+			}
+			start++;
 		}
-		start++;
 	}
 	return (1);
 }

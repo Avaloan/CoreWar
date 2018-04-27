@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/07 01:02:47 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/26 03:06:54 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/27 03:43:49 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int	check_line(t_env *e, int sl)
 	int	i;
 
 	i = 0;
-//	printf("stock [%s]\n", e->stock + e->count);
 	if (sl == 0 || e->stock[e->count] == COMMENT_CHAR)
 		return (1);
 	if (!check_char(e, sl) || !check_label(e, sl))

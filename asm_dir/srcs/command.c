@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 01:23:42 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/27 00:07:05 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/27 03:17:14 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ int	s_command(t_env *e, int i, int sl)
 	if (ft_strncmp(e->stock + e->count + i, "st", 2) == 0 &&
 		(e->stock[e->count + i + 2] > 126 ||
 		e->stock[e->count + i + 2] < 33))
-		printf("st\n");
-//		return (st_operator(e, i, sl));
+		return (st_operator(e, i + 2, sl));
 	if (ft_strncmp(e->stock + e->count + i, "sub", 3) == 0 &&
 		(e->stock[e->count + i + 3] > 126 ||
 		e->stock[e->count + i + 3] < 33))
