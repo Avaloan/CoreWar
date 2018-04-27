@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:02:28 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/26 03:36:34 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/27 00:16:24 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,8 @@ int	main(int ac, char **av)
 	int i = 0;
 	while (i < e->size_player)
 	{
-		printf("%.2x", e->player_buff[i]);
+		
+		printf("%.2x ", e->player_buff[i]);
 		i++;
 	}
 	printf("\n");
