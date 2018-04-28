@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/26 07:06:36 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/28 02:14:55 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,39 +33,45 @@ int				check_coding_byte(t_env *e, t_params *p, t_args_value args[3],
 	return (p->bad_byte);
 }
 
-int				ft_operations(t_env *e, t_process *process)
+int				ft_operations_sec(t_env *e, t_process *process,
+		t_params par, t_args_value *args)
 {
-	t_params		params;
-	t_args_value	args[3];
-
-	init_t_args(args);
-	init_t_params(&params);
-	params.opcode = process->opcode - 1;
-	process->opcode = 0;
-	params.nb_params_max = g_op_tab[params.opcode].nb_param;
-	if (g_op_tab[params.opcode].octal == 1)
+	if (g_op_tab[par.opcode].octal == 1)
 	{
-		params.bad_byte = 1;
-		params.total_size += 1;
-		if (((params.coding_byte = e->arena[(process->pc + 1) % MEM_SIZE]) == 0) ||
-				(check_coding_byte(e, &params, args, process) == BAD_CODING_BYTE))
+		par.bad_byte = 1;
+		par.total_size += 1;
+		if (((par.coding_byte = e->arena[(process->pc + 1) % MEM_SIZE]) == 0) ||
+				(check_coding_byte(e, &par, args, process) == BAD_CODING_BYTE))
 		{
-			process->pc = (process->pc + params.total_size) % MEM_SIZE;
+			process->pc = (process->pc + par.total_size) % MEM_SIZE;
 			return (0);
 		}
 	}
 	else
 	{
-		params.total_size = (g_op_tab[params.opcode].dir_size) ? 2 : 4;
-		if (params.total_size == 4)
-			args[0].dir = read_nb_bytes(e, params.total_size, process, 1);
+		par.total_size = (g_op_tab[par.opcode].dir_size) ? 2 : 4;
+		if (par.total_size == 4)
+			args[0].dir = read_nb_bytes(e, par.total_size, process, 1);
 		else
-			args[0].dir_short = read_nb_bytes(e, params.total_size, process, 1);
+			args[0].dir_short = read_nb_bytes(e, par.total_size, process, 1);
 	}
 	process->pc = process->pc % MEM_SIZE;
-	g_op_tab[params.opcode].op(e, process, args);
-	if (params.opcode + 1 != 9)
-		process->pc += (params.total_size) + 1;
+	g_op_tab[par.opcode].op(e, process, args);
+	if (par.opcode + 1 != 9)
+		process->pc += (par.total_size) + 1;
 	process->pc = process->pc % MEM_SIZE;
 	return (1);
+}
+
+int				ft_operations(t_env *e, t_process *process)
+{
+	t_params		par;
+	t_args_value	args[3];
+
+	init_t_args(args);
+	init_t_params(&par);
+	par.opcode = process->opcode - 1;
+	process->opcode = 0;
+	par.nb_params_max = g_op_tab[par.opcode].nb_param;
+	return (ft_operations_sec(e, process, par, args));
 }

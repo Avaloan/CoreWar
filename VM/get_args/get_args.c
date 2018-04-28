@@ -6,13 +6,13 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 05:15:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/25 04:14:13 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/28 02:18:04 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_vm.h"
 
-int				read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
+int		read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 {
 	int				i;
 	int				iter;
@@ -20,7 +20,6 @@ int				read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 	unsigned int	stock;
 	int				pos;
 
-//	printf("offset = %d\n", offset);
 	i = 1;
 	stock = 0;
 	iter = 0;
@@ -29,12 +28,8 @@ int				read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 	while (i < arg_size + 1)
 	{
 		pos = process->pc + iter + offset;
-//		printf("PC_NBR = process->from_pl = %d\n", process->from_pl);
-//		printf("e->arena[pos] = %.2x\n", e->arena[pos]);
-//		printf("pos = %d && offset = %d\n", pos, offset);
-		pos  = (pos < 0) ? MEM_SIZE + pos : pos;
+		pos = (pos < 0) ? MEM_SIZE + pos : pos;
 		stock = e->arena[pos % MEM_SIZE];
-//		printf("stock = %.2x\n", stock);
 		dec_to_bin(stock, t, i * 8, arg_size * 8);
 		i++;
 		iter++;
@@ -45,22 +40,18 @@ int				read_nb_bytes(t_env *e, int arg_size, t_process *process, int offset)
 	return (stock);
 }
 
-int			get_reg_value(t_args_value args[3], t_process *pc, t_env *e,
+int		get_reg_value(t_args_value args[3], t_process *pc, t_env *e,
 t_params *p)
 {
 	args[p->num_param].reg = read_nb_bytes(e, 1, pc, p->total_size + 1);
 	p->total_size += 1;
 	if (args[p->num_param].reg <= 0 || args[p->num_param].reg > REG_NUMBER)
-	{
-	//	printf("REGpc->pc = %d && params.total_size = %d\n", pc->pc , p->total_size);
-	//	printf("&& args[p->num_param].reg = %d // e->arena[pc->pc] = %.2x\n", args[p->num_param].reg, e->arena[pc->pc]);
 		return (REG_INVALID);
-	}
 	args[p->num_param].type = 'r';
-	return (1);	
+	return (1);
 }
 
-void		get_ind_value(t_args_value args[3], t_process *pc, t_env *e,
+void	get_ind_value(t_args_value args[3], t_process *pc, t_env *e,
 t_params *p)
 {
 	args[p->num_param].ind = read_nb_bytes(e, 2, pc, p->total_size + 1);
@@ -68,7 +59,7 @@ t_params *p)
 	p->total_size += 2;
 }
 
-void		get_dir_value(t_args_value args[3], t_process *pc, t_env *e,
+void	get_dir_value(t_args_value args[3], t_process *pc, t_env *e,
 t_params *p)
 {
 	if (g_op_tab[p->opcode].dir_size == 0)
@@ -78,13 +69,14 @@ t_params *p)
 	}
 	else
 	{
-		args[p->num_param].dir_short = read_nb_bytes(e, 2, pc, p->total_size + 1);
+		args[p->num_param].dir_short =
+			read_nb_bytes(e, 2, pc, p->total_size + 1);
 		p->total_size += 2;
 	}
 	args[p->num_param].type = 'd';
 }
 
-int			get_args_value(t_args_value args[3],t_process *pc, t_env *e,
+int		get_args_value(t_args_value args[3], t_process *pc, t_env *e,
 t_params *p)
 {
 	if (p->arg_type == 1)
