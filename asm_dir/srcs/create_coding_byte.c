@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 03:42:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/28 03:13:06 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/28 04:49:19 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,15 @@ void	get_args_dir(t_env *e, unsigned char *str, t_offset *t_off, int dir_size)
 
 	dir_value = 0;
 	i = 1;
-	printf("j'ai tant besoin de toi. %d\n", t_off->index_str);
 /*	if (e->stock[t_off[1] + i] == ':' && e->stock[t_off[1] + i] != '-')
 		get_label;
 	else
-	{*///printf("le char %c\n", e->stock[t_off[1] + i]);
-		//printf("%d\n", t_off[0]);
+	{*/
 		dir_value = ft_atoi(e->stock + t_off->offset + 1);
-		//printf("euuuuh dir value %d\n", dir_value);
 		if (dir_size == 0)
 		{
-			printf("t_off %d\n", t_off->index_str);
 			number_to_hex(dir_value, str + t_off->index_str);
-			t_off->index_str += 4; //tentative decalage de l'index pour str
+			t_off->index_str += 4;
 			t_off->size_ope += 2;
 		}
 		else
@@ -40,8 +36,6 @@ void	get_args_dir(t_env *e, unsigned char *str, t_offset *t_off, int dir_size)
 			t_off->index_str += 2;
 			t_off->size_ope += 2;
 		}
-		for (int zz = 0 ; zz < 20 ; zz++)
-			printf("%.2x\n", str[zz]);
 	//}
 }
 
@@ -56,10 +50,9 @@ void	get_args_ind(t_env *e, unsigned char *str, t_offset *t_off)
 	else
 	{*/
 		ind_value = ft_atoi(e->stock + t_off->offset);
-		printf("ind_value %d\n", ind_value);
 		number_to_hex_size_two(ind_value, str + t_off->index_str);
-		t_off->index_str += 2; //tentative decalage de l'index pour str
-		t_off->size_ope += 2; //tentative decalage de l'index pour str
+		t_off->index_str += 2;
+		t_off->size_ope += 2;
 	//}
 }
 
@@ -68,14 +61,10 @@ void	get_args_reg(t_env *e, unsigned char *str, t_offset *t_off)
 	int				reg_number;
 
 	reg_number = 0;
-	printf("%c\n", e->stock[t_off->offset + 1]);
 	reg_number = ft_atoi(e->stock + t_off->offset + 1);
-	//printf("le reg %d et i %d\n", reg_number, i);
 	str[t_off->index_str] = ((reg_number << 24 & 0xff000000) >> 24 & 0x000000ff);
-	//printf("offset b4 %d i = %d\n", t_off[0], i);
-	t_off->index_str += 1; //tentative decalage de l'index pour str
-	t_off->size_ope += 1; //tentative decalage de l'index pour str
-	//printf("offset %d\n", t_off[0]);
+		t_off->index_str += 1;
+	t_off->size_ope += 1;
 }
 
 void	fill_coding_byte(unsigned char *coding_byte, t_offset *t_off, int id)
@@ -100,7 +89,7 @@ void	fill_coding_byte(unsigned char *coding_byte, t_offset *t_off, int id)
 	}
 }
 
-int		create_coding_byte(t_env *e, t_offset *t_off, int opcode,
+int		create_coding_byte(t_env *e, t_offset *t_off, unsigned char opcode,
 		unsigned char *str)
 {
 	unsigned char	coding_byte;
@@ -137,25 +126,20 @@ int		create_coding_byte(t_env *e, t_offset *t_off, int opcode,
 	return (coding_byte);
 }
 
-void	menu_args_coding_byte(t_env *e, int start, int opcode)
+void	menu_args_coding_byte(t_env *e, int start, unsigned char opcode)
 {
 	unsigned char	*str;
 	t_offset		t_off;
 	unsigned char	coding_byte;
-	int				i;
 
 	str = NULL;
 	t_off.index_str = 0;
 	t_off.offset = e->count + start;
 	t_off.size_ope = 0;
-	i = -1;
 	if (!(str = ft_memalloc(20)))
 		ft_perror("");
 	coding_byte = create_coding_byte(e, &t_off, opcode, str);
 	add_command(e, &coding_byte, 1);
-	for (int z = 0 ; z < e->size_player ; z++)
-		printf("%.2x\n", e->player_buff[z]);
-	printf("size op %d\n", t_off.size_ope);
 	add_command(e, str, t_off.size_ope);
 	free(str);
 }

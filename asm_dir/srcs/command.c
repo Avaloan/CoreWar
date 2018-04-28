@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 01:23:42 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/27 03:17:14 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/28 04:46:35 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,14 @@
 
 int	xozf_command(t_env *e, int i, int sl)
 {
-//	printf("||||||||%d\n", (int)g_op_tab[0].arg_type[0]);
 	if (ft_strncmp(e->stock + e->count + i, "xor", 3) == 0 &&
 		(e->stock[e->count + i + 3] > 126 ||
 		e->stock[e->count + i + 3] < 33))
-		printf("xor\n");
-//		return (xor_operator(e, i, sl));
+		return (operator_all(e, i + 3, 8, sl));
 	if (ft_strncmp(e->stock + e->count + i, "or", 2) == 0 &&
 		(e->stock[e->count + i + 2] > 126 ||
 		e->stock[e->count + i + 2] < 33))
-		printf("or\n");
-//		return (or_operator(e, i, sl));
+		return (operator_all(e, i + 2, 7, sl));
 	if (ft_strncmp(e->stock + e->count + i, "zjmp", 4) == 0 &&
 		(e->stock[e->count + i + 4] > 126 ||
 		e->stock[e->count + i + 4] < 33))
@@ -42,18 +39,15 @@ int	a_command(t_env *e, int i, int sl)
 	if (ft_strncmp(e->stock + e->count + i, "add", 3) == 0 &&
 		(e->stock[e->count + i + 3] > 126 ||
 		e->stock[e->count + i + 3] < 33))
-		printf("add\n");
-//		return (add_operator(e, i, sl));
+		return (operator_all(e, i + 3, 4, sl));
 	if (ft_strncmp(e->stock + e->count + i, "and", 3) == 0 &&
 		(e->stock[e->count + i + 3] > 126 ||
 		e->stock[e->count + i + 3] < 33))
-		printf("and\n");
-//		return (and_operator(e, i, sl));
+		return (operator_all(e, i + 3, 6, sl));
 	if (ft_strncmp(e->stock + e->count + i, "aff", 3) == 0 &&
 		(e->stock[e->count + i + 3] > 126 ||
 		e->stock[e->count + i + 3] < 33))
-		printf("aff\n");
-//		return (aff_operator(e, i, sl));
+		return (operator_all(e, i + 3, 16, sl));
 	sl = 0;
 	return (1);
 }
@@ -63,17 +57,15 @@ int	s_command(t_env *e, int i, int sl)
 	if (ft_strncmp(e->stock + e->count + i, "st", 2) == 0 &&
 		(e->stock[e->count + i + 2] > 126 ||
 		e->stock[e->count + i + 2] < 33))
-		return (st_operator(e, i + 2, sl));
+		return (operator_all(e, i + 2, 3, sl));
 	if (ft_strncmp(e->stock + e->count + i, "sub", 3) == 0 &&
 		(e->stock[e->count + i + 3] > 126 ||
 		e->stock[e->count + i + 3] < 33))
-		printf("sub\n");
-//		return (sub_operator(e, i, sl));
+		return (operator_all(e, i + 3, 5, sl));
 	if (ft_strncmp(e->stock + e->count + i, "sti", 3) == 0 &&
 		(e->stock[e->count + i + 3] > 126 ||
 		e->stock[e->count + i + 3] < 33))
-		printf("sti\n");
-//		return (sti_operator(e, i, sl));
+		return (operator_all(e, i + 3, 11, sl));
 	sl = 0;
 	return (1);
 }
@@ -84,7 +76,7 @@ int	l_command(t_env *e, int i, int sl)
 		(e->stock[e->count + i + 2] > 126 ||
 		e->stock[e->count + i + 2] < 33))
 		printf("ld\n");
-//		return (ld_operator(e, i, sl));
+		return (operator_all(e, i + 2, 2, sl));
 	if (ft_strncmp(e->stock + e->count + i, "live", 4) == 0 &&
 		(e->stock[e->count + i + 4] > 126 ||
 		e->stock[e->count + i + 4] < 33))
@@ -92,18 +84,15 @@ int	l_command(t_env *e, int i, int sl)
 	if (ft_strncmp(e->stock + e->count + i, "ldi", 3) == 0 &&
 		(e->stock[e->count + i + 3] > 126 ||
 		e->stock[e->count + i + 3] < 33))
-		printf("ldi\n");
-//		return (ldi_operator(e, i, sl));
+		return (operator_all(e, i + 3, 10, sl));
 	if (ft_strncmp(e->stock + e->count + i, "lld", 3) == 0 &&
 		(e->stock[e->count + i + 3] > 126 ||
 		e->stock[e->count + i + 3] < 33))
-		printf("lld\n");
-//		return (lld_operator(e, i, sl));
+		return (operator_all(e, i + 3, 13, sl));
 	if (ft_strncmp(e->stock + e->count + i, "lldi", 4) == 0 &&
 		(e->stock[e->count + i + 4] > 126 ||
 		e->stock[e->count + i + 4] < 33))
-		printf("lldi\n");
-//		return (lldi_operator(e, i, sl));
+		return (operator_all(e, i + 4, 14, sl));
 	if (ft_strncmp(e->stock + e->count + i, "lfork", 5) == 0 &&
 		(e->stock[e->count + i + 5] > 126 ||
 		e->stock[e->count + i + 5] < 33))
