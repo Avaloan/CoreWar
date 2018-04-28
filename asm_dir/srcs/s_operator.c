@@ -6,25 +6,24 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 03:08:43 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/28 03:02:12 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/28 04:28:31 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-int		st_operator(t_env *e, int start, int sl)
+int		operator_all(t_env *e, int start, unsigned char opcode, int sl)
 {
-	unsigned char lel;
+	unsigned char	size_command;
 
-	lel = 3;
+	size_command = 1;
+	if (opcode > 9)
+		size_command = 2;
 	start += skip_space(e->stock + e->count + start);
-	if (!check_nb_param(e, start, sl, 2) || !valid_param(e, start, 2))
+	if (!check_nb_param(e, start, sl, opcode - 1) ||
+			!valid_param(e, start, opcode - 1))
 		return (0);
-	add_command(e, &lel, 1);
-	menu_args_coding_byte(e, start, 3);
+	add_command(e, &opcode, size_command);
+	menu_args_coding_byte(e, start, opcode - 1);
 	return (1);
 }
-/*
-sub_ope()
-
-sti_ope()*/

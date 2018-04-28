@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/28 02:27:09 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/28 04:28:29 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct	s_env
 int		lfork_operator(t_env *e, int start, int sl);
 int		fork_operator(t_env *e, int start, int sl);
 int		zjmp_operator(t_env *e, int start, int sl);
-int		st_operator(t_env *e, int start, int sl);
+int		operator_all(t_env *e, int start, unsigned char opcode, int sl);
 
 
 
@@ -101,14 +101,13 @@ int		st_operator(t_env *e, int start, int sl);
 
 
 
-void	menu_args_coding_byte(t_env *e, int start, int sl);
 void	add_command(t_env *e, unsigned char *command, int size);
 void	number_to_hex_size_two(unsigned int num, unsigned char *dest);
 void	number_to_hex(unsigned int num, unsigned char *dest);
 void	get_label(t_env *e, int start);
 void	create_label_lst(t_env *e, int start, int end);
 void	create_label_stock(t_env *e, int start, int end);
-void	menu_args_coding_byte(t_env *e, int start, int opcode);
+void	menu_args_coding_byte(t_env *e, int start, unsigned char opcode);
 int	skip_label(t_env *e, int sl);
 int	valid_command(t_env *e, int sl);
 int	check_line(t_env *e, int sl);
