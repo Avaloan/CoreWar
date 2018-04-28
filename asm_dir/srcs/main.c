@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:02:28 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/28 03:10:21 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/28 04:50:56 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ int	main(int ac, char **av)
 	close(fd);
 	if (!valid_player(e))
 		ft_perror("Invalid player, i smell some bullshit.\n");
+	if (!replace_label(e))
+		ft_perror("Invalid label call nigga.\n");
 	while (e->lst_label)
 	{
 		printf("Label = %s\n", e->lst_label->name);
@@ -142,7 +144,7 @@ int	main(int ac, char **av)
 	}
 	while (e->stock_label)
 	{
-		printf("Label = %s\n", e->stock_label->name);
+		printf(" MegaLabel = %s\n", e->stock_label->name);
 		printf("Placement = %d\n", e->stock_label->placement);
 		e->stock_label = e->stock_label->next;
 	}

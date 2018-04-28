@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 01:23:42 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/28 04:46:35 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/28 06:49:04 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int	xozf_command(t_env *e, int i, int sl)
 		(e->stock[e->count + i + 4] > 126 ||
 		e->stock[e->count + i + 4] < 33))
 		return (fork_operator(e, i + 4, sl));
-	sl = 0;
-	return (1);
+	return (0);
 }
 
 int	a_command(t_env *e, int i, int sl)
@@ -48,8 +47,7 @@ int	a_command(t_env *e, int i, int sl)
 		(e->stock[e->count + i + 3] > 126 ||
 		e->stock[e->count + i + 3] < 33))
 		return (operator_all(e, i + 3, 16, sl));
-	sl = 0;
-	return (1);
+	return (0);
 }
 
 int	s_command(t_env *e, int i, int sl)
@@ -66,8 +64,7 @@ int	s_command(t_env *e, int i, int sl)
 		(e->stock[e->count + i + 3] > 126 ||
 		e->stock[e->count + i + 3] < 33))
 		return (operator_all(e, i + 3, 11, sl));
-	sl = 0;
-	return (1);
+	return (0);
 }
 
 int	l_command(t_env *e, int i, int sl)
@@ -75,7 +72,6 @@ int	l_command(t_env *e, int i, int sl)
 	if (e->stock[e->count + i + 1] == 'd' &&
 		(e->stock[e->count + i + 2] > 126 ||
 		e->stock[e->count + i + 2] < 33))
-		printf("ld\n");
 		return (operator_all(e, i + 2, 2, sl));
 	if (ft_strncmp(e->stock + e->count + i, "live", 4) == 0 &&
 		(e->stock[e->count + i + 4] > 126 ||
@@ -97,7 +93,7 @@ int	l_command(t_env *e, int i, int sl)
 		(e->stock[e->count + i + 5] > 126 ||
 		e->stock[e->count + i + 5] < 33))
 		return (lfork_operator(e, i + 5, sl));
-	return (1);
+	return (0);
 }
 
 int	valid_command(t_env *e, int sl)

@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 03:46:12 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/26 23:58:28 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/28 05:08:30 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	lfork_operator(t_env *e, int start, int sl)
 		ft_perror("malloc() failed.\n");
 	command[0] = 0x0f;
 	if (e->stock[e->count + start] == LABEL_CHAR)
-		get_label(e, start);
+		get_label(e, start, 1, 1);
 	else
 	{
 		retatoi = ft_atoi(e->stock + e->count + start);

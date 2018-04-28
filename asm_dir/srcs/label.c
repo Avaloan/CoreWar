@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 02:42:03 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/26 02:46:17 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/28 06:08:10 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ void	create_label_lst(t_env *e, int start, int end)
 		}
 	}
 	tmp->placement = e->size_player;
-	if (!(tmp->name = (char *)ft_memalloc(sizeof(char) * (end - start))))
+	if (!(tmp->name = (char *)ft_memalloc(sizeof(char) * (end - start + 2))))
 		ft_perror("malloc() failed.\n");
 	ft_strncpy(tmp->name, e->stock + e->count + start, end - start + 1);
 	tmp->next = NULL;
 }
 
-void	create_label_stock(t_env *e, int start, int end)
+void	create_label_stock(t_env *e, int start, int end, t_pukutak puku)
 {
 	t_label *tmp;
 
@@ -81,18 +81,27 @@ void	create_label_stock(t_env *e, int start, int end)
 		}
 	}
 	tmp->placement = e->size_player;
-	if (!(tmp->name = (char *)ft_memalloc(sizeof(char) * (end - start))))
+	tmp->deca = puku.deca;
+	tmp->dir_size = puku.size_dir;
+	if (!(tmp->name = (char *)ft_memalloc(sizeof(char) * (end - start + 2))))
 		ft_perror("malloc() failed.\n");
 	ft_strncpy(tmp->name, e->stock + e->count + start, end - start + 1);
 	tmp->next = NULL;
 }
 
-void	get_label(t_env *e, int start)
+void	get_label(t_env *e, int start, int deca, int dir_size)
 {
 	int end;
+	int	size_dir;
+	t_pukutak puku;
 
+	size_dir = 2;
+	if (dir_size == 0)
+		size_dir = 4;
 	end = start;
+	puku.size_dir = size_dir;
+	puku.deca = deca;
 	while (ft_isprint(e->stock[e->count + end]))
 		end++;
-	create_label_stock(e, start + 1, end - 1);
+	create_label_stock(e, start + 1, end - 1, puku);
 }

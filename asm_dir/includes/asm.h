@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/28 06:27:13 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/28 06:40:35 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,17 @@
 
 typedef	char	t_arg_type;
 
-typedef struct	s_pukutak
+typedef struct s_pukutak
 {
-    int size_dir;
-    int deca;
+	int			size_dir;
+	int			deca;
 }				t_pukutak;
 
 typedef struct	s_label
 {
 	int				placement;
+	int				deca;
+	int				dir_size;
 	char			*name;
 	struct s_label	*next;
 }				t_label;
@@ -110,10 +112,10 @@ int		replace_label(t_env *e);
 void	add_command(t_env *e, unsigned char *command, int size);
 void	number_to_hex_size_two(unsigned int num, unsigned char *dest);
 void	number_to_hex(unsigned int num, unsigned char *dest);
-void	get_label(t_env *e, int start);
+void	get_label(t_env *e, int start, int deca, int dir_size);
 void	create_label_lst(t_env *e, int start, int end);
-void	create_label_stock(t_env *e, int start, int end);
 void	menu_args_coding_byte(t_env *e, int start, unsigned char opcode);
+void	create_label_stock(t_env *e, int start, int end, t_pukutak puku);
 int	skip_label(t_env *e, int sl);
 int	valid_command(t_env *e, int sl);
 int	check_line(t_env *e, int sl);

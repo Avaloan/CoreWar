@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 03:42:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/28 04:49:19 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/28 07:10:01 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ void	get_args_dir(t_env *e, unsigned char *str, t_offset *t_off, int dir_size)
 
 	dir_value = 0;
 	i = 1;
-/*	if (e->stock[t_off[1] + i] == ':' && e->stock[t_off[1] + i] != '-')
-		get_label;
+	if (e->stock[t_off[1] + i] == ':' && e->stock[t_off[1] + i] != '-')
+	{
+//GERER LES ERREUR DIRSIZECAT4444444444
+		get_label(e, t_off->offset - e->count, t_off->size_ope + 2, 1);
+		t_off->size_ope += 2;
+	}
 	else
-	{*/
+	{
 		dir_value = ft_atoi(e->stock + t_off->offset + 1);
 		if (dir_size == 0)
 		{
@@ -36,7 +40,7 @@ void	get_args_dir(t_env *e, unsigned char *str, t_offset *t_off, int dir_size)
 			t_off->index_str += 2;
 			t_off->size_ope += 2;
 		}
-	//}
+	}
 }
 
 void	get_args_ind(t_env *e, unsigned char *str, t_offset *t_off)
@@ -44,16 +48,18 @@ void	get_args_ind(t_env *e, unsigned char *str, t_offset *t_off)
 	unsigned int	ind_value;
 
 	ind_value = 0;
-	/*if (e->stock[t_off[1] + i] == ':' && e->stock[t_off[1] + i] != '-')
-		ind_value = ft_atoi(e->stock + t_off->offset + 1);
-		get_label;
+	if (e->stock[t_off[1] + i] == ':' && e->stock[t_off[1] + i] != '-')
+	{
+		get_label(e, t_off->offset - e->count, t_off->size_ope + 2, 1);
+		t_off->size_ope += 2;
+	}
 	else
-	{*/
+	{
 		ind_value = ft_atoi(e->stock + t_off->offset);
 		number_to_hex_size_two(ind_value, str + t_off->index_str);
 		t_off->index_str += 2;
 		t_off->size_ope += 2;
-	//}
+	}
 }
 
 void	get_args_reg(t_env *e, unsigned char *str, t_offset *t_off)

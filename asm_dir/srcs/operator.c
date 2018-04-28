@@ -7,7 +7,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 02:38:44 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/26 04:37:09 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/28 05:08:04 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	live_operator(t_env *e, int start, int sl)
 		ft_perror("malloc() failed.\n");
 	command[0] = 0x01;
 	if (e->stock[e->count + start] == LABEL_CHAR)
-		get_label(e, start);
+		get_label(e, start, 1, 0);
 	else
 	{
 		retatoi = ft_atoi(e->stock + e->count + start);
