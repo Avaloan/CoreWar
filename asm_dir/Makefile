@@ -6,7 +6,7 @@
 #    By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/07 22:22:27 by fdidelot          #+#    #+#              #
-#    Updated: 2018/04/27 03:01:26 by snedir           ###   ########.fr        #
+#    Updated: 2018/04/27 03:15:51 by snedir           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -19,6 +19,7 @@ SRCS = 		main.c \
 			label.c \
 			command.c \
 			operator.c \
+			s_operator.c \
 			check_param.c \
 			lfork.c \
 			zjump.c \

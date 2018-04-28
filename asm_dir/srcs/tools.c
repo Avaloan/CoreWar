@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 01:27:44 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/27 00:03:53 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/28 02:49:15 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	skip_param(t_env *e, int start, int num_p)
 
 int	check_param(t_env *e, int start, t_arg_type type, int num_p)
 {
-	start += skip_param(e, start, num_p);
+	start += skip_param(e, start, num_p + 1);
+	start += skip_space(e->stock + e->count + start);
 	if (type == 1)
 		return (check_reg(e, start));
 	if (type == 2)

@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/27 03:24:55 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/28 02:27:09 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,21 @@
 
 typedef	char	t_arg_type;
 
-typedef struct s_label
+typedef struct	s_label
 {
 	int				placement;
 	char			*name;
 	struct s_label	*next;
 }				t_label;
+
+typedef struct	s_offset
+{
+	unsigned int	index_str;
+	unsigned int	offset;
+	unsigned int	trileen;
+	unsigned int	next_separator;
+	unsigned int	size_ope;
+}				t_offset;
 
 typedef struct	s_op
 {

@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 02:42:35 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/27 03:42:42 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/28 02:47:24 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	check_reg(t_env *e, int start)
 {
 	int	reg_val;
+
 	if (e->stock[e->count + start] != 'r')
 		return (0);
 	start++;
