@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 03:57:39 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/27 06:57:54 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/28 07:28:57 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ void	ft_fresh(t_env *e)
 		while (tmp)
 		{
 			tmp = e->pc_list->next;
-			free(e->pc_list);
+			ft_memdel((void*)&e->pc_list);
 			e->pc_list = tmp;
 		}
 	}
-	free(e->arena);
-	free(e->written_by);
+	ft_memdel((void*)&e->arena);
+	ft_memdel((void*)&e->written_by);
 	while (++i < e->nb_of_pl)
 	{
-		free(e->players[i].name);
-		free(e->players[i].comment);
+		ft_strdel(&e->players[i].name);
+		ft_strdel(&e->players[i].comment);
 	}
-	free(e->players);
-	free(e->winner_name);
-	free(e);
+	ft_memdel((void*)&e->players);
+	ft_strdel(&e->winner_name);
+	ft_memdel((void*)&e);
 }
 
 int		ft_fight_under_the_moon(t_env *e, int i)
@@ -87,12 +87,13 @@ int		ft_claim_winner(t_env *e)
 	return (1);
 }
 
-int		ft_finish(t_env *e)
+int		ft_finish(t_env *e, int i)
 {
 	if (e->visu > 0)
 		ft_end_visu(e);
-	if (ft_claim_winner(e) == 0)
-		return (0);
+	if (i == 1)
+		if (ft_claim_winner(e) == 0)
+			return (0);
 	ft_fresh(e);
 	return (1);
 }

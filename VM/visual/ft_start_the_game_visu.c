@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 06:16:10 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/27 05:41:54 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/28 07:24:14 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ int	ft_start_the_game_visu(t_env *e)
 	init_pair(6, COLOR_CYAN, use_default_colors());
 	wrefresh(e->vi->arena);
 	wrefresh(e->vi->info);
-	getch();
 	return (1);
 }

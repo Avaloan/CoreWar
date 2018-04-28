@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/27 01:04:06 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/28 07:17:34 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ int								ft_how_many_pl(t_env *e, int argc, char **argv);
 int								ft_init_player(t_env *e, char *argv);
 int								ft_init_process(t_env *e);
 int								ft_error(t_env *e, int i);
-int								ft_finish(t_env *e);
+int								ft_finish(t_env *e, int i);
 int								ft_game_runner(t_env *e);
 int								ft_play_turn(t_env *e);
 int								ft_options(t_env *e, char *argv);

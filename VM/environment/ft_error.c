@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 05:46:54 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/27 07:38:43 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/04/28 07:18:26 by gquerre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	ft_error(t_env *e, int i)
 {
+	if (i != 7)
+		ft_finish(e, 0);
 	if (i == 1)
 		ft_putstr("Error.\nMalloc of environment have failed\n");
 	else if (i == 2)
