@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 02:42:03 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/28 06:08:10 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/30 01:45:54 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	get_label(t_env *e, int start, int deca, int dir_size)
 	end = start;
 	puku.size_dir = size_dir;
 	puku.deca = deca;
-	while (ft_isprint(e->stock[e->count + end]))
+	while (ft_isprint(e->stock[e->count + end]) && e->stock[e->count + end] != SEPARATOR_CHAR)
 		end++;
 	create_label_stock(e, start + 1, end - 1, puku);
 }

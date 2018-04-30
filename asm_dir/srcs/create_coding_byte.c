@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 03:42:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/04/30 00:17:15 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/30 03:39:17 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,18 @@ void	get_args_dir(t_env *e, unsigned char *str, t_offset *t_off, int dir_size)
 
 	dir_value = 0;
 	i = 2;
-	if (dir_size != 0)
+	if (dir_size == 1)
 		i = 0;
+	printf("how \n");
 	if (e->stock[t_off->offset + 1] == ':' && e->stock[t_off->offset + 1]
 			!= '-')
 	{
-		get_label(e, t_off->offset - e->count, t_off->size_ope + 2 + i, 1);
+		printf("size op %d\n", t_off->size_ope);
+		e->size_player -= 1;
+		get_label(e, t_off->offset - e->count + 1, t_off->size_ope + 2 + i, dir_size);
+		e->size_player += 1;
 		t_off->size_ope += 2 + i;
+		t_off->index_str += 2 + i;
 	}
 	else
 	{
@@ -34,10 +39,11 @@ void	get_args_dir(t_env *e, unsigned char *str, t_offset *t_off, int dir_size)
 		{
 			number_to_hex(dir_value, str + t_off->index_str);
 			t_off->index_str += 4;
-			t_off->size_ope += 2;
+			t_off->size_ope += 4;
 		}
 		else
 		{
+			printf("size op %d\n", t_off->index_str);
 			number_to_hex_size_two(dir_value, str + t_off->index_str);
 			t_off->index_str += 2;
 			t_off->size_ope += 2;
@@ -50,11 +56,15 @@ void	get_args_ind(t_env *e, unsigned char *str, t_offset *t_off)
 	unsigned int	ind_value;
 
 	ind_value = 0;
-	if (e->stock[t_off->offset + 1] == ':' && e->stock[t_off->offset + 1]
-			!= '-')
+	printf("e->stock %c\n", e->stock[t_off->offset]);
+	if (e->stock[t_off->offset] == ':' && e->stock[t_off->offset] != '-')
 	{
+		e->size_player -= 1;
 		get_label(e, t_off->offset - e->count, t_off->size_ope + 2, 1);
+		e->size_player += 1;
 		t_off->size_ope += 2;
+		t_off->index_str += 2;
+		printf("are you working ?\n");
 	}
 	else
 	{
@@ -148,6 +158,9 @@ void	menu_args_coding_byte(t_env *e, int start, unsigned char opcode)
 	if (!(str = ft_memalloc(20)))
 		ft_perror("");
 	coding_byte = create_coding_byte(e, &t_off, opcode, str);
+	for (unsigned int z = 0 ; z < t_off.size_ope ; z++)
+			printf("%.2x ", str[z]);
+	printf("\n");
 	add_command(e, &coding_byte, 1);
 	add_command(e, str, t_off.size_ope);
 	free(str);
