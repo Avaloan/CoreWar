@@ -50,7 +50,6 @@ int	live_operator(t_env *e, int start, int sl)
 	start += skip_space(e->stock + e->count + start);
 	if (!check_nb_param(e, start, sl, 0) || !valid_param(e, start, 0))
 		return (0);
-//	printf("live op = %d\n", g_op_tab[0].nb_param);
 	start++;
 	if (!(command = (unsigned char *)ft_memalloc(sizeof(unsigned char) * 5)))
 		ft_perror("malloc() failed.\n");

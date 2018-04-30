@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 01:23:42 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/28 06:49:04 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/30 07:09:52 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int	valid_command(t_env *e, int sl)
 	int	i;
 
 	i = skip_label(e, sl);
-//	printf("stock without label [%s]\n", e->stock + e->count + i);
 	i += skip_space(e->stock + e->count + i);
 	if (i < sl)
 	{

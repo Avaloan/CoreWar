@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 02:42:03 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/30 01:45:54 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/30 06:37:25 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		skip_label(t_env *e, int sl)
 	{
 		if (e->stock[e->count + i] == LABEL_CHAR)
 		{
-			if (e->stock[e->count + i - 1] != ' ' && e->stock[e->count + i - 1] != DIRECT_CHAR)
+			if (ft_isprint(e->stock[e->count + i - 1]) && e->stock[e->count + i - 1] != DIRECT_CHAR)
 				return (i + 1);
 		}
 		i++;

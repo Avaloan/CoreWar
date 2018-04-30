@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 01:27:44 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/28 02:49:15 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/30 07:12:39 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	check_nb_param(t_env *e, int start, int sl, int n_op)
 	int	param;
 
 	param = 1;
-	while (start < sl)
+	while (start < sl && e->stock[e->count + start] != COMMENT_CHAR)
 	{
 		if (e->stock[e->count + start] == SEPARATOR_CHAR)
 			param++;

@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/07 01:02:47 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/30 05:24:03 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/30 07:05:00 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check_label(t_env *e, int sl)
 		if (e->stock[e->count + i] == COMMENT_CHAR)
 			return (1);
 		if (e->stock[e->count + i] == LABEL_CHAR &&
-			e->stock[e->count + i - 1] != ' ' &&
+			ft_isprint(e->stock[e->count + i - 1]) &&
 			e->stock[e->count + i - 1] != DIRECT_CHAR)
 			if (i == 0 || !stock_label(e, i - 1))
 				return (0);
