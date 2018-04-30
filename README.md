@@ -12,3 +12,14 @@ Simple game, involving memory and angry processes
 42.s n'est pas pris mais parce qu il est trop grand : pas de soucis
 barriere.s n'est pas pris mais parce qu il est trop grand : pas de soucis
 
+
+
+
+
+
+
+
+
+test.sh dans Globtest est un script qui permet d asm tous les fichiers .s d'un dossier
+les .cor sont ranges dans 2 fichiers differents.
+les executables de l'asm et la vm sont les derniers en date.
