@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:02:28 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/30 02:58:57 by snedir           ###   ########.fr       */
+/*   Updated: 2018/04/30 05:09:40 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ int	main(int ac, char **av)
 		i++;
 	}
 	printf("\n");
+	ft_create_cor(e);
 //	if (!create_binary_player(stock, e))
 //		ft_perror("I'm too bad for this player, pls call another developer.\n");
 //	fd = open(e->name_file, O_CREAT | O_WRONLY, 0777);

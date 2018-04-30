@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/28 06:40:35 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/04/30 05:10:02 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define IND				192
 # define REG				64
 # define _DIR				128
+# define MAGIC_NUMBER		0xea83f3
 
 typedef	char	t_arg_type;
 
@@ -107,7 +108,7 @@ int		operator_all(t_env *e, int start, unsigned char opcode, int sl);
 
 
 
-
+int		ft_create_cor(t_env *e);
 int		replace_label(t_env *e);
 void	add_command(t_env *e, unsigned char *command, int size);
 void	number_to_hex_size_two(unsigned int num, unsigned char *dest);

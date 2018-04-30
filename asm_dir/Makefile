@@ -6,7 +6,7 @@
 #    By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/07 22:22:27 by fdidelot          #+#    #+#              #
-#    Updated: 2018/04/27 03:15:51 by snedir           ###   ########.fr        #
+#    Updated: 2018/04/30 05:12:18 by snedir           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -27,6 +27,7 @@ SRCS = 		main.c \
 			ld.c \
 			create_coding_byte.c \
 			replace_label.c \
+			ft_create_cor.c
 
 OBJS = 		$(SRCS:.c=.o)
 
