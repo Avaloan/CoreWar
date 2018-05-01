@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 01:19:01 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/30 02:00:02 by snedir           ###   ########.fr       */
+/*   Updated: 2018/05/01 06:42:27 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,9 @@
 void	put_label_into_buff(unsigned char *buff, int pos, unsigned int val, int size_dir)
 {
 	if (size_dir == 2)
-	{
 		number_to_hex_size_two(val, buff + pos);
-	}
 	else if (size_dir == 4)
-	{
-		number_to_hex(val, buff + pos);
-	}
+		number_to_hex(val, buff + pos - 2);
 	else
 		ft_perror("WHATTHEFYCYJEDKEDGIGIUGWDPWDGOOUHDOBOUDJWOJDNWO\n");
 }
@@ -41,7 +37,9 @@ int	replace_label(t_env *e)
 		{
 			if (ft_strcmp(stock->name, tmp->name) == 0)
 			{
-				put_label_into_buff(e->player_buff, stock->placement + stock->deca, tmp->placement - stock->placement, stock->dir_size);
+				put_label_into_buff(e->player_buff,
+						stock->placement + stock->deca,
+						tmp->placement - stock->placement, stock->dir_size);
 				label_exist = 1;
 			}
 			tmp = tmp->next;

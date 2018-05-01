@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 01:48:35 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/03/29 03:06:43 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/05/01 04:45:43 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	stock_name(t_env *e, int i)
 	int	j;
 
 	j = 1;
-	if (i > PROG_NAME_LENGTH)
+	if (i > PROG_NAME_LENGTH + 1)
 		return (0);
 	if (!(e->name_player = (char *)ft_memalloc(sizeof(char) * i)))
 		ft_perror("malloc() failed.\n");
@@ -67,7 +67,7 @@ int	stock_comment(t_env *e, int i)
 	int	j;
 
 	j = 1;
-	if (i > COMMENT_LENGTH)
+	if (i > COMMENT_LENGTH + 1)
 		return (0);
 	if (!(e->comment = (char *)ft_memalloc(sizeof(char) * i)))
 		ft_perror("malloc() failed.\n");

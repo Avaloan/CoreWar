@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:02:28 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/30 05:09:40 by snedir           ###   ########.fr       */
+/*   Updated: 2018/05/01 06:57:45 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int	main(int ac, char **av)
 		ft_perror("Invalid player, i smell some bullshit.\n");
 	if (!replace_label(e))
 		ft_perror("Invalid label call nigga.\n");
-	while (e->lst_label)
+	/*while (e->lst_label)
 	{
 		printf("Label = %s\n", e->lst_label->name);
 		printf("Placement = %d\n", e->lst_label->placement);
@@ -159,7 +159,7 @@ int	main(int ac, char **av)
 		printf("%.2x ", e->player_buff[i]);
 		i++;
 	}
-	printf("\n");
+	printf("\n");*/
 	ft_create_cor(e);
 //	if (!create_binary_player(stock, e))
 //		ft_perror("I'm too bad for this player, pls call another developer.\n");

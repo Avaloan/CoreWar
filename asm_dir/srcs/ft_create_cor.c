@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 02:10:52 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/30 05:13:07 by snedir           ###   ########.fr       */
+/*   Updated: 2018/05/01 04:47:40 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_put_in(int fd, char *input, int max_size)
 
 	i = 0;
 	if ((i = ft_strlen(input)) == 0)
-		return (-1);
+		return (max_size - i);
 	write(fd, input, i);
 	return (max_size - i);
 }
@@ -32,7 +32,7 @@ int	ft_create_cor(t_env *e)
 	unsigned char	lol[4];
 
 	empty = 0;
-	if ((fd = open(e->name_file, O_CREAT | O_WRONLY, 0777)) == -1)
+	if ((fd = open(e->name_file, O_CREAT | O_WRONLY, 0600)) == -1)
 		return (-1);
 	number_to_hex(MAGIC_NUMBER, lol);
 	write(fd, lol, 4);
@@ -43,8 +43,7 @@ int	ft_create_cor(t_env *e)
 		write(fd, "\0", 1);
 	number_to_hex_size_two(e->size_player, tmp);
 	write(fd, tmp, 2);
-	if ((empty = ft_put_in(fd, e->comment, COMMENT_LENGTH)) < 0)
-		return (0);
+	empty = ft_put_in(fd, e->comment, COMMENT_LENGTH);
 	i = -1;
 	while (++i < empty + 4)
 		write(fd, "\0", 1);

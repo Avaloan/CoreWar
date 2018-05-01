@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 01:23:42 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/30 07:09:52 by snedir           ###   ########.fr       */
+/*   Updated: 2018/05/01 02:32:19 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ int	valid_command(t_env *e, int sl)
 			return (xozf_command(e, i, sl));
 		else if (e->stock[e->count + i] == 'f')
 			return (xozf_command(e, i, sl));
+		else if (e->stock[e->count + i] == COMMENT_CHAR)
+			return (1);
 		else
 			return (0);
 	}
