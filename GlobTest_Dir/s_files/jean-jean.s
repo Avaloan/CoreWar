@@ -1,5 +1,6 @@
 .name "Real_Killah"
-.comment "some moves and more"
+.comment "some moves
+and more"
 
 load:		ld %3, r3 ##int de 3 utilisable
 			ld %4, r13 ##int de 4 utilisable

@@ -47,19 +47,11 @@ int	live_operator(t_env *e, int start, int sl)
 	int				retatoi;
 	unsigned char	*command;
 
-	printf("Prime_start = %d, sl = %d\n", start, sl); 
 	start += skip_space(e->stock + e->count + start);
-	printf("Seconde_start = %d, sl = %d\n", start, sl); 
 	if (!check_nb_param(e, start, sl, 0))
-	{
-		printf("checks_param\n");
 		return (0);
-	}
 	if (!valid_param(e, start, 0))
-	{
-		printf("valid_param\n");
 		return (0);
-	}
 	start++;
 	if (!(command = (unsigned char *)ft_memalloc(sizeof(unsigned char) * 5)))
 		ft_perror("malloc() failed.\n");
@@ -73,6 +65,5 @@ int	live_operator(t_env *e, int start, int sl)
 	}
 	add_command(e, command, 5);
 	free(command);
-	printf("Tieece_start "); 
 	return (1);
 }

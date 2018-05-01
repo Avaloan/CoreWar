@@ -6,7 +6,7 @@
 /*   By: snedir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 03:42:24 by snedir            #+#    #+#             */
-/*   Updated: 2018/05/01 05:29:07 by snedir           ###   ########.fr       */
+/*   Updated: 2018/05/01 07:55:52 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	get_args_dir(t_env *e, unsigned char *str, t_offset *t_off, int dir_size)
 	i = 2;
 	if (dir_size == 1)
 		i = 0;
-	printf("stock = %c\n", e->stock[t_off->offset]);
-	printf("stock = %c\n", e->stock[t_off->offset + 1]);
+//	printf("stock = %c\n", e->stock[t_off->offset]);
+//	printf("stock = %c\n", e->stock[t_off->offset + 1]);
 	if (e->stock[t_off->offset + 1] == ':' && e->stock[t_off->offset + 1]
 			!= '-')
 	{
@@ -30,10 +30,10 @@ void	get_args_dir(t_env *e, unsigned char *str, t_offset *t_off, int dir_size)
 		get_label(e, t_off->offset - e->count + 1, t_off->size_ope + 2 + i, dir_size);
 		e->size_player += 1;
 		t_off->size_ope += 2 + i;
-		printf("with label %d\n", dir_size);
-		for (unsigned int seks = 0; seks < t_off->index_str ; seks++)
+//		printf("with label %d\n", dir_size);
+/*		for (unsigned int seks = 0; seks < t_off->index_str ; seks++)
 			printf("%.2x ", str[seks]);
-		printf("\n");
+		printf("\n");*/
 		t_off->index_str += 2 + i;
 	}
 	else
@@ -84,8 +84,8 @@ void	get_args_reg(t_env *e, unsigned char *str, t_offset *t_off)
 	reg_number = ft_atoi(e->stock + t_off->offset + 1);
 	str[t_off->index_str] = ((reg_number << 24 & 0xff000000) >> 24 & 0x000000ff);
 	t_off->index_str += 1;
-		for (unsigned int seks = 0; seks < t_off->index_str ; seks++)
-			printf("%.2x ", str[seks]);
+//		for (unsigned int seks = 0; seks < t_off->index_str ; seks++)
+//			printf("%.2x ", str[seks]);
 	t_off->size_ope += 1;
 }
 

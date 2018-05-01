@@ -32,7 +32,7 @@
 		sti	r1,%:live,%101	
 		sti	r1,%:live,%106
 		sti	r1,%:live,%111
-		sti	r1,%:live,%116
+		sti	r1,%:live,%216
 		ld	%48,r14	
 		ld      %4,r4
 		ld      %48,r6
@@ -103,11 +103,6 @@ fork_live:	live	%42
 		fork	%:live
 		ld	%0,r15
 		zjmp	%:fork_live
-	
-
-
-
-
 
 
 

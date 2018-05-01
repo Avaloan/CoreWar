@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:02:28 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/05/01 06:57:45 by snedir           ###   ########.fr       */
+/*   Updated: 2018/05/01 10:01:09 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ t_op    g_op_tab[17] =
 int	check_command(t_env *e)
 {
 	int	sl;
+//	int	u;
 
+//	u = 0;
 	while (e->count != e->off_set)
 	{
+	//	printf("u = %d\n", u++);
 //	printf("of = %d\n", e->off_set);
 //	printf("count = %d\n", e->count);
 		sl = size_line(e->stock, e->count);
@@ -133,11 +136,16 @@ int	main(int ac, char **av)
 	read(fd, e->stock, e->off_set);
 	close(fd);
 	if (!valid_player(e))
-		ft_perror("Invalid player, i smell some bullshit.\n");
-	if (!replace_label(e))
-		ft_perror("Invalid label call nigga.\n");
-	/*while (e->lst_label)
 	{
+		ft_clean_env(e);
+		ft_perror("Invalid player, i smell some bullshit.\n");
+	}
+	if (!replace_label(e))
+	{
+		ft_clean_env(e);
+		ft_perror("Invalid label call nigga.\n");
+	}/*while (e->lst_label)
+	   {
 		printf("Label = %s\n", e->lst_label->name);
 		printf("Placement = %d\n", e->lst_label->placement);
 		e->lst_label = e->lst_label->next;
@@ -166,9 +174,9 @@ int	main(int ac, char **av)
 //	fd = open(e->name_file, O_CREAT | O_WRONLY, 0777);
 //	write(fd, player_buff, size_buff);
 //	close(fd);
+	ft_clean_env(e);
 	return (0);
 }
-
 
 /*
 

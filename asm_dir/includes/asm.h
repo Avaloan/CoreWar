@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/30 05:10:02 by snedir           ###   ########.fr       */
+/*   Updated: 2018/05/01 08:21:38 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	check_nb_param(t_env *e, int start, int sl, int n_op);
 int live_operator(t_env *e, int start, int sl);
 int	valid_param(t_env *e, int start, int n_op);
 int	check_reg(t_env *e, int start);
-int	check_dir(t_env *e, int start);
-int	check_ind(t_env *e, int start);
-
+int		check_dir(t_env *e, int start);
+int		check_ind(t_env *e, int start);
+void	ft_clean_env(t_env *e);
 #endif

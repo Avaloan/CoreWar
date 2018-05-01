@@ -1,7 +1,7 @@
 .name "run Kitty RUN"
 .comment "Si vous voula Tesla"
 
-gomugomu:	fork%:gear_second
+gomugomu:	fork %:gear_second
 	live %252645135
 	fork %:gear_fourth
 	ld %190056971, r9
