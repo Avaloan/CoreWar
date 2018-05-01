@@ -19,7 +19,7 @@ i=1
 sec_file=$(echo $S_FILES | cut -d ' ' -f 1)
 while [ $sec_file ]
 do
-		./asm_fgs $sec_file
+		../asm_dir/asm $sec_file
 		let i++
 		echo $sec_file
 		sec_file=$(echo $S_FILES | cut -d ' ' -f $i)
