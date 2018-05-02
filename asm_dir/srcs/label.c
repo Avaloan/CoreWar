@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 02:42:03 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/05/02 03:03:30 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/05/02 06:18:11 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		skip_label(t_env *e, int sl)
 	int	i;
 
 	i = 0;
-	while (i < sl)
+	while (i < sl && e->stock[e->count + i] != COMMENT_CHAR)
 	{
 		if (e->stock[e->count + i] == LABEL_CHAR)
 		{

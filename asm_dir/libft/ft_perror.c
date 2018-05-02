@@ -6,13 +6,13 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 05:17:04 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/03/13 05:20:21 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/05/02 04:35:06 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_perror(char *s)
+void	ft_perror(char *s)
 {
 	perror(s);
 	exit(0);

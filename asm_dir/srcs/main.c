@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:02:28 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/05/02 04:20:00 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/05/02 07:31:01 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_op	g_op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-int	check_command(t_env *e)
+int		check_command(t_env *e)
 {
 	int	sl;
 
@@ -53,7 +53,7 @@ int	check_command(t_env *e)
 	return (1);
 }
 
-int	valid_player(t_env *e)
+int		valid_player(t_env *e)
 {
 	e->count += skip_empty_and_com(e->stock);
 	if (!name(e) && !comment(e))
@@ -77,9 +77,9 @@ int	valid_player(t_env *e)
 	return (1);
 }
 
-int	ifator(t_env *e, int i, int j, int k)
+int		ifator(t_env *e, int i, int j, int k)
 {
-	 if (i == j - 2)
+	if (i == j - 2)
 		e->name_file[k] = 'c';
 	else if (i == j - 1)
 		e->name_file[k] = 'o';
@@ -88,7 +88,7 @@ int	ifator(t_env *e, int i, int j, int k)
 	return (1);
 }
 
-int	check_s_ponkt(char *str, t_env *e)
+int		check_s_ponkt(char *str, t_env *e)
 {
 	int	i;
 	int j;
@@ -110,14 +110,14 @@ int	check_s_ponkt(char *str, t_env *e)
 		if (i < j - 2)
 			e->name_file[k] = str[i];
 		else
-			ifator(e, i, j ,k);
+			ifator(e, i, j, k);
 		k++;
 	}
 	e->name_file[k] = '\0';
 	return (1);
 }
 
-int	main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	int		fd;
 	t_env	*e;
@@ -133,29 +133,9 @@ int	main(int ac, char **av)
 		ft_perror("malloc() failed.\n");
 	lseek(fd, 0, SEEK_SET);
 	read(fd, e->stock, e->off_set);
+	replace_valid(e);
 	close(fd);
-	if (!valid_player(e))
-	{
-		ft_clean_env(e);
-		ft_perror("Invalid player, i smell some bullshit.\n");
-	}
-	if (!replace_label(e))
-	{
-		ft_clean_env(e);
-		ft_perror("Invalid label call nigga.\n");
-	}/*while (e->lst_label)
-	   {
-		printf("Label = %s\n", e->lst_label->name);
-		printf("Placement = %d\n", e->lst_label->placement);
-		e->lst_label = e->lst_label->next;
-	}
-	while (e->stock_label)
-	{
-		printf(" MegaLabel = %s\n", e->stock_label->name);
-		printf("Placement = %d\n", e->stock_label->placement);
-		e->stock_label = e->stock_label->next;
-	}
-	printf("Size = %d\n",e->size_player);*/
 	ft_create_cor(e);
+	ft_clean_env(e);
 	return (0);
 }

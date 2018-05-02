@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 02:42:35 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/05/02 04:08:43 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/05/02 05:22:12 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_reg(t_env *e, int start)
 	if (!mini_reg(e, &start))
 		return (0);
 	reg_val = ft_atoi(e->stock + e->count + start);
-	if (reg_val > 16 || reg_val < 0)
+	if (reg_val > 16 || reg_val < 1)
 		return (0);
 	while (ft_isdigit(e->stock[e->count + start]))
 		start++;

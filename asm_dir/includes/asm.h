@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 04:01:26 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/05/02 04:17:03 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/05/02 07:27:46 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,4 +130,7 @@ void				menu_args_coding_byte(t_env *e, int start,
 void				create_label_stock(t_env *e, int start, int end,
 									t_pukutak puku);
 void				ft_clean_env(t_env *e);
+void				replace_valid(t_env *e);
+int					valid_player(t_env *e);
+int					replace_label(t_env *e);
 #endif

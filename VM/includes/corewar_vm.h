@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 05:54:02 by gquerre           #+#    #+#             */
-/*   Updated: 2018/04/28 07:17:34 by gquerre          ###   ########.fr       */
+/*   Updated: 2018/05/02 06:47:47 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <math.h>
 # include "../SRC/libft/SRC/libft.h"
 
+# define WIDTH_DUMP				64
 # define COMMENT_SIZE			2048
 # define NAME_SIZE				128
 # define MEM_SIZE				(4 * 1024)
