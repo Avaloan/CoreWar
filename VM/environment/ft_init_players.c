@@ -6,7 +6,7 @@
 /*   By: gquerre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 01:04:40 by gquerre           #+#    #+#             */
-/*   Updated: 2018/05/02 07:16:19 by snedir           ###   ########.fr       */
+/*   Updated: 2018/05/02 08:22:11 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int		ft_import_champ(t_env *e, int i, char *argv)
 	if (!(pos = ft_save_name(e, i, fd)))
 		return (0);
 	if (!(pos = ft_save_comment(e, i, fd, pos)))
+		return (0);
+	if (!(e->players[i].size))
 		return (0);
 	if (!(ft_put_champ_in_arena(e, i, fd, pos)))
 		return (0);
