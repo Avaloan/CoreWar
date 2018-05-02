@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 01:48:35 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/05/01 09:55:23 by snedir           ###   ########.fr       */
+/*   Updated: 2018/05/02 03:10:25 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,18 @@ int	name(t_env *e)
 
 	i = 0;
 	e->count += skip_space(e->stock + e->count);
-	if (*(e->stock + e->count) == '.')
+	if ((*(e->stock + e->count) == '.') &&
+		ft_strncmp(e->stock + e->count, NAME_CMD_STRING, 5) == 0)
 	{
-		if (ft_strncmp(e->stock + e->count, NAME_CMD_STRING, 5) == 0)
+		e->count += skip_space(e->stock + e->count + 5) + 5;
+		if (*(e->stock + e->count) == '"')
 		{
-			e->count += skip_space(e->stock + e->count + 5) + 5;
-			if (*(e->stock + e->count) == '"')
-			{
+			i++;
+			while (*(e->stock + e->count + i) != '"')
 				i++;
-				while (*(e->stock + e->count + i) != '"')
-					i++;
-				if (!stock_name(e, i))
-					return (0);
-				e->count += i;
-			}
-			else
+			if (!stock_name(e, i))
 				return (0);
+			e->count += i;
 		}
 		else
 			return (0);
@@ -86,22 +82,18 @@ int	comment(t_env *e)
 
 	i = 0;
 	e->count += skip_space(e->stock + e->count);
-	if (*(e->stock + e->count) == '.')
+	if ((*(e->stock + e->count) == '.') &&
+		ft_strncmp(e->stock + e->count, COMMENT_CMD_STRING, 8) == 0)
 	{
-		if (ft_strncmp(e->stock + e->count, COMMENT_CMD_STRING, 8) == 0)
+		e->count += skip_space(e->stock + e->count + 8) + 8;
+		if (*(e->stock + e->count) == '"')
 		{
-			e->count += skip_space(e->stock + e->count + 8) + 8;
-			if (*(e->stock + e->count) == '"')
-			{
+			i++;
+			while (*(e->stock + e->count + i) != '"')
 				i++;
-				while (*(e->stock + e->count + i) != '"')
-					i++;
-				if (!stock_comment(e, i))
-					return (0);
-				e->count += i;
-			}
-			else
+			if (!stock_comment(e, i))
 				return (0);
+			e->count += i;
 		}
 		else
 			return (0);

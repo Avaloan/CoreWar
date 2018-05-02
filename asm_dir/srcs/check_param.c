@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 02:42:35 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/30 06:07:29 by snedir           ###   ########.fr       */
+/*   Updated: 2018/05/02 05:22:12 by snedir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@ int	check_reg(t_env *e, int start)
 {
 	int	reg_val;
 
-	if (e->stock[e->count + start] != 'r')
-		return (0);
-	start++;
-	if (!ft_isdigit(e->stock[e->count + start]))
+	if (!mini_reg(e, &start))
 		return (0);
 	reg_val = ft_atoi(e->stock + e->count + start);
-	if (reg_val > 16 || reg_val < 0)
+	if (reg_val > 16 || reg_val < 1)
 		return (0);
 	while (ft_isdigit(e->stock[e->count + start]))
 		start++;
@@ -65,8 +62,7 @@ int	valid_num(t_env *e, int start)
 			{
 				if (e->stock[e->count + start + i] == COMMENT_CHAR && i > 0)
 					return (1);
-				else
-					return (0);
+				return (0);
 			}
 			i++;
 		}

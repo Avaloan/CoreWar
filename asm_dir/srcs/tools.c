@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 01:27:44 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/05/01 09:52:01 by snedir           ###   ########.fr       */
+/*   Updated: 2018/05/02 04:09:53 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ int	check_param(t_env *e, int start, t_arg_type type, int num_p)
 	if (type == 6)
 		return (check_dir(e, start) || check_ind(e, start));
 	if (type == 7)
-		return (check_dir(e, start) || check_reg(e, start) || check_ind(e, start));
+	{
+		return (check_dir(e, start) || check_reg(e, start) ||
+				check_ind(e, start));
+	}
 	return (1);
 }
 
@@ -79,39 +82,12 @@ int	check_nb_param(t_env *e, int start, int sl, int n_op)
 	return (1);
 }
 
-int size_line(char *stock, int count)
+int	size_line(char *stock, int count)
 {
 	int size;
 
 	size = 0;
-	while(stock[size + count] != '\n' && stock[size + count] != '\0')
+	while (stock[size + count] != '\n' && stock[size + count] != '\0')
 		size++;
 	return (size);
-}
-
-int skip_space(char *str)
-{
-	int i;
-
-	i = 0;
-	while (!(str[i] > 32 && str[i] < 127))
-		i++;
-	return (i);
-}
-
-int skip_empty_and_com(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] != '.' && !ft_isalpha(str[i]) && !ft_isdigit(str[i]) && str[i] != '_')
-	{
-		if (str[i] == '#')
-		{
-			while (str[i] != '\n')
-				i++;
-		}
-		i++;
-	}
-	return (i);
 }
