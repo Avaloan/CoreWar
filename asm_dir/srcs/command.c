@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 01:23:42 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/05/01 02:32:19 by snedir           ###   ########.fr       */
+/*   Updated: 2018/05/02 02:55:30 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,8 @@ int	l_command(t_env *e, int i, int sl)
 	return (0);
 }
 
-int	valid_command(t_env *e, int sl)
+int	valid_command(t_env *e, int sl, int i)
 {
-	int	i;
-
 	i = skip_label(e, sl);
 	i += skip_space(e->stock + e->count + i);
 	if (i < sl)
@@ -125,12 +123,3 @@ int	valid_command(t_env *e, int sl)
 	}
 	return (1);
 }
-/*
-
-	while (i < sl)
-	{
-		if (!(e->stock[e->count + i] < 33 || e->stock[e->count + i] > 126))
-			if (!analyse_command(e, i, sl))
-				return (0);
-	}
-*/

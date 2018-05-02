@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 02:38:44 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/28 05:08:04 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/05/02 00:29:47 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +19,8 @@ void	add_command(t_env *e, unsigned char *command, int size)
 	i = 0;
 	if (e->player_buff == NULL)
 	{
-		if (!(e->player_buff = (unsigned char *)ft_memalloc(sizeof(unsigned char) * CHAMP_MAX_SIZE)))
+		if (!(e->player_buff = (unsigned char *)ft_memalloc(
+				sizeof(unsigned char) * CHAMP_MAX_SIZE)))
 			ft_perror("malloc() failed.\n");
 	}
 	while (i < size)
@@ -42,7 +42,7 @@ void	number_to_hex(unsigned int num, unsigned char *dest)
 	dest[3] = (num << 24 & 0xff000000) >> 24 & 0x000000ff;
 }
 
-int	live_operator(t_env *e, int start, int sl)
+int		live_operator(t_env *e, int start, int sl)
 {
 	int				retatoi;
 	unsigned char	*command;

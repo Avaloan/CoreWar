@@ -6,7 +6,7 @@
 /*   By: fdidelot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 03:46:12 by fdidelot          #+#    #+#             */
-/*   Updated: 2018/04/28 05:08:30 by fdidelot         ###   ########.fr       */
+/*   Updated: 2018/05/02 00:27:45 by fdidelot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	number_to_hex_size_two(unsigned int num, unsigned char *dest)
 	dest[1] = (num << 24 & 0xff000000) >> 24 & 0x000000ff;
 }
 
-int	lfork_operator(t_env *e, int start, int sl)
+int		lfork_operator(t_env *e, int start, int sl)
 {
 	int				retatoi;
 	unsigned char	*command;
